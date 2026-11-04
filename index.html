@@ -1,0 +1,4754 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>iLovegym – jadwal gym setahun</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f4f2ee;
+        --card: #ffffff;
+        --ink: #111111;
+        --mute: #6b6b6b;
+        --line: #ddd9d2;
+        --forest: #111111;
+        --on: #ffffff;
+        --sage: #ffd3e3;
+        --sun: #ff3e8a;
+        color-scheme: light;
+        box-sizing: border-box;
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --bg: #0c0c0c;
+          --card: #181818;
+          --ink: #f5f2ec;
+          --mute: #a09c96;
+          --line: #2c2c2c;
+          --forest: #f5f2ec;
+          --on: #111111;
+          --sage: #5a2237;
+          --sun: #ff5c9f;
+          color-scheme: dark;
+        }
+      }
+      :root[data-theme="dark"] {
+        --bg: #0c0c0c;
+        --card: #181818;
+        --ink: #f5f2ec;
+        --mute: #a09c96;
+        --line: #2c2c2c;
+        --forest: #f5f2ec;
+        --on: #111111;
+        --sage: #5a2237;
+        --sun: #ff5c9f;
+        color-scheme: dark;
+      }
+      html {
+        scroll-padding-top: env(safe-area-inset-top, 0px);
+        overflow-x: clip;
+        overscroll-behavior-x: none;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        max-width: 100%;
+        overflow-x: clip;
+        overscroll-behavior-x: none;
+        background: var(--bg);
+        color: var(--ink);
+        font:
+          400 16px/1.55 "DM Sans",
+          system-ui,
+          sans-serif;
+      }
+      .logo,
+      .stat b,
+      #yl,
+      h1,
+      h2,
+      h3 {
+        font-family: Syne, system-ui, sans-serif !important;
+        font-weight: 800;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: "Bricolage Grotesque", system-ui, sans-serif;
+        margin: 0;
+        letter-spacing: -0.02em;
+        line-height: 1.05;
+      }
+      button,
+      input,
+      textarea {
+        font: inherit;
+        color: inherit;
+      }
+      button {
+        cursor: pointer;
+      }
+      :focus-visible {
+        outline: 3px solid var(--sun);
+        outline-offset: 2px;
+      }
+      .wrap {
+        max-width: 1020px;
+        margin: 0 auto;
+        padding: 20px 18px 120px;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 6px 0 18px;
+      }
+      .logo {
+        font: 800 26px "Bricolage Grotesque";
+        letter-spacing: -0.04em;
+      }
+      .logo i {
+        display: inline-block;
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background: var(--sun);
+        margin-left: 3px;
+      }
+      nav {
+        display: flex;
+        gap: 4px;
+        background: var(--card);
+        padding: 4px;
+        border-radius: 99px;
+        border: 1px solid var(--line);
+        overflow-x: auto;
+      }
+      nav button {
+        border: 0;
+        background: none;
+        padding: 8px 16px;
+        border-radius: 99px;
+        font-weight: 600;
+        color: var(--mute);
+        white-space: nowrap;
+      }
+      nav button[aria-current="page"] {
+        background: var(--forest);
+        color: var(--on);
+      }
+      #nav {
+        overflow: visible;
+      }
+      #activityMenu {
+        position: relative;
+      }
+      #activityToggle {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      #activityToggle::after {
+        content: "⌄";
+        font-size: 15px;
+        transition: transform 0.18s ease;
+      }
+      #activityToggle[aria-expanded="true"]::after {
+        transform: rotate(180deg);
+      }
+      .nav-dropdown {
+        position: absolute;
+        z-index: 60;
+        top: calc(100% + 14px);
+        left: 50%;
+        width: min(300px, calc(100vw - 32px));
+        padding: 8px;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: var(--card);
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+        transform: translateX(-50%);
+      }
+      .nav-dropdown[hidden] {
+        display: none;
+      }
+      .nav-dropdown button {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        gap: 12px;
+        padding: 13px 15px;
+        border-radius: 16px;
+        text-align: left;
+      }
+      .nav-dropdown button:hover,
+      .nav-dropdown button[aria-current="page"] {
+        background: color-mix(in srgb, var(--forest) 13%, var(--card));
+        color: var(--forest);
+      }
+      .hero {
+        background: var(--forest);
+        color: var(--on);
+        border-radius: 28px;
+        padding: 30px;
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: 24px;
+        align-items: end;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero small {
+        opacity: 0.75;
+        font-size: 15px;
+      }
+      .hero::after {
+        content: "";
+        position: absolute;
+        right: -70px;
+        top: -70px;
+        width: 230px;
+        height: 230px;
+        border-radius: 50%;
+        background: var(--sun);
+        pointer-events: none;
+      }
+      .hero > * {
+        position: relative;
+        z-index: 1;
+      }
+      .q {
+        display: block;
+        margin-top: 16px;
+        background: none;
+        border: 1px dashed currentColor;
+        color: inherit;
+        border-radius: 14px;
+        padding: 10px 14px;
+        text-align: left;
+        max-width: 40ch;
+      }
+      .bn {
+        display: none;
+        background: var(--sun);
+        color: #111;
+        border-radius: 16px;
+        padding: 12px 16px;
+        margin-bottom: 12px;
+        font-weight: 500;
+      }
+      .mq {
+        overflow: hidden;
+        white-space: nowrap;
+        margin: 16px 0 4px;
+        font:
+          800 22px Syne,
+          sans-serif;
+        border-block: 2px solid var(--ink);
+        padding: 8px 0;
+      }
+      .mq div {
+        display: inline-block;
+        animation: mq 24s linear infinite;
+      }
+      .mq b,
+      .logo span {
+        color: var(--sun);
+      }
+      .logo span {
+        display: inline-block;
+        animation: bt 1.4s infinite;
+      }
+      @keyframes mq {
+        to {
+          transform: translateX(-50%);
+        }
+      }
+      @keyframes bt {
+        50% {
+          transform: scale(1.25);
+        }
+      }
+      input[type="time"] {
+        padding: 11px 14px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: var(--bg);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .mq div,
+        .logo span {
+          animation: none !important;
+        }
+      }
+      .toast {
+        position: fixed;
+        left: 50%;
+        bottom: calc(84px + env(safe-area-inset-bottom, 0px));
+        transform: translateX(-50%);
+        background: var(--ink);
+        color: var(--bg);
+        padding: 12px 18px;
+        border-radius: 99px;
+        font-weight: 600;
+        z-index: 100;
+        max-width: 90vw;
+        text-align: center;
+      }
+      #tm {
+        position: fixed;
+        right: 16px;
+        bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+        z-index: 50;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 10px;
+      }
+      #tp {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 16px;
+        width: 230px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+      #tp[hidden] {
+        display: none;
+      }
+      #tt {
+        font:
+          800 44px Syne,
+          sans-serif;
+        text-align: center;
+      }
+      #tb {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        background: var(--sun);
+        color: #111;
+      }
+      .lvl {
+        font:
+          800 40px Syne,
+          sans-serif;
+        width: 88px;
+        height: 88px;
+        flex: none;
+        border-radius: 50%;
+        background: var(--sun);
+        color: #111;
+        display: grid;
+        place-items: center;
+      }
+      .pbar {
+        height: 10px;
+        background: var(--sage);
+        border-radius: 9px;
+        margin: 8px 0;
+        overflow: hidden;
+      }
+      .pbar i {
+        display: block;
+        height: 100%;
+        background: var(--forest);
+      }
+      .bg {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 10px;
+        margin-top: 16px;
+      }
+      .bgi {
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .bgi span {
+        font-size: 26px;
+      }
+      .bgi small {
+        color: var(--mute);
+      }
+      .bgi.lock {
+        opacity: 0.35;
+        filter: grayscale(1);
+      }
+      :root,
+      :root:not([data-theme="light"]),
+      :root[data-theme="dark"] {
+        --bg: #0a0a0b;
+        --card: #131315;
+        --ink: #f2f2f2;
+        --mute: #8f8f96;
+        --line: #27272b;
+        --forest: #d4201a;
+        --on: #fff;
+        --sage: #3b1512;
+        --sun: #ff6b1a;
+        color-scheme: dark;
+      }
+      body {
+        background:
+          radial-gradient(900px 420px at 90% -8%, #2d0b09, transparent 60%),
+          var(--bg);
+      }
+      .logo,
+      .stat b,
+      #yl,
+      h1,
+      h2,
+      h3,
+      #tt,
+      .lvl,
+      .mq {
+        font-family: Anton, Impact, sans-serif !important;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+      }
+      .hero {
+        background: linear-gradient(135deg, #120505, #2b0907 55%, #8f1410);
+        color: #fff;
+      }
+      .hero::after {
+        display: none;
+      }
+      .bb {
+        position: absolute !important;
+        right: 18px;
+        top: 8px;
+        width: 170px;
+        opacity: 0.85;
+        z-index: 0 !important;
+        pointer-events: none;
+      }
+      .bb g {
+        animation: lift 2.2s ease-in-out infinite;
+      }
+      @keyframes lift {
+        0%,
+        100% {
+          transform: translateY(26px);
+        }
+        50% {
+          transform: translateY(-12px);
+        }
+      }
+      .fx {
+        position: absolute !important;
+        bottom: -24px;
+        font-size: 26px;
+        opacity: 0;
+        animation: rise 7s linear infinite;
+        pointer-events: none;
+      }
+      @keyframes rise {
+        12% {
+          opacity: 0.5;
+        }
+        100% {
+          transform: translateY(-300px) rotate(25deg);
+          opacity: 0;
+        }
+      }
+      .stk {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .stk b {
+        font:
+          400 36px Anton,
+          sans-serif;
+      }
+      .fl {
+        display: inline-block;
+        font-size: 30px;
+        animation: fl 0.9s ease-in-out infinite alternate;
+      }
+      @keyframes fl {
+        to {
+          transform: scale(1.18) rotate(-7deg);
+        }
+      }
+      .dots {
+        display: flex;
+        gap: 6px;
+      }
+      .dots i {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 255, 255, 0.45);
+      }
+      .dots i.on {
+        background: var(--sun);
+        border-color: var(--sun);
+      }
+      .av {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        object-fit: cover;
+        background: var(--sun);
+        display: inline-grid;
+        place-items: center;
+        flex: none;
+      }
+      select {
+        padding: 10px 14px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: var(--card);
+        color: var(--ink);
+      }
+      .gal {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 10px;
+      }
+      .gt {
+        position: relative;
+        aspect-ratio: 3/4;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        padding: 0;
+        background: var(--card);
+      }
+      .gt img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .gt b {
+        position: absolute;
+        left: 8px;
+        bottom: 8px;
+        background: var(--forest);
+        color: #fff;
+        border-radius: 99px;
+        padding: 2px 10px;
+        font-size: 12px;
+      }
+      .flex {
+        font-size: 52px;
+        display: inline-block;
+        animation: fl 0.8s ease-in-out infinite alternate;
+      }
+      .eq {
+        display: flex;
+        gap: 4px;
+        align-items: flex-end;
+        height: 36px;
+      }
+      .eq i {
+        width: 6px;
+        height: 6px;
+        background: var(--sun);
+        border-radius: 3px;
+        animation: eq 0.9s ease-in-out infinite alternate;
+      }
+      .eq i:nth-child(2) {
+        animation-delay: 0.15s;
+      }
+      .eq i:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .eq i:nth-child(4) {
+        animation-delay: 0.45s;
+      }
+      .eq i:nth-child(5) {
+        animation-delay: 0.6s;
+      }
+      @keyframes eq {
+        to {
+          height: 36px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .eq i {
+          animation: none !important;
+          height: 20px;
+        }
+      }
+      ::selection {
+        background: var(--forest);
+        color: #fff;
+      }
+      * {
+        scrollbar-width: thin;
+        scrollbar-color: #3a3a3f transparent;
+      }
+      header {
+        position: sticky;
+        top: env(safe-area-inset-top, 0px);
+        z-index: 40;
+        background: rgba(10, 10, 11, 0.82);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        margin: 0 -18px 14px;
+        padding: 10px 18px;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0 0 auto;
+        height: env(safe-area-inset-top, 0px);
+        background: rgba(10, 10, 11, 0.9);
+        z-index: 41;
+      }
+      nav {
+        background: rgba(255, 255, 255, 0.04);
+      }
+      nav button {
+        transition: 0.2s;
+      }
+      nav button:hover {
+        color: var(--ink);
+      }
+      nav button[aria-current="page"] {
+        box-shadow: 0 6px 18px -6px var(--forest);
+      }
+      section.show {
+        animation: up 0.4s ease both;
+      }
+      @keyframes up {
+        from {
+          opacity: 0;
+          transform: translateY(14px);
+        }
+      }
+      .card {
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 40%),
+          var(--card);
+        transition: border-color 0.2s;
+      }
+      .card:hover {
+        border-color: #3d3d44;
+      }
+      .card > h2:first-child {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 28px;
+      }
+      .card > h2:first-child::before {
+        content: "";
+        width: 6px;
+        height: 0.9em;
+        background: var(--forest);
+        border-radius: 3px;
+        box-shadow: 0 0 14px var(--forest);
+      }
+      .btn {
+        box-shadow: 0 8px 20px -8px var(--forest);
+        transition:
+          transform 0.15s,
+          box-shadow 0.2s,
+          filter 0.2s;
+      }
+      .btn:hover {
+        transform: translateY(-2px);
+        filter: brightness(1.12);
+      }
+      .btn:active {
+        transform: scale(0.96);
+      }
+      .btn.ghost {
+        box-shadow: none;
+      }
+      .btn.ghost:hover {
+        border-color: var(--forest);
+        background: rgba(212, 32, 26, 0.12);
+      }
+      .chip,
+      .months button {
+        transition: 0.2s;
+      }
+      .chip:hover,
+      .months button:hover {
+        border-color: var(--forest);
+      }
+      input[type="text"],
+      input[type="number"],
+      input[type="date"],
+      input[type="time"],
+      textarea,
+      select {
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+      }
+      input:focus,
+      textarea:focus,
+      select:focus {
+        outline: none;
+        border-color: var(--forest);
+        box-shadow: 0 0 0 3px rgba(212, 32, 26, 0.3);
+      }
+      .tick:hover {
+        transform: scale(1.06);
+      }
+      .tick:not(.on) {
+        animation: pr 2s ease-out infinite;
+      }
+      @keyframes pr {
+        0% {
+          box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+        }
+        100% {
+          box-shadow: 0 0 0 22px rgba(255, 255, 255, 0);
+        }
+      }
+      .stat {
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.2s;
+      }
+      .stat:hover {
+        transform: translateY(-3px);
+      }
+      .stat::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, var(--forest), var(--sun));
+      }
+      .dn {
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-size: 11px;
+      }
+      .day {
+        transition:
+          transform 0.15s,
+          border-color 0.2s,
+          background 0.2s;
+      }
+      .day:hover {
+        transform: translateY(-2px);
+      }
+      .day.done {
+        box-shadow: 0 8px 20px -10px var(--forest);
+      }
+      .day.today {
+        animation: tp 2s ease-in-out infinite;
+      }
+      @keyframes tp {
+        50% {
+          box-shadow:
+            0 0 0 3px var(--sun),
+            0 0 22px rgba(255, 107, 26, 0.5);
+        }
+      }
+      .item {
+        transition: background 0.2s;
+        border-radius: 12px;
+        padding-inline: 8px;
+      }
+      .item:hover {
+        background: rgba(255, 255, 255, 0.03);
+      }
+      #mu .item {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 10px 12px;
+        margin-bottom: 8px;
+      }
+      #mu .item input {
+        border-color: transparent;
+        background: transparent;
+      }
+      #mu .item input:focus {
+        background: var(--bg);
+      }
+      .gt {
+        transition:
+          transform 0.2s,
+          border-color 0.2s;
+      }
+      .gt img {
+        transition: transform 0.4s;
+      }
+      .gt:hover {
+        transform: translateY(-3px);
+        border-color: var(--forest);
+      }
+      .gt:hover img {
+        transform: scale(1.06);
+      }
+      .bar i {
+        transition: height 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+        background: linear-gradient(180deg, var(--forest), var(--sage));
+      }
+      .bar.cur i {
+        background: linear-gradient(180deg, var(--sun), var(--forest));
+      }
+      .lvl {
+        box-shadow:
+          0 0 0 6px rgba(255, 107, 26, 0.2),
+          0 0 40px rgba(255, 107, 26, 0.4);
+      }
+      .bgi {
+        transition:
+          transform 0.2s,
+          border-color 0.2s;
+      }
+      .bgi:not(.lock) {
+        background: linear-gradient(
+          160deg,
+          rgba(255, 107, 26, 0.14),
+          transparent
+        );
+      }
+      .bgi:not(.lock):hover {
+        transform: translateY(-3px) rotate(-1deg);
+        border-color: var(--sun);
+      }
+      .mq {
+        border-color: var(--forest);
+      }
+      @media (max-width: 720px) {
+        header {
+          position: static;
+          margin: 0 0 8px;
+          padding: 6px 0;
+          background: none;
+          backdrop-filter: none;
+          -webkit-backdrop-filter: none;
+        }
+        body::before {
+          display: none;
+        }
+        .hero {
+          padding: 22px;
+        }
+        .wrap {
+          padding-inline: 14px;
+        }
+        nav {
+          width: 100%;
+          flex-wrap: wrap;
+          justify-content: stretch;
+          overflow: visible;
+          border-radius: 20px;
+        }
+        nav button {
+          flex: 1 1 calc(33% - 4px);
+          padding: 8px 10px;
+        }
+        #activityMenu {
+          flex: 1 1 calc(33% - 4px);
+        }
+        #activityToggle {
+          width: 100%;
+          justify-content: center;
+        }
+        .nav-dropdown {
+          top: calc(100% + 8px);
+          left: 50%;
+          width: min(300px, calc(100vw - 28px));
+          transform: translateX(-50%);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .tick,
+        .day.today,
+        section.show {
+          animation: none !important;
+        }
+      }
+      :root,
+      :root:not([data-theme="light"]),
+      :root[data-theme="dark"] {
+        --bg: #0f0b12;
+        --card: #1a141d;
+        --ink: #f7f0f3;
+        --mute: #a99ba6;
+        --line: #2e2432;
+        --forest: #d6336c;
+        --on: #fff;
+        --sage: #43213a;
+        --sun: #ff9e80;
+        color-scheme: dark;
+      }
+      body {
+        background:
+          radial-gradient(900px 480px at 88% -10%, #3a1233, transparent 60%),
+          radial-gradient(700px 420px at -5% 105%, #241446, transparent 60%),
+          var(--bg);
+      }
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background:
+          radial-gradient(
+            420px 300px at 8% 22%,
+            rgba(214, 51, 108, 0.16),
+            transparent
+          ),
+          radial-gradient(
+            460px 340px at 92% 78%,
+            rgba(160, 120, 255, 0.13),
+            transparent
+          );
+      }
+      .logo,
+      .stat b,
+      #yl,
+      h1,
+      h2,
+      h3,
+      #tt,
+      .lvl,
+      .mq {
+        font-family: "DM Serif Display", Georgia, serif !important;
+        font-weight: 400;
+        text-transform: none;
+        letter-spacing: 0;
+      }
+      .logo {
+        font-size: 30px;
+        font-style: italic;
+      }
+      h1 {
+        font-style: italic;
+      }
+      .stk b {
+        font:
+          400 38px "DM Serif Display",
+          serif;
+      }
+      .mq {
+        font-style: italic;
+        border-color: rgba(255, 255, 255, 0.18);
+      }
+      .hero {
+        background: linear-gradient(135deg, #1c1022, #3d1238 55%, #c2255c);
+        border-radius: 34px;
+        box-shadow: 0 30px 60px -30px rgba(214, 51, 108, 0.55);
+      }
+      .card {
+        border-radius: 28px;
+        background:
+          linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.05),
+            rgba(255, 255, 255, 0.015)
+          ),
+          var(--card);
+        backdrop-filter: blur(10px);
+      }
+      .card > h2:first-child::before {
+        content: "✦";
+        width: auto;
+        height: auto;
+        background: none;
+        box-shadow: none;
+        color: var(--forest);
+        font-size: 0.6em;
+      }
+      .btn:not(.ghost) {
+        background: linear-gradient(135deg, #ee5a93, #d6336c);
+        box-shadow: 0 10px 24px -10px #d6336c;
+      }
+      .btn.ghost:hover {
+        background: rgba(214, 51, 108, 0.14);
+      }
+      nav {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+      }
+      nav button[aria-current="page"],
+      #activityToggle[aria-current="page"] {
+        background: linear-gradient(135deg, #ee5a93, #d6336c);
+        box-shadow: 0 8px 20px -8px #d6336c;
+      }
+      input:focus,
+      textarea:focus,
+      select:focus {
+        box-shadow: 0 0 0 3px rgba(214, 51, 108, 0.3);
+      }
+      header {
+        background: rgba(15, 11, 18, 0.8);
+      }
+      body::before {
+        background: rgba(15, 11, 18, 0.9);
+      }
+      .day {
+        border-radius: 18px;
+      }
+      .day.done {
+        background: linear-gradient(145deg, #e0457f, #b02a63);
+        box-shadow: 0 10px 22px -10px #d6336c;
+      }
+      .tick.on {
+        background: linear-gradient(135deg, #ffb199, #ff7aa2);
+        border-color: transparent;
+      }
+      .chip.on,
+      .months button[aria-pressed="true"] {
+        background: linear-gradient(135deg, #ee5a93, #d6336c);
+        border-color: transparent;
+      }
+      .lvl {
+        background: linear-gradient(135deg, #ffb199, #ff7aa2);
+        box-shadow:
+          0 0 0 6px rgba(255, 158, 128, 0.2),
+          0 0 40px rgba(255, 122, 162, 0.45);
+      }
+      .bgi:not(.lock) {
+        background: linear-gradient(
+          160deg,
+          rgba(255, 122, 162, 0.16),
+          transparent
+        );
+      }
+      .bar i {
+        background: linear-gradient(180deg, #ee5a93, #43213a);
+      }
+      .bar.cur i {
+        background: linear-gradient(180deg, #ffb199, #d6336c);
+      }
+      .stat::after {
+        background: linear-gradient(90deg, #d6336c, #ffb199);
+      }
+      .pbar i {
+        background: linear-gradient(90deg, #d6336c, #ffb199);
+      }
+      dialog {
+        background: rgba(26, 20, 29, 0.94);
+        backdrop-filter: blur(18px);
+        border: 1px solid var(--line);
+        border-radius: 28px;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .bb g,
+        .fx,
+        .fl,
+        .flex {
+          animation: none !important;
+        }
+      }
+      @media (max-width: 720px) {
+        .bb {
+          opacity: 0.25;
+        }
+      }
+      .hero h1 {
+        font-size: clamp(34px, 6vw, 58px);
+        margin: 8px 0 14px;
+      }
+      .hero p {
+        margin: 0;
+        opacity: 0.85;
+        max-width: 38ch;
+      }
+      .big {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 22px;
+        padding: 20px;
+        text-align: center;
+      }
+      .tick {
+        width: 84px;
+        height: 84px;
+        border-radius: 50%;
+        border: 3px solid var(--on);
+        background: none;
+        display: grid;
+        place-items: center;
+        transition: 0.25s;
+      }
+      .tick svg {
+        width: 40px;
+        opacity: 0;
+        transform: scale(0.4);
+        transition: 0.25s;
+      }
+      .tick.on {
+        background: var(--sun);
+        border-color: var(--sun);
+      }
+      .tick.on svg {
+        opacity: 1;
+        transform: none;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin: 14px 0 26px;
+      }
+      .stat {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 14px 16px;
+      }
+      .stat b {
+        font: 800 32px "Bricolage Grotesque";
+        display: block;
+        line-height: 1;
+      }
+      .stat span {
+        color: var(--mute);
+        font-size: 14px;
+      }
+      section {
+        display: none;
+      }
+      section.show {
+        display: block;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 20px;
+        margin-bottom: 16px;
+      }
+      .row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .months {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 76px), 1fr));
+        gap: 6px;
+        min-width: 0;
+        margin: 12px 0;
+      }
+      .months button,
+      .chip {
+        border: 1px solid var(--line);
+        background: var(--card);
+        border-radius: 99px;
+        padding: 6px 14px;
+        white-space: nowrap;
+      }
+      .months button {
+        min-width: 0;
+        padding-inline: 8px;
+      }
+      .months button[aria-pressed="true"],
+      .chip.on {
+        background: var(--forest);
+        color: var(--on);
+        border-color: var(--forest);
+      }
+      .yr {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .yr button {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid var(--line);
+        background: var(--card);
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 6px;
+      }
+      .dn {
+        font-size: 13px;
+        color: var(--mute);
+        text-align: center;
+        padding: 4px;
+      }
+      .day {
+        min-height: 84px;
+        border: 1px solid var(--line);
+        background: var(--card);
+        border-radius: 14px;
+        padding: 7px 8px;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        position: relative;
+      }
+      .day:hover {
+        border-color: var(--forest);
+      }
+      .day .n {
+        font-weight: 600;
+        font-size: 14px;
+      }
+      .day .f {
+        font-size: 12px;
+        line-height: 1.25;
+        color: var(--mute);
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+      }
+      .day.rest {
+        background: transparent;
+        border-style: dashed;
+      }
+      .day.done {
+        background: var(--forest);
+        color: var(--on);
+        border-color: var(--forest);
+      }
+      .day.done .f {
+        color: var(--on);
+        opacity: 0.85;
+      }
+      .day.today {
+        box-shadow: 0 0 0 3px var(--sun);
+      }
+      .day.blank {
+        visibility: hidden;
+      }
+      .day .ck {
+        position: absolute;
+        right: 8px;
+        top: 7px;
+        font-size: 13px;
+      }
+      input[type="text"],
+      input[type="number"],
+      input[type="date"],
+      textarea {
+        width: 100%;
+        padding: 11px 14px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: var(--bg);
+      }
+      textarea {
+        min-height: 90px;
+        resize: vertical;
+      }
+      label {
+        display: block;
+        font-weight: 600;
+        font-size: 14px;
+        margin: 12px 0 5px;
+      }
+      .btn {
+        background: var(--forest);
+        color: var(--on);
+        border: 0;
+        border-radius: 99px;
+        padding: 11px 20px;
+        font-weight: 600;
+      }
+      .btn.ghost {
+        background: none;
+        color: var(--ink);
+        border: 1px solid var(--line);
+      }
+      .ico {
+        background: none;
+        border: 0;
+        color: var(--mute);
+        padding: 4px 8px;
+        border-radius: 8px;
+      }
+      .ico:hover {
+        color: var(--ink);
+      }
+      dialog {
+        border: 0;
+        border-radius: 24px;
+        padding: 24px;
+        width: min(460px, 92vw);
+        background: var(--card);
+        color: var(--ink);
+      }
+      dialog::backdrop {
+        background: rgba(10, 20, 14, 0.55);
+      }
+      .plan {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 10px;
+      }
+      .item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .item:last-child {
+        border: 0;
+      }
+      .item input[type="checkbox"] {
+        width: 22px;
+        height: 22px;
+        accent-color: var(--forest);
+      }
+      .item .t {
+        flex: 1;
+      }
+      .item.x .t {
+        text-decoration: line-through;
+        color: var(--mute);
+      }
+      .bars {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 8px;
+        align-items: end;
+        height: 150px;
+      }
+      .bar {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        height: 100%;
+        gap: 6px;
+        font-size: 12px;
+        color: var(--mute);
+      }
+      .bar i {
+        width: 100%;
+        background: var(--sage);
+        border-radius: 8px 8px 3px 3px;
+        min-height: 4px;
+        display: block;
+      }
+      .bar.cur i {
+        background: var(--sun);
+      }
+      .two {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      h2 {
+        font-size: 26px;
+        margin-bottom: 6px;
+      }
+      .sub {
+        color: var(--mute);
+        margin: 0 0 14px;
+      }
+      .social-list,
+      .workout-list {
+        display: grid;
+        gap: 10px;
+      }
+      .social-card,
+      .workout-card {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 14px 16px;
+        background: rgba(255, 255, 255, 0.025);
+      }
+      .social-card h3,
+      .workout-card h3 {
+        font-size: 19px;
+        margin: 0 0 4px;
+      }
+      .social-avatar {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        object-fit: cover;
+        display: grid;
+        place-items: center;
+        background: var(--sage);
+        font-size: 26px;
+        flex: 0 0 auto;
+      }
+      .workout-card ul {
+        margin: 8px 0 0;
+        padding-left: 20px;
+      }
+      .social-empty {
+        color: var(--mute);
+        padding: 12px 0;
+      }
+      .profile-card {
+        padding: clamp(18px, 3vw, 28px);
+      }
+      .profile-page {
+        max-width: 860px;
+        margin: 0 auto;
+      }
+      .profile-top {
+        display: grid;
+        grid-template-columns: 140px minmax(0, 1fr);
+        align-items: center;
+        gap: clamp(20px, 5vw, 52px);
+        padding: clamp(20px, 4vw, 38px);
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background:
+          radial-gradient(400px 220px at 90% 0%, rgba(214, 51, 108, 0.17), transparent 70%),
+          var(--card);
+      }
+      .profile-top #pav {
+        display: grid;
+        place-items: center;
+      }
+      .profile-top #pav .av {
+        width: 128px !important;
+        height: 128px !important;
+        border: 3px solid rgba(255, 255, 255, 0.24);
+        box-shadow: 0 12px 32px rgba(214, 51, 108, 0.26);
+        font-size: 58px !important;
+      }
+      .profile-main {
+        min-width: 0;
+      }
+      .profile-name-row,
+      .profile-counts {
+        display: flex;
+        align-items: center;
+      }
+      .profile-name-row {
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      .profile-name-row h1 {
+        flex: 1 1 170px;
+        font-size: clamp(27px, 4vw, 38px);
+      }
+      .profile-counts {
+        justify-content: space-between;
+        gap: clamp(10px, 3vw, 30px);
+        margin-bottom: 16px;
+      }
+      .profile-count {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+        border: 0;
+        padding: 0;
+        background: none;
+        color: var(--ink);
+        text-align: left;
+      }
+      button.profile-count {
+        cursor: pointer;
+      }
+      .profile-count b {
+        font-size: 21px;
+        line-height: 1.15;
+      }
+      .profile-count span {
+        color: var(--mute);
+        font-size: 13px;
+      }
+      .profile-bio {
+        margin: 0;
+        font-weight: 600;
+        overflow-wrap: anywhere;
+      }
+      .profile-goal {
+        margin: 4px 0 0;
+        color: var(--mute);
+        font-size: 14px;
+      }
+      .profile-mobile-actions {
+        display: none;
+      }
+      .profile-tabs {
+        display: flex;
+        justify-content: space-around;
+        gap: 8px;
+        margin: 20px 0 16px;
+        border-bottom: 1px solid var(--line);
+      }
+      .profile-tabs button {
+        min-width: 112px;
+        padding: 13px 10px;
+        border: 0;
+        border-bottom: 2px solid transparent;
+        background: none;
+        color: var(--mute);
+        font-weight: 700;
+      }
+      .profile-tabs button[aria-selected="true"] {
+        border-bottom-color: var(--forest);
+        color: var(--ink);
+      }
+      .profile-panel[hidden] {
+        display: none;
+      }
+      .profile-activity-summary {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .profile-activity-stat {
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.025);
+      }
+      .profile-activity-stat b,
+      .profile-activity-stat span {
+        display: block;
+      }
+      .profile-activity-stat b {
+        font-size: 20px;
+      }
+      .profile-activity-stat span {
+        color: var(--mute);
+        font-size: 13px;
+      }
+      .profile-activity-summary > .workout-card,
+      .profile-activity-summary > .social-empty {
+        grid-column: 1 / -1;
+      }
+      .profile-sync-code input {
+        flex: 1 1 220px;
+      }
+      .profile-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding-bottom: 18px;
+        margin-bottom: 18px;
+        border-bottom: 1px solid var(--line);
+      }
+      .profile-heading h2 {
+        margin-bottom: 6px;
+      }
+      .profile-heading .sub {
+        margin: 0;
+      }
+      .site-footer {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        margin-top: 40px;
+        padding: 22px clamp(18px, 4vw, 30px);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background:
+          radial-gradient(420px 220px at 100% 0%, rgba(160, 120, 255, 0.1), transparent 75%),
+          radial-gradient(360px 180px at 0% 100%, rgba(214, 51, 108, 0.16), transparent 75%),
+          var(--card);
+        box-shadow: 0 24px 80px -58px rgba(214, 51, 108, 0.72);
+      }
+      .footer-brand {
+        min-width: 0;
+      }
+      .footer-brand strong {
+        display: block;
+        font: italic 36px "DM Serif Display", Georgia, serif;
+        letter-spacing: -0.04em;
+        line-height: 1;
+      }
+      .footer-brand strong span {
+        color: var(--sun);
+      }
+      .footer-brand p {
+        max-width: 34ch;
+        margin: 12px 0 0;
+        color: var(--mute);
+        font-size: 14px;
+      }
+      .footer-topline,
+      .footer-bottomline {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .footer-topline {
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--line);
+      }
+      .footer-kicker,
+      .footer-label {
+        color: var(--mute);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+      .footer-spark {
+        color: var(--sun);
+        font-size: 20px;
+      }
+      .footer-content {
+        display: grid;
+        grid-template-columns: minmax(0, 1.15fr) minmax(350px, 0.85fr);
+        align-items: center;
+        gap: 24px;
+        padding: 24px 0;
+      }
+      .footer-motto {
+        margin: 14px 0 0;
+        color: var(--sun);
+        font: italic 16px "DM Serif Display", Georgia, serif;
+      }
+      .footer-links {
+        min-width: 0;
+      }
+      .footer-label {
+        margin: 0 0 10px 8px;
+      }
+      .footer-nav {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+      }
+      .footer-nav button {
+        width: 100%;
+        padding: 10px 14px;
+        border: 1px solid var(--line);
+        border-radius: 99px;
+        background: rgba(255, 255, 255, 0.025);
+        color: var(--ink);
+        font: inherit;
+        font-size: 13px;
+        font-weight: 600;
+        text-align: left;
+        transition:
+          transform 0.2s ease,
+          border-color 0.2s ease,
+          background 0.2s ease;
+      }
+      .footer-nav button:hover {
+        transform: translateY(-2px);
+        border-color: rgba(214, 51, 108, 0.6);
+        background: rgba(214, 51, 108, 0.12);
+      }
+      .footer-bottomline {
+        padding-top: 14px;
+        border-top: 1px solid var(--line);
+        color: var(--mute);
+        font-size: 11px;
+      }
+      .footer-bottomline span:last-child {
+        color: var(--sun);
+        font-weight: 600;
+      }
+      .music-item {
+        display: grid !important;
+        grid-template-columns: 32px minmax(130px, 1fr) minmax(90px, 0.7fr) auto auto auto;
+        gap: 10px;
+      }
+      .music-item .music-icon {
+        align-self: center;
+      }
+      .music-item [data-st],
+      .music-item [data-sa] {
+        width: 100%;
+        min-width: 0 !important;
+        max-width: none !important;
+        flex: initial !important;
+      }
+      #profileFriendsPanel #teman > .two {
+        gap: 0 16px;
+      }
+      #profileFriendsPanel #teman > .two > .card {
+        margin-bottom: 0;
+      }
+      #musik,
+      #beli,
+      #teman {
+        margin-top: 16px;
+      }
+      @media (max-width: 720px) {
+        .hero,
+        .two {
+          grid-template-columns: 1fr;
+        }
+        .wrap {
+          padding: 12px 14px 120px;
+        }
+        header {
+          gap: 10px;
+          margin: 0 -14px 12px;
+          padding: 8px 14px 12px;
+        }
+        nav {
+          display: grid;
+          grid-template-columns: repeat(5, minmax(0, 1fr));
+          gap: 3px;
+          padding: 5px;
+          border-radius: 20px;
+        }
+        #nav > button,
+        #activityMenu,
+        #activityToggle {
+          min-width: 0;
+          width: 100%;
+        }
+        #nav > button,
+        #activityToggle {
+          display: flex;
+          min-height: 58px;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 3px;
+          padding: 6px 1px;
+          font-size: clamp(9px, 2.8vw, 11px);
+          line-height: 1.1;
+          text-align: center;
+        }
+        #activityToggle {
+          position: relative;
+        }
+        #activityToggle::after {
+          position: absolute;
+          top: 2px;
+          right: 4px;
+          font-size: 10px;
+        }
+        #activityMenu {
+          align-self: stretch;
+        }
+        form.row,
+        form > .row {
+          flex-wrap: wrap !important;
+          align-items: stretch;
+        }
+        form.row > input,
+        form.row > select,
+        form > .row > input,
+        form > .row > select {
+          flex: 1 1 150px;
+          width: auto;
+          min-width: 0;
+          max-width: none !important;
+        }
+        form.row > .btn,
+        form > .row > .btn {
+          flex: 1 0 auto;
+        }
+        .card {
+          padding: clamp(16px, 4vw, 22px);
+          border-radius: 22px;
+        }
+        .hero {
+          gap: 18px;
+          padding: clamp(18px, 5vw, 24px);
+          border-radius: 26px;
+        }
+        .hero h1 {
+          font-size: clamp(34px, 9vw, 48px);
+        }
+        .music-item {
+          grid-template-columns: 26px minmax(0, 1fr) auto;
+          gap: 8px;
+          padding: 12px 0;
+        }
+        .music-item .music-icon {
+          grid-column: 1;
+          grid-row: 1 / span 2;
+          align-self: start;
+          padding-top: 9px;
+        }
+        .music-item [data-st] {
+          grid-column: 2 / -1;
+          grid-row: 1;
+        }
+        .music-item [data-sa] {
+          grid-column: 2;
+          grid-row: 2;
+        }
+        .music-item [data-yt] {
+          grid-column: 3;
+          grid-row: 2;
+          padding: 9px 12px;
+          white-space: nowrap;
+        }
+        .music-item [data-sp] {
+          grid-column: 2;
+          grid-row: 3;
+          justify-self: start;
+        }
+        .music-item [data-sx] {
+          grid-column: 3;
+          grid-row: 3;
+          justify-self: end;
+        }
+        .stats {
+          grid-template-columns: 1fr 1fr;
+        }
+        .bars {
+          grid-template-columns: repeat(6, minmax(0, 1fr));
+          grid-template-rows: repeat(2, 120px);
+          height: auto;
+          gap: 8px 6px;
+        }
+        .day {
+          min-height: 62px;
+          padding: 5px;
+        }
+        .day .f {
+          display: none;
+        }
+        header {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 8px;
+          padding: 8px 0 10px;
+        }
+        .logo {
+          padding-left: 4px;
+          font-size: 28px;
+        }
+        .profile-page {
+          margin-inline: -2px;
+        }
+        .profile-top {
+          grid-template-columns: 76px minmax(0, 1fr);
+          gap: 16px;
+          padding: 18px 14px;
+          border-radius: 22px;
+        }
+        .profile-top #pav .av {
+          width: 72px !important;
+          height: 72px !important;
+          font-size: 34px !important;
+        }
+        .profile-name-row {
+          gap: 7px;
+          margin-bottom: 14px;
+        }
+        .profile-name-row h1 {
+          flex-basis: 100%;
+          font-size: 28px;
+        }
+        .profile-name-row > .btn {
+          display: none;
+        }
+        .profile-mobile-actions {
+          display: flex;
+          gap: 8px;
+          margin: 10px 0;
+        }
+        .profile-mobile-actions .btn {
+          flex: 1;
+          padding: 9px 12px;
+        }
+        .profile-counts {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 10px 8px;
+          margin-bottom: 14px;
+        }
+        .profile-count {
+          align-items: flex-start;
+          min-width: 0;
+        }
+        .profile-count b {
+          font-size: 20px;
+        }
+        .profile-count span {
+          font-size: 12px;
+        }
+        .profile-tabs {
+          justify-content: space-between;
+          gap: 0;
+          margin-top: 16px;
+        }
+        .profile-tabs button {
+          min-width: 0;
+          flex: 1;
+          padding: 12px 4px;
+          font-size: 13px;
+        }
+        .profile-activity-summary {
+          grid-template-columns: 1fr;
+        }
+        .profile-sync-code {
+          align-items: stretch;
+        }
+        #profileFriendsPanel #teman > .two > .card {
+          margin-bottom: 16px;
+        }
+        .site-footer {
+          display: block;
+          margin-top: 32px;
+          padding: 18px;
+          border-radius: 24px;
+        }
+        .footer-content {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 20px;
+          padding: 20px 0;
+        }
+        .footer-brand strong {
+          font-size: 32px;
+        }
+        .footer-brand p {
+          font-size: 13px;
+        }
+        .footer-motto {
+          font-size: 15px;
+        }
+        .footer-links {
+          min-width: 0;
+        }
+        .footer-nav {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 8px;
+        }
+        .footer-nav button {
+          padding: 11px 12px;
+          text-align: left;
+        }
+        .footer-bottomline {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 5px;
+        }
+      }
+      @media (max-width: 380px) {
+        .profile-top {
+          grid-template-columns: minmax(0, 1fr);
+          justify-items: center;
+          gap: 12px;
+          text-align: center;
+        }
+        .profile-top #pav .av {
+          width: 64px !important;
+          height: 64px !important;
+          font-size: 30px !important;
+        }
+        .profile-name-row {
+          justify-content: center;
+        }
+        .profile-name-row h1 {
+          text-align: center;
+        }
+        .profile-count {
+          align-items: center;
+        }
+        .profile-bio,
+        .profile-goal {
+          text-align: center;
+        }
+        .profile-tabs button {
+          font-size: 12px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="logo">i<span>♥</span>gym</div>
+        <nav id="nav" aria-label="Navigasi utama">
+          <button data-t="jadwal"><span aria-hidden="true">📅</span><span>Jadwal</span></button>
+          <div id="activityMenu">
+            <button
+              type="button"
+              id="activityToggle"
+              aria-expanded="false"
+              aria-controls="activityDropdown"
+            >
+              <span aria-hidden="true">🏋️</span><span>Aktivitas</span>
+            </button>
+            <div class="nav-dropdown" id="activityDropdown" hidden>
+              <button data-t="rutin">🏋️ <span>Rutinitas</span></button>
+              <button data-t="musik">🎵 <span>Playlist gym</span></button>
+              <button data-t="beli">🛒 <span>Mau dibeli</span></button>
+            </div>
+          </div>
+          <button data-t="progres"><span aria-hidden="true">📈</span><span>Progres</span></button>
+          <button data-t="galeri"><span aria-hidden="true">📸</span><span>Kenangan</span></button>
+          <button data-t="profil"><span aria-hidden="true">👤</span><span>Profil</span></button>
+        </nav>
+      </header>
+
+      <div id="homeDashboard">
+        <div id="bn" class="bn"></div>
+        <div class="hero" id="hero"></div>
+        <div class="mq" aria-hidden="true">
+          <div>
+            Hadir dulu <b>♥</b> Pelan tapi pasti <b>♥</b> Satu hari, satu centang
+            <b>♥</b> Badanmu rumahmu <b>♥</b> Hadir dulu <b>♥</b> Pelan tapi pasti
+            <b>♥</b> Satu hari, satu centang <b>♥</b> Badanmu rumahmu <b>♥</b>
+          </div>
+        </div>
+        <div class="stats" id="stats"></div>
+      </div>
+
+      <section id="teman">
+        <div class="card">
+          <h2>Teman latihan</h2>
+          <p class="sub">
+            Buka tautan profil teman untuk melihat hasil latihan yang mereka
+            bagikan, lalu ikuti untuk menjaga streak latihan bareng.
+          </p>
+          <form class="row" id="friendForm" style="flex-wrap: nowrap">
+            <input
+              type="text"
+              id="friendInput"
+              placeholder="Tempel tautan profil teman"
+              autocomplete="url"
+            /><button class="btn">Lihat profil</button>
+          </form>
+          <div id="friendProfile" style="margin-top: 16px"></div>
+        </div>
+        <div class="two">
+          <div class="card">
+            <h2>Mengikuti</h2>
+            <p class="sub">Streak bareng dihitung saat kalian berdua latihan di hari yang sama.</p>
+            <div class="social-list" id="followingList"></div>
+          </div>
+          <div class="card">
+            <h2>Pengikut</h2>
+            <p class="sub">Teman yang mengikuti profil publikmu.</p>
+            <div class="social-list" id="followerList"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="musik">
+        <div class="card">
+          <div class="row" style="justify-content: space-between">
+            <div>
+              <h2>Playlist gym</h2>
+              <p class="sub">
+                Ketuk Putar, lagunya terbuka di YouTube pada tab baru. Tanpa
+                unduh.
+              </p>
+            </div>
+            <div class="eq" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i>
+            </div>
+          </div>
+          <div class="row" style="margin-bottom: 8px">
+            <button class="btn" id="mr">🔀 Putar acak</button>
+          </div>
+          <div id="mu"></div>
+          <form class="row" id="mf" style="margin-top: 14px; flex-wrap: nowrap">
+            <input
+              type="text"
+              id="mt"
+              placeholder="Judul lagu"
+              required
+            /><input
+              type="text"
+              id="ma"
+              placeholder="Artis (opsional)"
+              style="max-width: 180px"
+            /><button class="btn">Tambah</button>
+          </form>
+        </div>
+      </section>
+      <section id="galeri">
+        <div class="card">
+          <h2>Progres & kenangan</h2>
+          <p class="sub">
+            Foto before-after, momen di gym, atau kenangan berdua. Ketuk foto
+            untuk memberi keterangan atau menghapus.
+          </p>
+          <div class="row">
+            <div class="row" id="gf" style="gap: 6px"></div>
+            <select id="gt" aria-label="Jenis foto">
+              <option>Progres</option>
+              <option>Kenangan</option></select
+            ><label class="btn" style="margin: 0; cursor: pointer"
+              >+ Tambah foto<input
+                type="file"
+                id="gu"
+                accept="image/*"
+                multiple
+                hidden
+            /></label>
+          </div>
+        </div>
+        <div class="gal" id="gg"></div>
+      </section>
+      <section id="profil">
+        <div class="profile-page">
+          <div class="profile-top">
+            <div id="pav"></div>
+            <div class="profile-main">
+              <div class="profile-name-row">
+                <h1 id="profileName">Profil kamu</h1>
+                <button class="btn ghost" id="profileEditButton">Edit profil</button>
+                <button class="btn" id="profileShareButton" disabled>Bagikan</button>
+              </div>
+              <div class="profile-counts">
+                <button type="button" class="profile-count" data-profile-view="friends">
+                  <b id="profilePostCount">0</b><span>Sesi</span>
+                </button>
+                <button type="button" class="profile-count" data-profile-view="friends">
+                  <b id="profileFollowerCount">0</b><span>Pengikut</span>
+                </button>
+                <button type="button" class="profile-count" data-profile-view="friends">
+                  <b id="profileFollowingCount">0</b><span>Mengikuti</span>
+                </button>
+                <div class="profile-count">
+                  <b id="profileStreakCount">0</b><span>Hari streak</span>
+                </div>
+              </div>
+              <p class="profile-bio" id="profileMotto">Mulai perjalanan latihanmu.</p>
+              <p class="profile-goal" id="profileGoal"></p>
+            </div>
+          </div>
+          <div class="profile-mobile-actions">
+            <button class="btn ghost" id="profileEditMobile">Edit profil</button>
+            <button class="btn" id="profileShareMobile" disabled>Bagikan profil</button>
+          </div>
+          <div class="profile-tabs" role="tablist" aria-label="Bagian profil">
+            <button role="tab" id="profileTabActivity" aria-controls="profileActivityPanel" aria-selected="true" data-profile-view="activity">Aktivitas</button>
+            <button role="tab" id="profileTabFriends" aria-controls="profileFriendsPanel" aria-selected="false" data-profile-view="friends">Teman</button>
+            <button role="tab" id="profileTabEdit" aria-controls="profileEditPanel" aria-selected="false" data-profile-view="edit">Edit profil</button>
+            <button role="tab" id="profileTabAccount" aria-controls="profileAccountPanel" aria-selected="false" data-profile-view="account">Akun</button>
+          </div>
+          <div class="profile-panel" id="profileActivityPanel" role="tabpanel" tabindex="0" aria-labelledby="profileTabActivity">
+            <div class="card profile-card">
+              <div class="row" style="justify-content:space-between">
+                <div>
+                  <h2>Aktivitas publik</h2>
+                  <p class="sub">Kontrol apa yang terlihat saat teman membuka profilmu.</p>
+                </div>
+                <label class="row" style="font-weight:500">
+                  <input type="checkbox" id="shareToggle" style="width:22px;height:22px;accent-color:var(--forest)">
+                  Bagikan hasil latihan
+                </label>
+              </div>
+              <div class="row" style="margin-top:8px">
+                <button class="btn ghost" id="shareLink" hidden>Salin tautan profil</button>
+                <button class="btn ghost" id="sharePreview" hidden>Lihat profil publik</button>
+              </div>
+              <p class="sub" id="shareStatus" style="margin:10px 0 0"></p>
+            </div>
+            <div class="card profile-card">
+              <div class="row" style="justify-content:space-between">
+                <div>
+                  <h2>Perjalanan latihan</h2>
+                  <p class="sub">Lihat catatan latihan terbaru dan progresmu.</p>
+                </div>
+                <button class="btn ghost" id="profileProgressButton">Buka progres</button>
+              </div>
+              <div id="profileActivitySummary" class="profile-activity-summary"></div>
+            </div>
+          </div>
+          <div class="profile-panel" id="profileFriendsPanel" role="tabpanel" tabindex="0" aria-labelledby="profileTabFriends" hidden></div>
+          <div class="profile-panel" id="profileEditPanel" role="tabpanel" tabindex="0" aria-labelledby="profileTabEdit" hidden>
+            <div class="card profile-card">
+              <div class="profile-heading">
+                <div>
+                  <h2>Informasi profil</h2>
+                  <p class="sub">Nama, foto, dan tujuan latihanmu.</p>
+                </div>
+                <div class="row">
+                  <label class="btn ghost" style="margin:0;cursor:pointer">Ganti foto<input type="file" id="pa" accept="image/*" hidden></label>
+                  <button class="btn ghost" id="pad">Hapus foto</button>
+                </div>
+              </div>
+              <div class="two profile-fields">
+                <div>
+                  <label for="pn">Nama</label><input type="text" id="pn" placeholder="Nama kamu">
+                  <label for="ps">Mulai gym sejak</label><input type="date" id="ps">
+                  <label for="pb">Motto</label><input type="text" id="pb" placeholder="Misal: Pelan tapi pasti">
+                </div>
+                <div>
+                  <label for="ph">Tinggi (cm)</label><input type="number" id="ph">
+                  <label for="pg">Target besar</label><input type="text" id="pg" placeholder="Misal: bisa pull-up, lari 5K">
+                  <p class="sub" id="pd" style="margin-top:16px"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="profile-panel" id="profileAccountPanel" role="tabpanel" tabindex="0" aria-labelledby="profileTabAccount" hidden>
+            <div class="card profile-card">
+              <h2>Sinkron antar perangkat</h2>
+              <p class="sub" id="sinfo"></p>
+              <div class="row profile-sync-code">
+                <input type="text" id="scode" placeholder="Kode rahasia kamu" autocomplete="off" spellcheck="false">
+                <button class="btn ghost" id="sgen">Buat kode baru</button>
+                <button class="btn" id="scon">Hubungkan</button>
+                <button class="btn ghost" id="soff" hidden>Putuskan</button>
+              </div>
+              <p class="sub" id="sst" style="margin:10px 0 0"></p>
+            </div>
+            <div class="card profile-card">
+              <h2>Data akun</h2>
+              <p class="sub">Pulihkan data lama dari file atau hapus semua data dari perangkat ini.</p>
+              <div class="row">
+                <label class="btn ghost" style="margin:0;cursor:pointer">Pulihkan dari file<input type="file" id="imp" accept=".json" hidden></label>
+                <button class="btn ghost" id="rst">Hapus semua data</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="jadwal">
+        <div class="row" style="justify-content: space-between">
+          <div>
+            <h2>Jadwal setahun</h2>
+            <p class="sub">
+              Ketuk satu hari untuk ganti fokus, tulis catatan, atau centang
+              selesai.
+            </p>
+          </div>
+          <div class="yr">
+            <button id="py" aria-label="Tahun sebelumnya">‹</button
+            ><b
+              id="yl"
+              style="font: 700 20px &quot;Bricolage Grotesque&quot;"
+            ></b
+            ><button id="ny" aria-label="Tahun berikutnya">›</button>
+          </div>
+        </div>
+        <div class="months" id="months"></div>
+        <button class="btn ghost" id="fill" style="margin-bottom: 14px">
+          Isi pesan harian untuk bulan ini
+        </button>
+        <div class="grid" id="cal"></div>
+      </section>
+
+      <section id="rutin">
+        <div class="card">
+          <h2>Pola mingguan</h2>
+          <p class="sub">
+            Ini jadi isi awal semua hari. Ketik sendiri, misalnya “Bisep &amp;
+            punggung”. Hari yang sudah kamu ubah manual tidak ikut berubah.
+          </p>
+          <div class="plan" id="plan"></div>
+        </div>
+        <div class="card">
+          <h2>Pengingat harian</h2>
+          <p class="sub">
+            Notifikasi muncul tiap hari di jam pilihanmu selama halaman ini
+            terbuka. Untuk pengingat yang selalu jalan, unduh file kalender lalu
+            buka di HP.
+          </p>
+          <div class="row">
+            <input type="time" id="rt" /><button class="btn" id="rn">
+              Aktifkan notifikasi</button
+            ><button class="btn ghost" id="ri">Unduh pengingat kalender</button
+            ><button class="btn ghost" id="rg">
+              Tambah ke Google Calendar
+            </button>
+          </div>
+          <p class="sub" id="rs" style="margin: 10px 0 0"></p>
+        </div>
+        <div class="card">
+          <h2>Motivasi harian</h2>
+          <p class="sub">
+            Kata-kata harian ala anak gym. Ketuk teks untuk mengubahnya, tambah
+            atau hapus sesukamu.
+          </p>
+          <div id="ql"></div>
+          <form class="row" id="qf" style="margin-top: 12px; flex-wrap: nowrap">
+            <input
+              type="text"
+              id="qin"
+              placeholder="Tulis kalimat baru"
+              required
+            /><button class="btn">Tambah</button>
+          </form>
+        </div>
+        <div class="card">
+          <h2>Pilihan gerakan</h2>
+          <p class="sub">
+            Tombol cepat untuk daftar gerakan saat mengisi hari. Ketuk nama
+            untuk mengubah, tambah atau hapus sesukamu.
+          </p>
+          <div class="row" id="ml"></div>
+          <form class="row" id="mvf" style="margin-top: 12px">
+            <input
+              type="text"
+              id="mvi"
+              placeholder="Misal: Cable fly"
+              style="max-width: 240px"
+              required
+            /><button class="btn">Tambah</button>
+          </form>
+        </div>
+        <div class="card">
+          <h2>Pilihan fokus</h2>
+          <p class="sub">
+            Tombol cepat saat mengisi hari. Ketuk nama untuk mengubah, tambah
+            atau hapus sesukamu.
+          </p>
+          <div class="row" id="cl"></div>
+          <form class="row" id="cf" style="margin-top: 12px">
+            <input
+              type="text"
+              id="ci"
+              placeholder="Misal: Glutes, Yoga"
+              style="max-width: 240px"
+              required
+            /><button class="btn">Tambah</button>
+          </form>
+        </div>
+      </section>
+
+      <section id="beli">
+        <div class="card">
+          <h2>Mau dibeli</h2>
+          <p class="sub">
+            Whey, sepatu, sarung tangan, apa pun. Centang kalau sudah dapat.
+          </p>
+          <form class="row" id="sf" style="flex-wrap: nowrap">
+            <input
+              type="text"
+              id="si"
+              placeholder="Nama barang"
+              required
+            /><input
+              type="number"
+              id="sp"
+              placeholder="Harga (Rp)"
+              min="0"
+              style="max-width: 180px"
+            /><button class="btn">Tambah</button>
+          </form>
+          <div id="sl"></div>
+          <p id="sum" class="sub" style="margin: 14px 0 0"></p>
+        </div>
+      </section>
+
+      <section id="progres">
+        <div class="card">
+          <h2>Level & lencana</h2>
+          <p class="sub">
+            Tiap 5 sesi selesai naik satu level. Lencana terbuka otomatis.
+          </p>
+          <div id="bd"></div>
+        </div>
+        <div class="card">
+          <h2>Selesai per bulan</h2>
+          <p class="sub" id="ysub"></p>
+          <div class="bars" id="bars"></div>
+        </div>
+        <div class="card">
+          <h2>Rekor pribadi</h2>
+          <p class="sub">
+            Beban terberat tiap gerakan. Isi kolom kg di daftar gerakan.
+          </p>
+          <div id="pr"></div>
+        </div>
+        <div class="two">
+          <div class="card">
+            <h2>Berat badan</h2>
+            <p class="sub">Catat tiap minggu sudah cukup.</p>
+            <form id="wf">
+              <div class="row" style="flex-wrap: nowrap">
+                <input type="date" id="wd" required /><input
+                  type="number"
+                  id="wk"
+                  step="0.1"
+                  min="20"
+                  placeholder="kg"
+                  required
+                  style="max-width: 110px"
+                /><button class="btn">Simpan</button>
+              </div>
+            </form>
+            <div id="wc" style="margin-top: 14px"></div>
+          </div>
+          <div class="card">
+            <h2>Riwayat</h2>
+            <p class="sub" id="gl"></p>
+            <div id="wl"></div>
+            <label for="goal">Target berat (kg)</label
+            ><input type="number" id="goal" step="0.1" placeholder="Misal 65" />
+          </div>
+        </div>
+      </section>
+      <footer class="site-footer">
+        <div class="footer-topline">
+          <span class="footer-kicker">iLOVEGYM · YOUR TRAINING JOURNAL</span>
+          <span class="footer-spark" aria-hidden="true">✦</span>
+        </div>
+        <div class="footer-content">
+          <div class="footer-brand">
+            <strong>i<span>♥</span>gym</strong>
+            <p>Gerak kecil, perubahan besar. Ruang personal untuk menjaga ritme dan merayakan setiap progresmu.</p>
+            <div class="footer-motto">Konsistensi terlihat bagus untukmu.</div>
+          </div>
+          <div class="footer-links">
+            <p class="footer-label">Jelajahi iLovegym</p>
+            <div class="footer-nav" role="navigation" aria-label="Navigasi footer">
+              <button type="button" data-footer-view="jadwal">📅&nbsp; Jadwal</button>
+              <button type="button" data-footer-view="rutin">🏋️&nbsp; Rutinitas</button>
+              <button type="button" data-footer-view="progres">📈&nbsp; Progres</button>
+              <button type="button" data-footer-view="profil">♡&nbsp; Profil</button>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottomline">
+          <span>Dibuat untuk hari-hari yang lebih kuat.</span>
+          <span>Terus bergerak&nbsp; ♥</span>
+        </div>
+      </footer>
+    </div>
+
+    <dialog id="lb">
+      <img
+        id="li"
+        alt=""
+        style="
+          width: 100%;
+          border-radius: 16px;
+          max-height: 60vh;
+          object-fit: contain;
+        "
+      /><label for="lc">Keterangan</label
+      ><input type="text" id="lc" placeholder="Misal: minggu ke-4, 62 kg" />
+      <div class="row" style="margin-top: 14px; justify-content: space-between">
+        <button class="btn ghost" id="ld">Hapus foto</button
+        ><button class="btn" id="lx">Tutup</button>
+      </div>
+    </dialog>
+    <div id="tm">
+      <div id="tp" hidden>
+        <b id="tt">01:00</b>
+        <div class="row" id="tpr" style="justify-content: center"></div>
+        <div class="row" style="justify-content: center">
+          <button class="btn" id="tg">Mulai</button
+          ><button class="btn ghost" id="tr">Atur ulang</button>
+        </div>
+      </div>
+      <button class="btn" id="tb">⏱ Istirahat</button>
+    </div>
+    <dialog id="dlg">
+      <form method="dialog" id="df">
+        <h3 id="dt" style="font-size: 26px"></h3>
+        <label for="df1">Fokus hari ini</label
+        ><input
+          type="text"
+          id="df1"
+          placeholder="Misal: Bisep &amp; punggung"
+        />
+        <div class="row" id="chips" style="margin-top: 8px; gap: 6px"></div>
+        <label>Daftar gerakan</label>
+        <div id="exl"></div>
+        <div class="row" style="flex-wrap: nowrap; margin-top: 6px">
+          <input
+            type="text"
+            id="exi"
+            placeholder="Misal: Barbell curl 3×10"
+          /><button type="button" class="btn ghost" id="exa">Tambah</button>
+        </div>
+        <div
+          class="row"
+          id="mchips"
+          style="gap: 6px; margin-top: 8px; max-height: 110px; overflow: auto"
+        ></div>
+        <label for="dn">Catatan (beban, set, rasa badan)</label
+        ><textarea id="dn"></textarea>
+        <label for="dl">Pesan untuk dirimu hari ini</label>
+        <div class="row" style="flex-wrap: nowrap">
+          <input
+            type="text"
+            id="dl"
+            placeholder="Tulis pengingat buat dirimu, atau ketuk dadu"
+          /><button
+            type="button"
+            class="btn ghost"
+            id="dg"
+            title="Acak pesan dari bubub"
+            aria-label="Acak pesan dari bubub"
+          >
+            🎲
+          </button>
+        </div>
+        <label class="row" style="margin-top: 14px; font-weight: 500"
+          ><input
+            type="checkbox"
+            id="dd"
+            style="width: 22px; height: 22px; accent-color: var(--forest)"
+          />
+          Latihan hari ini selesai</label
+        >
+        <div class="row" style="margin-top: 18px; justify-content: flex-end">
+          <button type="button" class="btn ghost" id="dr">
+            Kembalikan ke pola</button
+          ><button type="button" class="btn ghost" id="dx">Tutup</button
+          ><button class="btn" id="ds" value="ok">Simpan</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script>
+      const K = "latih.v1",
+        MN = [
+          "Januari",
+          "Februari",
+          "Maret",
+          "April",
+          "Mei",
+          "Juni",
+          "Juli",
+          "Agustus",
+          "September",
+          "Oktober",
+          "November",
+          "Desember",
+        ],
+        DN = ["Sen", "Sel", "Rab", "Kam", "Jum", "Sab", "Min"];
+      const DEF = {
+        plan: [
+          "Dada & trisep",
+          "Punggung & bisep",
+          "Kaki",
+          "Istirahat",
+          "Bahu & perut",
+          "Kardio ringan",
+          "Istirahat",
+        ],
+        days: {},
+        wish: [],
+        logs: [],
+        goal: "",
+        chips: [
+          "Bisep",
+          "Trisep",
+          "Dada",
+          "Punggung",
+          "Bahu",
+          "Kaki",
+          "Perut",
+          "Kardio",
+          "Glutes",
+          "Istirahat",
+        ],
+        rem: { on: false, time: "17:00" },
+        social: { publicId: "", share: false },
+      };
+      let S;
+      try {
+        S = Object.assign({}, DEF, JSON.parse(localStorage.getItem(K) || "{}"));
+      } catch (e) {
+        S = structuredClone(DEF);
+      }
+      S.social = Object.assign({ publicId: "", share: false }, S.social || {});
+      let READY = false;
+      const save = () => {
+        if (READY) S._ts = Date.now();
+        try {
+          localStorage.setItem(K, JSON.stringify(S));
+        } catch (e) {}
+        if (READY && typeof syncSoon === "function") syncSoon();
+      };
+      const $ = (i) => document.getElementById(i),
+        esc = (s) =>
+          String(s).replace(
+            /[&<>"]/g,
+            (c) =>
+              ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c],
+          );
+      const key = (d) =>
+        d.getFullYear() +
+        "-" +
+        String(d.getMonth() + 1).padStart(2, "0") +
+        "-" +
+        String(d.getDate()).padStart(2, "0");
+      const now = new Date(),
+        todayK = key(now);
+      let Y = now.getFullYear(),
+        M = now.getMonth(),
+        tab = "jadwal",
+        editK = null;
+      const wd = (d) => (d.getDay() + 6) % 7;
+      const info = (d) => {
+        const k = key(d),
+          o = S.days[k] || {};
+        const f = o.focus ?? S.plan[wd(d)] ?? "";
+        return {
+          k,
+          f,
+          love: o.love || "",
+          note: o.note || "",
+          done: !!o.done,
+          rest: /istirahat/i.test(f) || f.trim() === "",
+        };
+      };
+      const rp = (n) => "Rp" + Number(n || 0).toLocaleString("id-ID");
+      const CHK =
+        '<svg viewBox="0 0 24 24" fill="none" stroke="#1D2B22" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>';
+
+      function stats() {
+        let m = 0,
+          y = 0;
+        for (const k in S.days) {
+          if (S.days[k].done) {
+            if (k.startsWith(now.getFullYear() + "-")) y++;
+            if (
+              k.startsWith(
+                now.getFullYear() +
+                  "-" +
+                  String(now.getMonth() + 1).padStart(2, "0"),
+              )
+            )
+              m++;
+          }
+        }
+        let st = 0;
+        for (let i = 0; i < 365; i++) {
+          const d = new Date(now);
+          d.setDate(d.getDate() - i);
+          const o = info(d);
+          if (o.done) st++;
+          else if (o.rest || i === 0) continue;
+          else break;
+        }
+        const last = [...S.logs].sort((a, b) => (a.d < b.d ? -1 : 1)).pop();
+        $("stats").innerHTML = [
+          [st, "hari beruntun"],
+          [m, "sesi bulan ini"],
+          [y, "sesi tahun ini"],
+          [last ? last.w + " kg" : "–", "berat terakhir"],
+        ]
+          .map(
+            (a) => `<div class="stat"><b>${a[0]}</b><span>${a[1]}</span></div>`,
+          )
+          .join("");
+      }
+      function hero() {
+        const o = info(now),
+          h = now.getHours(),
+          g =
+            h < 11
+              ? "Selamat pagi"
+              : h < 15
+                ? "Selamat siang"
+                : h < 18
+                  ? "Selamat sore"
+                  : "Selamat malam";
+        const tgl = now.toLocaleDateString("id-ID", {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+        });
+        $("hero").innerHTML =
+          `<div><small style="display:flex;align-items:center;gap:10px">${av()}<span>${g}${(S.pf || {}).name ? ", " + esc(S.pf.name) : ""} · ${tgl}</span></small><h1>${o.rest ? "Hari ini waktunya pulih." : esc(o.f)}</h1><p>${o.done ? "Sudah tercatat. Cukup untuk hari ini." : o.rest ? "Tidur cukup dan minum air. Otot tumbuh saat istirahat." : "Hangatkan badan 5 menit, lalu mulai dari beban yang paling berat."}</p><button class="q" id="qq" title="Ketuk untuk kata semangat lain">${o.love ? "🔥 " + esc(o.love) : Q()[qi % Q().length]}</button></div>
+ <div class="big"><button class="tick ${o.done ? "on" : ""}" id="tk" aria-label="Tandai selesai" aria-pressed="${o.done}">${CHK}</button><span>${o.done ? "Selesai" : "Ketuk kalau sudah"}</span>${sk()}</div>${BB}`;
+        $("tk").onclick = () => {
+          const v = !info(now).done;
+          upd(todayK, { done: v });
+          if (v) confetti();
+          render();
+        };
+        $("qq").onclick = () => {
+          qi = (qi + 1) % Q().length;
+          $("qq").textContent = Q()[qi];
+        };
+      }
+      function upd(k, p) {
+        S.days[k] = Object.assign({}, S.days[k], p);
+        save();
+      }
+      function cal() {
+        $("yl").textContent = Y;
+        $("months").innerHTML = MN.map(
+          (n, i) =>
+            `<button data-m="${i}" aria-pressed="${i === M}">${n}</button>`,
+        ).join("");
+        $("months")
+          .querySelectorAll("button")
+          .forEach(
+            (b) =>
+              (b.onclick = () => {
+                M = +b.dataset.m;
+                cal();
+              }),
+          );
+        const first = new Date(Y, M, 1),
+          len = new Date(Y, M + 1, 0).getDate();
+        let h =
+          DN.map((d) => `<div class="dn">${d}</div>`).join("") +
+          '<div class="day blank"></div>'.repeat(wd(first));
+        for (let i = 1; i <= len; i++) {
+          const d = new Date(Y, M, i),
+            o = info(d);
+          h += `<button class="day ${o.rest ? "rest" : ""} ${o.done ? "done" : ""} ${o.k === todayK ? "today" : ""}" data-k="${o.k}"><span class="n">${i}</span>${o.done ? '<span class="ck">✓</span>' : ""}${o.love ? '<span class="ck" style="right:auto;left:8px;top:auto;bottom:5px;color:var(--sun)">✎</span>' : ""}<span class="f">${o.rest && !S.days[o.k] ? "Istirahat" : esc(o.f)}</span></button>`;
+        }
+        $("cal").innerHTML = h;
+        $("cal")
+          .querySelectorAll(".day[data-k]")
+          .forEach((b) => (b.onclick = () => openDay(b.dataset.k)));
+      }
+
+      function openDay(k) {
+        editK = k;
+        const [y, m, d] = k.split("-").map(Number),
+          dt = new Date(y, m - 1, d),
+          o = info(dt);
+        $("dt").textContent = dt.toLocaleDateString("id-ID", {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+        });
+        $("df1").value = o.f;
+        $("dn").value = o.note;
+        $("dd").checked = o.done;
+        EX = structuredClone((S.days[k] || {}).ex || []);
+        exr();
+        $("dl").value = o.love;
+        $("chips").innerHTML = S.chips
+          .map((c) => `<button type="button" class="chip">${c}</button>`)
+          .join("");
+        $("chips")
+          .querySelectorAll(".chip")
+          .forEach(
+            (c) =>
+              (c.onclick = () => {
+                const v = $("df1").value.trim();
+                $("df1").value =
+                  c.textContent === "Istirahat"
+                    ? "Istirahat"
+                    : v && !/istirahat/i.test(v)
+                      ? v + " & " + c.textContent.toLowerCase()
+                      : c.textContent;
+              }),
+          );
+        dchips();
+        dmv();
+        $("dlg").showModal();
+      }
+      $("dx").onclick = () => $("dlg").close();
+      $("df").onsubmit = () => {
+        prCheck();
+        upd(editK, {
+          focus: $("df1").value.trim(),
+          note: $("dn").value,
+          done: $("dd").checked,
+          ex: EX,
+          love: $("dl").value.trim(),
+        });
+        render();
+      };
+      $("dr").onclick = () => {
+        delete S.days[editK];
+        save();
+        $("dlg").close();
+        render();
+      };
+      function plan() {
+        $("plan").innerHTML = DN.map(
+          (n, i) =>
+            `<div><label for="p${i}" style="margin-top:0">${["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"][i]}</label><input type="text" id="p${i}" value="${esc(S.plan[i])}"></div>`,
+        ).join("");
+        DN.forEach(
+          (_, i) =>
+            ($("p" + i).oninput = (e) => {
+              S.plan[i] = e.target.value;
+              save();
+              hero();
+              cal();
+            }),
+        );
+      }
+      function shop() {
+        $("sl").innerHTML = S.wish.length
+          ? S.wish
+              .map(
+                (w, i) =>
+                  `<div class="item ${w.got ? "x" : ""}"><input type="checkbox" ${w.got ? "checked" : ""} data-i="${i}" aria-label="Sudah dibeli">${w.ed ? `<input type="text" class="t" data-n="${i}" value="${esc(w.t)}" aria-label="Nama barang"><input type="number" data-pp="${i}" value="${w.p || ""}" aria-label="Harga" style="max-width:130px">` : `<span class="t">${esc(w.t)}</span><span>${w.p ? rp(w.p) : ""}</span>`}<button class="ico" data-ed="${i}" aria-label="${w.ed ? "Simpan" : "Ubah"}">${w.ed ? "✓" : "✎"}</button><button class="ico" data-r="${i}" aria-label="Hapus">✕</button></div>`,
+              )
+              .join("")
+          : '<p class="sub" style="margin-top:14px">Belum ada barang. Tulis yang kamu incar di atas.</p>';
+        $("sl")
+          .querySelectorAll("[data-i]")
+          .forEach(
+            (c) =>
+              (c.onchange = () => {
+                S.wish[c.dataset.i].got = c.checked;
+                save();
+                shop();
+              }),
+          );
+        $("sl")
+          .querySelectorAll("[data-ed]")
+          .forEach(
+            (c) =>
+              (c.onclick = () => {
+                const i = c.dataset.ed,
+                  w = S.wish[i];
+                if (w.ed) {
+                  const n = $("sl").querySelector(`[data-n="${i}"]`),
+                    p = $("sl").querySelector(`[data-pp="${i}"]`);
+                  w.t = n.value.trim() || w.t;
+                  w.p = p.value;
+                  delete w.ed;
+                } else w.ed = true;
+                save();
+                shop();
+              }),
+          );
+        $("sl")
+          .querySelectorAll("[data-r]")
+          .forEach(
+            (c) =>
+              (c.onclick = () => {
+                S.wish.splice(c.dataset.r, 1);
+                save();
+                shop();
+              }),
+          );
+        const left = S.wish
+          .filter((w) => !w.got)
+          .reduce((a, w) => a + Number(w.p || 0), 0);
+        $("sum").textContent = S.wish.length
+          ? `Yang belum dibeli: ${rp(left)}`
+          : "";
+      }
+      $("sf").onsubmit = (e) => {
+        e.preventDefault();
+        S.wish.push({ t: $("si").value.trim(), p: $("sp").value, got: false });
+        $("sf").reset();
+        save();
+        shop();
+      };
+      function prog() {
+        badgesR();
+        prR();
+        const per = [];
+        for (let m = 0; m < 12; m++) {
+          let p = 0,
+            d = 0;
+          for (let i = 1; i <= new Date(Y, m + 1, 0).getDate(); i++) {
+            const o = info(new Date(Y, m, i));
+            if (!o.rest || o.done) p++;
+            if (o.done) d++;
+          }
+          per.push(p ? Math.round((d / p) * 100) : 0);
+        }
+        $("ysub").textContent =
+          `Persentase sesi terjadwal yang kamu selesaikan, tahun ${Y}.`;
+        $("bars").innerHTML = per
+          .map(
+            (v, i) =>
+              `<div class="bar ${Y === now.getFullYear() && i === now.getMonth() ? "cur" : ""}"><span>${v}%</span><i style="height:${Math.max(v, 3)}%"></i><span>${MN[i].slice(0, 3)}</span></div>`,
+          )
+          .join("");
+        const L = [...S.logs].sort((a, b) => (a.d < b.d ? -1 : 1));
+        $("goal").value = S.goal;
+        if (L.length < 2)
+          $("wc").innerHTML =
+            '<p class="sub">Grafik muncul setelah dua catatan.</p>';
+        else {
+          const ws = L.map((l) => +l.w),
+            mn = Math.min(...ws, S.goal || 1e9) - 1,
+            mx = Math.max(...ws, S.goal || 0) + 1,
+            W = 400,
+            H = 170;
+          const pts = L.map((l, i) => [
+            20 + (i * (W - 40)) / (L.length - 1),
+            H - 20 - ((l.w - mn) / (mx - mn)) * (H - 40),
+          ]);
+          const gy = S.goal
+            ? H - 20 - ((S.goal - mn) / (mx - mn)) * (H - 40)
+            : null;
+          $("wc").innerHTML =
+            `<svg viewBox="0 0 ${W} ${H}" style="width:100%" role="img" aria-label="Grafik berat badan">${gy !== null ? `<line x1="20" x2="${W - 20}" y1="${gy}" y2="${gy}" stroke="var(--sun)" stroke-dasharray="5 5"/>` : ""}<polyline fill="none" stroke="var(--forest)" stroke-width="3" stroke-linejoin="round" points="${pts.map((p) => p.join(",")).join(" ")}"/>${pts.map((p) => `<circle cx="${p[0]}" cy="${p[1]}" r="4" fill="var(--forest)"/>`).join("")}</svg>`;
+        }
+        const l = L[L.length - 1],
+          f = L[0];
+        $("gl").textContent =
+          L.length > 1
+            ? `Dari ${f.w} kg ke ${l.w} kg (${l.w - f.w > 0 ? "+" : ""}${(l.w - f.w).toFixed(1)} kg).`
+            : "Belum ada catatan.";
+        $("wl").innerHTML = [...L]
+          .reverse()
+          .slice(0, 6)
+          .map(
+            (x) =>
+              `<div class="item"><span class="t">${new Date(x.d).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" })}</span><b>${x.w} kg</b><button class="ico" data-w="${x.d}|${x.w}" aria-label="Ubah">✎</button><button class="ico" data-d="${x.d}" aria-label="Hapus">✕</button></div>`,
+          )
+          .join("");
+        $("wl")
+          .querySelectorAll("[data-w]")
+          .forEach(
+            (b) =>
+              (b.onclick = () => {
+                const [d, w] = b.dataset.w.split("|");
+                $("wd").value = d;
+                $("wk").value = w;
+                $("wk").focus();
+              }),
+          );
+        $("wl")
+          .querySelectorAll("[data-d]")
+          .forEach(
+            (b) =>
+              (b.onclick = () => {
+                S.logs = S.logs.filter((x) => x.d !== b.dataset.d);
+                save();
+                render();
+              }),
+          );
+      }
+      $("wf").onsubmit = (e) => {
+        e.preventDefault();
+        S.logs = S.logs.filter((x) => x.d !== $("wd").value);
+        S.logs.push({ d: $("wd").value, w: $("wk").value });
+        $("wk").value = "";
+        save();
+        render();
+      };
+      $("goal").oninput = (e) => {
+        S.goal = e.target.value;
+        save();
+        prog();
+      };
+      $("py").onclick = () => {
+        Y--;
+        render();
+      };
+      $("ny").onclick = () => {
+        Y++;
+        render();
+      };
+      $("imp").onchange = (e) => {
+        const r = new FileReader();
+        r.onload = () => {
+          try {
+            const j = JSON.parse(r.result);
+            if (j._ph) {
+              PH = j._ph;
+              sPH();
+              delete j._ph;
+            }
+            S = Object.assign({}, DEF, j);
+            save();
+            render();
+            plan();
+            shop();
+            galR();
+            pfR();
+          } catch (x) {
+            alert(
+              "File tidak bisa dibaca. Pilih file data Latih (.json) yang valid.",
+            );
+          }
+        };
+        r.readAsText(e.target.files[0]);
+      };
+      $("rst").onclick = () => {
+        if (
+          confirm(
+            "Hapus semua jadwal, belanjaan, dan catatan berat? Ini tidak bisa dibatalkan.",
+          )
+        ) {
+          S = structuredClone(DEF);
+          save();
+          render();
+          plan();
+          shop();
+        }
+      };
+      $("profileFriendsPanel").appendChild($("teman"));
+      let profilePane = "activity";
+      function showProfilePane(name, focus = false) {
+        const valid = ["activity", "friends", "edit", "account"];
+        profilePane = valid.includes(name) ? name : "activity";
+        const paneId = {
+          activity: "profileActivityPanel",
+          friends: "profileFriendsPanel",
+          edit: "profileEditPanel",
+          account: "profileAccountPanel",
+        }[profilePane];
+        document.querySelectorAll(".profile-panel").forEach((panel) => {
+          panel.hidden = panel.id !== paneId;
+        });
+        document.querySelectorAll("[data-profile-view]").forEach((button) => {
+          const selected = button.dataset.profileView === profilePane;
+          if (button.getAttribute("role") === "tab") {
+            button.setAttribute("aria-selected", String(selected));
+            button.tabIndex = selected ? 0 : -1;
+          }
+        });
+        $("teman").classList.toggle("show", profilePane === "friends");
+        if (focus) {
+          $("profil").scrollIntoView({ behavior: "smooth", block: "start" });
+          $("profileTab" + profilePane[0].toUpperCase() + profilePane.slice(1)).focus();
+        }
+      }
+      document.querySelectorAll("[data-profile-view]").forEach((button) => {
+        button.onclick = () => showProfilePane(button.dataset.profileView);
+        if (button.getAttribute("role") === "tab")
+          button.onkeydown = (event) => {
+            if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key))
+              return;
+            event.preventDefault();
+            const tabs = [...document.querySelectorAll(".profile-tabs [role=tab]")];
+            const index = tabs.indexOf(button);
+            const next =
+              event.key === "Home"
+                ? 0
+                : event.key === "End"
+                  ? tabs.length - 1
+                  : (index + (event.key === "ArrowRight" ? 1 : -1) + tabs.length) %
+                    tabs.length;
+            showProfilePane(tabs[next].dataset.profileView);
+            tabs[next].focus();
+          };
+      });
+      $("profileEditButton").onclick = () => showProfilePane("edit", true);
+      $("profileEditMobile").onclick = () => showProfilePane("edit", true);
+      $("profileProgressButton").onclick = () => show("progres");
+      $("profileShareButton").onclick = () => $("shareLink").click();
+      $("profileShareMobile").onclick = () => $("shareLink").click();
+      const ACTIVITY_TABS = ["rutin", "musik", "beli"];
+      const activityToggle = $("activityToggle");
+      function setActivityMenu(open) {
+        activityToggle.setAttribute("aria-expanded", String(open));
+        $("activityDropdown").hidden = !open;
+      }
+      activityToggle.onclick = () =>
+        setActivityMenu(activityToggle.getAttribute("aria-expanded") !== "true");
+      activityToggle.onkeydown = (event) => {
+        if (event.key === "ArrowDown" || event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          setActivityMenu(true);
+          $("activityDropdown").querySelector("button").focus();
+        }
+      };
+      $("activityDropdown").onkeydown = (event) => {
+        const items = [...$("activityDropdown").querySelectorAll("button")];
+        const index = items.indexOf(document.activeElement);
+        if (event.key === "Escape") {
+          setActivityMenu(false);
+          activityToggle.focus();
+        } else if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+          event.preventDefault();
+          items[(index + (event.key === "ArrowDown" ? 1 : -1) + items.length) % items.length].focus();
+        } else if (event.key === "Home" || event.key === "End") {
+          event.preventDefault();
+          items[event.key === "Home" ? 0 : items.length - 1].focus();
+        }
+      };
+      document.addEventListener("click", (event) => {
+        if (!event.target.closest("#activityMenu")) setActivityMenu(false);
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") setActivityMenu(false);
+      });
+      function show(t) {
+        const openFriends = t === "teman";
+        if (openFriends) t = "profil";
+        if (!["jadwal", "rutin", "musik", "beli", "progres", "galeri", "profil"].includes(t))
+          t = "jadwal";
+        tab = t;
+        $("homeDashboard").hidden = t !== "jadwal";
+        document
+          .querySelectorAll("section")
+          .forEach((s) => s.classList.toggle("show", s.id === t));
+        document
+          .querySelectorAll("#nav [data-t]")
+          .forEach((button) => {
+            const selected = button.dataset.t === t;
+            button.setAttribute("aria-current", selected ? "page" : "false");
+          });
+        activityToggle.setAttribute(
+          "aria-current",
+          ACTIVITY_TABS.includes(t) ? "page" : "false",
+        );
+        setActivityMenu(false);
+        if (t === "profil") showProfilePane(openFriends ? "friends" : profilePane);
+        try {
+          history.replaceState(null, "", location.search + "#" + t);
+        } catch (e) {}
+      }
+      document
+        .querySelectorAll("#nav [data-t]")
+        .forEach((button) => (button.onclick = () => show(button.dataset.t)));
+      document.querySelectorAll("[data-footer-view]").forEach((button) => {
+        button.onclick = () => {
+          show(button.dataset.footerView);
+          document.querySelector("header").scrollIntoView({ behavior: "smooth" });
+        };
+      });
+      function render() {
+        hero();
+        stats();
+        cal();
+        prog();
+        banner();
+      }
+      const Q = () => {
+          if (!S.quotes) S.quotes = [...QS];
+          return S.quotes.length ? S.quotes : ["Semangat ya, sayang."];
+        },
+        QS = [
+          "Semangat ya, sayang. Aku bangga banget kamu mau mulai hari ini.",
+          "Satu set lagi, sayang. Aku nungguin kamu selesai, habis itu aku peluk.",
+          "Kamu nggak perlu sempurna, sayang. Cukup datang, aku jatuh cinta lagi tiap kali.",
+          "Capek itu sementara, sayang. Senyummu pas selesai latihan itu favoritku.",
+          "Aku nggak minta kamu kurus, aku minta kamu sehat. Biar kita bisa lama-lama.",
+          "Tubuhmu lagi kerja keras buat kamu, sayang. Terima kasih ya sudah merawatnya.",
+          "Kalau lagi mager, ingat aku lagi nyemangatin dari sini. Ayo, sayang.",
+          "Kamu cantik pas keringetan juga. Serius.",
+          "Hari ini 20 menit juga nggak apa-apa, sayang. Yang penting kamu hadir.",
+          "Aku percaya sama kamu, bahkan di hari kamu nggak percaya sama dirimu sendiri.",
+          "Habis latihan nanti, makan enak ya. Aku traktir di kepalaku.",
+          "Kamu lebih kuat dari yang kamu kira, sayang.",
+          "Tarik napas, angkat bebannya. Kamu lagi bikin versi dirimu yang bikin aku makin kagum.",
+          "Satu set lagi tidak akan membunuhmu.",
+          "Hadir dulu, hebat belakangan.",
+          "Badanmu ingat semua yang kamu lakukan.",
+          "Yang penting mulai, bukan sempurna.",
+          "Kamu tidak harus kuat. Kamu cuma harus datang.",
+          "Pelan-pelan juga tetap maju.",
+        ];
+      let qi = Math.floor(Date.now() / 864e5),
+        EX = [];
+      function confetti() {
+        if (matchMedia("(prefers-reduced-motion:reduce)").matches) return;
+        const c = document.createElement("canvas");
+        c.style.cssText =
+          "position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:99";
+        c.width = innerWidth;
+        c.height = innerHeight;
+        document.body.appendChild(c);
+        const g = c.getContext("2d"),
+          P = [...Array(100)].map(() => ({
+            x: innerWidth / 2,
+            y: innerHeight / 3,
+            vx: (Math.random() - 0.5) * 15,
+            vy: Math.random() * -12 - 3,
+            s: 5 + Math.random() * 7,
+            c: ["#FF3E8A", "#111", "#FFD3E3", "#fff"][(Math.random() * 4) | 0],
+          }));
+        let f = 0;
+        (function a() {
+          g.clearRect(0, 0, c.width, c.height);
+          P.forEach((p) => {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += 0.45;
+            g.fillStyle = p.c;
+            g.fillRect(p.x, p.y, p.s, p.s * 0.6);
+          });
+          if (++f < 110) requestAnimationFrame(a);
+          else c.remove();
+        })();
+      }
+      function exr() {
+        $("exl").innerHTML = EX.map(
+          (x, i) =>
+            `<div class="item" style="padding:6px 0"><input type="checkbox" data-e="${i}" ${x.d ? "checked" : ""}><input type="text" class="t" data-t="${i}" value="${esc(x.t)}" aria-label="Nama gerakan" style="border:0;background:none;padding:4px 6px"><input type="number" data-kg="${i}" value="${x.w || ""}" placeholder="${(bestMap(editK)[nk(x.t)] || { w: "kg" }).w}" aria-label="Beban kg" step="0.5" min="0" style="width:72px;padding:6px 8px"><button type="button" class="ico" data-x="${i}" aria-label="Hapus gerakan">✕</button></div>`,
+        ).join("");
+        $("exl")
+          .querySelectorAll("[data-e]")
+          .forEach(
+            (c) =>
+              (c.onchange = () => {
+                EX[c.dataset.e].d = c.checked;
+              }),
+          );
+        $("exl")
+          .querySelectorAll("[data-t]")
+          .forEach(
+            (c) =>
+              (c.oninput = () => {
+                EX[c.dataset.t].t = c.value;
+              }),
+          );
+        $("exl")
+          .querySelectorAll("[data-kg]")
+          .forEach(
+            (c) =>
+              (c.oninput = () => {
+                EX[c.dataset.kg].w = c.value;
+              }),
+          );
+        $("exl")
+          .querySelectorAll("[data-x]")
+          .forEach(
+            (b) =>
+              (b.onclick = () => {
+                EX.splice(b.dataset.x, 1);
+                exr();
+              }),
+          );
+      }
+      function exa() {
+        const v = $("exi").value.trim();
+        if (v) {
+          EX.push({ t: v, d: false });
+          $("exi").value = "";
+          exr();
+        }
+      }
+      $("exa").onclick = exa;
+      $("exi").onkeydown = (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          exa();
+        }
+      };
+      function chipsR() {
+        $("cl").innerHTML = S.chips
+          .map(
+            (c, i) =>
+              `<span class="chip"><span data-ce="${i}" role="button" tabindex="0" title="Ketuk untuk ubah">${esc(c)}</span> <button class="ico" data-c="${i}" aria-label="Hapus ${esc(c)}" style="padding:0 0 0 6px">✕</button></span>`,
+          )
+          .join("");
+        $("cl")
+          .querySelectorAll("[data-ce]")
+          .forEach(
+            (s) =>
+              (s.onclick = () => {
+                const v = prompt("Ubah nama fokus", S.chips[s.dataset.ce]);
+                if (v && v.trim()) {
+                  S.chips[s.dataset.ce] = v.trim();
+                  save();
+                  chipsR();
+                }
+              }),
+          );
+        $("cl")
+          .querySelectorAll("[data-c]")
+          .forEach(
+            (b) =>
+              (b.onclick = () => {
+                S.chips.splice(b.dataset.c, 1);
+                save();
+                chipsR();
+              }),
+          );
+      }
+      $("cf").onsubmit = (e) => {
+        e.preventDefault();
+        S.chips.push($("ci").value.trim());
+        $("cf").reset();
+        save();
+        chipsR();
+      };
+      const hm = (d) =>
+        String(d.getHours()).padStart(2, "0") +
+        ":" +
+        String(d.getMinutes()).padStart(2, "0");
+      function rs() {
+        $("rs").textContent =
+          S.rem.on &&
+          window.Notification &&
+          Notification.permission === "granted"
+            ? `Aktif. Pengingat tiap hari pukul ${S.rem.time} selama halaman terbuka.`
+            : "Notifikasi belum aktif.";
+      }
+      function banner() {
+        const o = info(new Date()),
+          b = $("bn");
+        if (!o.done && !o.rest && hm(new Date()) >= S.rem.time) {
+          b.innerHTML = `<b>Pengingat harian.</b> Hari ini jadwalnya ${esc(o.f)}. Sudah latihan belum?`;
+          b.style.display = "block";
+        } else b.style.display = "none";
+      }
+      function tick() {
+        if (
+          !S.rem.on ||
+          !window.Notification ||
+          Notification.permission !== "granted"
+        )
+          return;
+        const o = info(new Date());
+        if (hm(new Date()) === S.rem.time && S.rem.last !== todayK && !o.done) {
+          S.rem.last = todayK;
+          save();
+          new Notification("iLovegym ♥", {
+            body: o.rest
+              ? "Hari pulih. Tidur cukup ya."
+              : "Waktunya latihan: " + o.f,
+          });
+        }
+      }
+      function ics() {
+        const [h, m] = S.rem.time.split(":"),
+          d = todayK.replace(/-/g, ""),
+          t = h + m + "00",
+          s = `BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//iLovegym//ID\r\nBEGIN:VEVENT\r\nUID:ilovegym-daily@local\r\nDTSTAMP:${d}T000000\r\nDTSTART:${d}T${t}\r\nDURATION:PT1H\r\nRRULE:FREQ=DAILY\r\nSUMMARY:Waktunya latihan - iLovegym\r\nBEGIN:VALARM\r\nTRIGGER:PT0S\r\nACTION:DISPLAY\r\nDESCRIPTION:Cek jadwal gym hari ini\r\nEND:VALARM\r\nEND:VEVENT\r\nEND:VCALENDAR`,
+          a = document.createElement("a");
+        a.href = URL.createObjectURL(new Blob([s], { type: "text/calendar" }));
+        a.download = "ilovegym-pengingat.ics";
+        a.click();
+      }
+      $("rt").value = S.rem.time;
+      $("rt").onchange = (e) => {
+        S.rem.time = e.target.value;
+        save();
+        rs();
+        banner();
+      };
+      $("ri").onclick = ics;
+      $("rg").onclick = () => {
+        const [h, m] = S.rem.time.split(":"),
+          d = todayK.replace(/-/g, ""),
+          e = String((+h + 1) % 24).padStart(2, "0");
+        window.open(
+          "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" +
+            encodeURIComponent("Waktunya latihan - iLovegym") +
+            "&details=" +
+            encodeURIComponent("Cek jadwal gym hari ini") +
+            "&dates=" +
+            d +
+            "T" +
+            h +
+            m +
+            "00/" +
+            d +
+            "T" +
+            e +
+            m +
+            "00&recur=" +
+            encodeURIComponent("RRULE:FREQ=DAILY"),
+          "_blank",
+          "noopener",
+        );
+      };
+      $("rn").onclick = async () => {
+        if (!window.Notification) {
+          $("rs").textContent =
+            "Browser ini belum mendukung notifikasi. Pakai pengingat kalender.";
+          return;
+        }
+        const p = await Notification.requestPermission();
+        S.rem.on = p === "granted";
+        save();
+        rs();
+      };
+      setInterval(() => {
+        tick();
+        banner();
+      }, 30000);
+      function qlR() {
+        Q();
+        $("ql").innerHTML =
+          S.quotes
+            .map(
+              (t, i) =>
+                `<div class="item"><input type="text" data-q="${i}" value="${esc(t)}" aria-label="Kalimat semangat"><button class="ico" data-qx="${i}" aria-label="Hapus">✕</button></div>`,
+            )
+            .join("") ||
+          '<p class="sub">Belum ada kalimat. Tulis satu di bawah.</p>';
+        $("ql")
+          .querySelectorAll("[data-q]")
+          .forEach(
+            (c) =>
+              (c.oninput = () => {
+                S.quotes[c.dataset.q] = c.value;
+                save();
+              }),
+          );
+        $("ql")
+          .querySelectorAll("[data-qx]")
+          .forEach(
+            (b) =>
+              (b.onclick = () => {
+                S.quotes.splice(b.dataset.qx, 1);
+                save();
+                qlR();
+              }),
+          );
+      }
+      $("qf").onsubmit = (e) => {
+        e.preventDefault();
+        Q();
+        S.quotes.push($("qin").value.trim());
+        qi = S.quotes.length - 1;
+        $("qf").reset();
+        save();
+        qlR();
+        hero();
+      };
+      function toast(m) {
+        const e = document.createElement("div");
+        e.className = "toast";
+        e.textContent = m;
+        document.body.appendChild(e);
+        setTimeout(() => e.remove(), 3600);
+      }
+      const RX = /\s*\d+\s*[x×]\s*\d+.*$/i,
+        nk = (t) => t.toLowerCase().replace(RX, "").trim();
+      function bestMap(skip) {
+        const m = {};
+        for (const k in S.days) {
+          if (k === skip) continue;
+          (S.days[k].ex || []).forEach((x) => {
+            const w = +x.w;
+            if (w > 0) {
+              const n = nk(x.t);
+              if (!m[n] || w > m[n].w)
+                m[n] = { w, k, t: x.t.replace(RX, "").trim() };
+            }
+          });
+        }
+        return m;
+      }
+      function prCheck() {
+        const bm = bestMap(editK);
+        let hit = null;
+        EX.forEach((x) => {
+          const b = bm[nk(x.t)];
+          if (+x.w > 0 && b && +x.w > b.w) hit = x.t.replace(RX, "");
+        });
+        if (hit) {
+          toast("Rekor baru: " + hit + "! Bangga banget sama dirimu 🔥");
+          confetti();
+        }
+      }
+      function prR() {
+        const a = Object.values(bestMap())
+          .sort((x, y) => y.w - x.w)
+          .slice(0, 8);
+        $("pr").innerHTML = a.length
+          ? a
+              .map(
+                (v) =>
+                  `<div class="item"><span class="t">${esc(v.t)}</span><b>${v.w} kg</b><span class="sub" style="margin:0">${new Date(v.k).toLocaleDateString("id-ID", { day: "numeric", month: "short" })}</span></div>`,
+              )
+              .join("")
+          : '<p class="sub">Belum ada rekor. Isi beban di daftar gerakan, nanti muncul di sini.</p>';
+      }
+      const LV = [
+          "Pemula manis",
+          "Mulai rajin",
+          "Konsisten",
+          "Kuat",
+          "Jagoan gym",
+          "Legenda",
+        ],
+        BG = [
+          ["🌱", "Langkah pertama", "1 sesi selesai", (o) => o.t >= 1],
+          ["🔥", "Mulai panas", "7 sesi selesai", (o) => o.t >= 7],
+          ["💪", "Rutin", "30 sesi selesai", (o) => o.t >= 30],
+          ["👑", "Seratus", "100 sesi selesai", (o) => o.t >= 100],
+          ["⚡", "Beruntun 3", "3 hari beruntun", (o) => o.s >= 3],
+          ["🌸", "Beruntun 7", "7 hari beruntun", (o) => o.s >= 7],
+          ["💎", "Beruntun 30", "30 hari beruntun", (o) => o.s >= 30],
+          ["🏋️", "Beban pertama", "Catat 1 beban", (o) => o.p >= 1],
+          ["📈", "Timbang rutin", "5 catatan berat", (o) => o.l >= 5],
+          [
+            "💬",
+            "Penyemangat diri",
+            "3 pesan untuk diri sendiri",
+            (o) => o.v >= 3,
+          ],
+        ];
+      function stt() {
+        let t = 0,
+          p = 0,
+          v = 0;
+        for (const k in S.days) {
+          const d = S.days[k];
+          if (d.done) t++;
+          if (d.love) v++;
+          (d.ex || []).forEach((x) => {
+            if (+x.w > 0) p++;
+          });
+        }
+        let s = 0;
+        for (let i = 0; i < 365; i++) {
+          const d = new Date(now);
+          d.setDate(d.getDate() - i);
+          const o = info(d);
+          if (o.done) s++;
+          else if (o.rest || i === 0) continue;
+          else break;
+        }
+        return { t, p, v, s, l: S.logs.length };
+      }
+      function badgesR() {
+        const o = stt(),
+          first = !S.badges;
+        S.badges = S.badges || [];
+        let nb = null;
+        BG.forEach((b) => {
+          if (b[3](o) && !S.badges.includes(b[1])) {
+            S.badges.push(b[1]);
+            nb = b[1];
+          }
+        });
+        if (nb || first) save();
+        if (nb && !first) {
+          toast("Lencana baru: " + nb + " 🔥");
+          confetti();
+        }
+        const lv = Math.floor(o.t / 5);
+        $("bd").innerHTML =
+          `<div class="row" style="flex-wrap:nowrap;gap:16px"><div class="lvl">${lv + 1}</div><div style="flex:1"><b style="font-size:20px">${LV[Math.min(lv, LV.length - 1)]}</b><div class="pbar"><i style="width:${(o.t % 5) * 20}%"></i></div><span class="sub" style="margin:0">${5 - (o.t % 5)} sesi lagi ke level ${lv + 2}</span></div></div><div class="bg">${BG.map((b) => `<div class="bgi ${S.badges.includes(b[1]) ? "" : "lock"}"><span>${b[0]}</span><b>${b[1]}</b><small>${b[2]}</small></div>`).join("")}</div>`;
+      }
+      let TL = 60,
+        TS = 60,
+        tid = null;
+      const mm = (s) =>
+        String(Math.floor(s / 60)).padStart(2, "0") +
+        ":" +
+        String(s % 60).padStart(2, "0");
+      function trst() {
+        clearInterval(tid);
+        tid = null;
+        TL = TS;
+        $("tg").textContent = "Mulai";
+        $("tt").textContent = mm(TL);
+        $("tb").textContent = "⏱ Istirahat";
+      }
+      function beep() {
+        try {
+          const a = new AudioContext();
+          [0, 0.25, 0.5].forEach((d) => {
+            const o = a.createOscillator(),
+              g = a.createGain();
+            o.connect(g);
+            g.connect(a.destination);
+            o.frequency.value = 880;
+            g.gain.value = 0.15;
+            o.start(a.currentTime + d);
+            o.stop(a.currentTime + d + 0.15);
+          });
+        } catch (e) {}
+        navigator.vibrate && navigator.vibrate([200, 100, 200]);
+      }
+      $("tpr").innerHTML = [30, 60, 90, 120]
+        .map((s) => `<button class="chip" data-s="${s}">${s} dtk</button>`)
+        .join("");
+      $("tpr")
+        .querySelectorAll("button")
+        .forEach(
+          (b) =>
+            (b.onclick = () => {
+              TS = +b.dataset.s;
+              trst();
+            }),
+        );
+      $("tb").onclick = () => {
+        $("tp").hidden = !$("tp").hidden;
+      };
+      $("tr").onclick = trst;
+      $("tg").onclick = () => {
+        if (tid) {
+          clearInterval(tid);
+          tid = null;
+          $("tg").textContent = "Lanjut";
+          return;
+        }
+        if (TL <= 0) TL = TS;
+        $("tg").textContent = "Jeda";
+        tid = setInterval(() => {
+          TL--;
+          $("tt").textContent = mm(TL);
+          $("tb").textContent = "⏱ " + mm(TL);
+          if (TL <= 0) {
+            trst();
+            beep();
+            toast("Istirahat selesai. Set berikutnya, gas!");
+          }
+        }, 1000);
+      };
+      const BUB = [
+        "Semangat sayang, bubub bangga banget.",
+        "Keringatmu seksi, lanjut ya sayang.",
+        "Selesai latihan, bubub peluk kamu.",
+        "Satu set lagi, cantikku sayang.",
+        "Kuatmu bikin bubub jatuh cinta.",
+        "Hadir dulu, bubub nunggu pelukan.",
+        "Badan sehat, bubub makin gemas.",
+        "Ayo sayang, bubub lihatin kamu.",
+        "Nanti malam, bubub pijitin kamu.",
+        "Kamu panas banget hari ini.",
+        "Habis gym, hadiah ciuman menunggu.",
+        "Otot kecilmu bikin bubub klepek.",
+        "Pelan juga nggak apa, sayang.",
+        "Bubub sayang kamu, angkat bebannya!",
+        "Tubuhmu keren, bubub makin sayang.",
+        "Bayangin bubub nyemangatin, ayo sayang!",
+        "Capeknya sebentar, senyummu selamanya, sayang.",
+        "Selesai ini, bubub traktir makan.",
+        "Kamu goda banget pas berkeringat.",
+        "Bubub tunggu di rumah, cantik.",
+        "Kamu hebat, bubub cinta kamu.",
+        "Setelah ini, waktunya bermanja-manja ya.",
+        "Satu angkatan lagi, pacarku kuat!",
+        "Bubub kangen kamu, semangat latihan.",
+      ];
+      const MIX = [
+        "Disiplin lebih awet daripada motivasi.",
+        "Hari ini berat, besok kamu berterima kasih.",
+        "Otot dibangun di hari malasmu.",
+        "Jangan tunggu mood, bangun kebiasaan.",
+        "Satu rep lagi, lalu satu lagi.",
+        "Kamu melawan dirimu kemarin. Menang tipis pun menang.",
+        "Progres kecil tiap hari jadi perubahan besar.",
+        "Tubuhmu bisa. Kepalamu yang perlu diyakinkan.",
+        "Istirahat bagian dari latihan, bukan kemalasan.",
+        "Hadir dulu, hebat belakangan.",
+        "Semangat, sayang. Bubub bangga banget sama kamu.",
+        "Ayang, satu set lagi ya. Habis itu dipeluk.",
+        "Kuatmu bikin bubub makin jatuh cinta.",
+        "Keringatmu seksi, lanjut ya sayang.",
+        "Selesai latihan, bubub traktir makan enak.",
+        "Ayang pasti bisa. Bubub nungguin di rumah.",
+        "Kamu lagi merawat tubuh yang bubub sayang.",
+        "Habis gym, hadiah ciuman menunggu, ayang.",
+        "Pelan juga nggak apa-apa, sayang. Yang penting datang.",
+        "Bayangin bubub nyemangatin dari sini. Ayo!",
+      ];
+      const MIX2 = [
+        "Lagi males? Itu tandanya harus berangkat.",
+        "Bulking musim ini, cutting musim depan.",
+        "Pump hari ini, bangga besok pagi.",
+        "Leg day bukan opsi, itu kewajiban.",
+        "Form dulu, ego belakangan.",
+        "Protein masuk, mager keluar.",
+        "Pegal otot itu tanda tumbuh.",
+        "Satu set lagi. Selalu satu set lagi.",
+        "Progressive overload: lebih berat sedikit tiap minggu.",
+        "Tidur 8 jam itu juga latihan.",
+        "Gym itu terapi paling murah.",
+        "Bangun, makan, angkat, tidur, ulangi.",
+        "Jangan bandingkan bab satumu dengan bab dua puluh mereka.",
+        "Warm up dulu, jangan sok kuat.",
+        "Rest day bukan malas, itu strategi.",
+        "Tubuh dibentuk di dapur dan di gym.",
+        "Besi tidak akan mengangkat dirinya sendiri.",
+        "Fokus mind-muscle connection, bukan angka doang.",
+        "Day one atau one day, pilih salah satu.",
+        "Bukan soal besar, soal konsisten.",
+        "Gas terus, jangan kasih kendor.",
+      ];
+      if (S.qv !== 4) {
+        S.quotes = [...MIX2];
+        S.qv = 4;
+      }
+      if (S.qv !== 5) {
+        S.quotes = (S.quotes || [])
+          .filter(
+            (q) => !/sayang|bubub|ayang|pacar|cinta|ciuman|peluk/i.test(q),
+          )
+          .concat([
+            "Kamu yang bikin keputusan ini. Tuntaskan.",
+            "Dirimu setahun lagi akan berterima kasih.",
+            "Cukup datang dulu. Sisanya menyusul.",
+            "Kamu sudah sejauh ini, jangan berhenti sekarang.",
+            "Hari ini milikmu, bukan milik rasa malas.",
+            "Lawan dirimu yang kemarin, bukan orang lain.",
+            "Tepati janji ke dirimu sendiri hari ini.",
+          ]);
+        S.qv = 5;
+        save();
+      }
+      if (S.qv !== 6) {
+        S.quotes = [
+          "Stop making excuses. Your dream physique won’t build itself.",
+          "Otot dibangun dengan konsistensi, bukan sekadar ambisi.",
+          "Trust the process. Hasil besar butuh waktu.",
+          "Build your body, sharpen your mindset.",
+          "Jangan cuma kuat di gym, be stronger in life.",
+          "Every rep matters. Make every workout count.",
+          "Dream physique, daily discipline.",
+          "Jangan takut mulai dari kecil. Everyone starts somewhere.",
+          "Train hard, recover harder.",
+          "Your only competition is yesterday’s version of you.",
+          "Bahu lebih lebar, mindset lebih dewasa, ego tetap rendah.",
+          "No shortcuts. Just hard work and consistency.",
+          "Jangan kejar angka saja, focus on proper form.",
+          "Strong body, stronger mentality.",
+          "Eat clean, sleep well, lift smart.",
+          "Progress takes patience. Jangan terburu-buru.",
+          "Sculpt your physique, master your discipline.",
+          "Rest is productive. Recovery is part of growth.",
+          "Bukan soal seberapa berat bebannya, but how far you’ve improved.",
+          "Stay hungry, stay humble, keep building.",
+        ];
+        for (const k in S.days) {
+          const l = S.days[k].love || "";
+          if (
+            BUB.includes(l) ||
+            /bubub|sayang|ayang|pacar|cinta|ciuman|peluk|seksi|panas|goda|klepek|gemas|pijit|bermanja|cantik|kangen/i.test(
+              l,
+            )
+          )
+            delete S.days[k].love;
+        }
+        S.qv = 6;
+        save();
+      }
+      S.pf = S.pf || {};
+      const PF = () => S.pf || (S.pf = {});
+      let PH;
+      try {
+        PH = Object.assign(
+          { avatar: "", list: [] },
+          JSON.parse(localStorage.getItem("ilovegym.photos") || "{}"),
+        );
+      } catch (e) {
+        PH = { avatar: "", list: [] };
+      }
+      function sPH() {
+        try {
+          localStorage.setItem("ilovegym.photos", JSON.stringify(PH));
+          save();
+          return true;
+        } catch (e) {
+          toast("Penyimpanan penuh. Hapus beberapa foto lama dulu.");
+          return false;
+        }
+      }
+      function av() {
+        return PH.avatar
+          ? `<img class="av" src="${PH.avatar}" alt="">`
+          : '<span class="av">💪</span>';
+      }
+      function shrink(f, max, cb) {
+        const r = new FileReader();
+        r.onload = () => {
+          const i = new Image();
+          i.onload = () => {
+            const k = Math.min(1, max / Math.max(i.width, i.height)),
+              c = document.createElement("canvas");
+            c.width = i.width * k;
+            c.height = i.height * k;
+            c.getContext("2d").drawImage(i, 0, 0, c.width, c.height);
+            cb(c.toDataURL("image/jpeg", 0.72));
+          };
+          i.src = r.result;
+        };
+        r.readAsDataURL(f);
+      }
+      function sk() {
+        const s = stt().s;
+        let d = "";
+        for (let i = 6; i >= 0; i--) {
+          const x = new Date(now);
+          x.setDate(x.getDate() - i);
+          d += `<i class="${info(x).done ? "on" : ""}"></i>`;
+        }
+        return `<div class="stk"><span class="fl">🔥</span><b>${s}</b><span>hari beruntun</span></div><div class="dots" title="7 hari terakhir">${d}</div>`;
+      }
+      const BB =
+        '<svg class="bb" viewBox="0 0 220 120" aria-hidden="true"><g><rect x="8" y="58" width="204" height="6" rx="3" fill="#ddd"/><rect x="22" y="28" width="14" height="66" rx="4" fill="#fff"/><rect x="40" y="38" width="12" height="46" rx="4" fill="#fff" opacity=".7"/><rect x="184" y="28" width="14" height="66" rx="4" fill="#fff"/><rect x="168" y="38" width="12" height="46" rx="4" fill="#fff" opacity=".7"/></g></svg>' +
+        ["🏋️|8%|0s", "💪|30%|2.2s", "🔥|55%|4.4s", "⚡|78%|1.2s"]
+          .map((x) => {
+            const [a, b, c] = x.split("|");
+            return `<span class="fx" style="left:${b};animation-delay:${c}" aria-hidden="true">${a}</span>`;
+          })
+          .join("");
+      function pdt() {
+        const s = PF().since;
+        $("pd").textContent = s
+          ? `Hari ke-${Math.floor((now - new Date(s)) / 864e5) + 1} perjalananmu. Terus lanjut.`
+          : "";
+      }
+      const PFS = [
+        ["pn", "name"],
+        ["ps", "since"],
+        ["pb", "motto"],
+        ["ph", "h"],
+        ["pg", "goal"],
+      ];
+      function pfR() {
+        $("pav").innerHTML = PH.avatar
+          ? `<img class="av" style="width:96px;height:96px" src="${PH.avatar}" alt="Foto profil">`
+          : '<span class="av" style="width:96px;height:96px;font-size:44px">💪</span>';
+        PFS.forEach(([i, k]) => ($(i).value = PF()[k] || ""));
+        pdt();
+        profileHeaderR();
+      }
+      function profileHeaderR() {
+        $("profileName").textContent = PF().name || "Profil kamu";
+        $("profileMotto").textContent = PF().motto || "Mulai perjalanan latihanmu.";
+        $("profileGoal").textContent = PF().goal ? "🎯 " + PF().goal : "";
+        const stats = stt(),
+          recent = Object.entries(S.days || {})
+            .filter(([date, day]) => /^\d{4}-\d{2}-\d{2}$/.test(date) && day?.done)
+            .sort(([a], [b]) => b.localeCompare(a))
+            .slice(0, 3);
+        $("profilePostCount").textContent = stats.t;
+        $("profileStreakCount").textContent = stats.s;
+        const latestWeight = [...(S.logs || [])].sort((a, b) =>
+          a.d < b.d ? 1 : -1,
+        )[0];
+        const recentHtml = recent.length
+          ? recent
+              .map(([date, day]) => {
+                const focus =
+                  day.focus ||
+                  S.plan[wd(new Date(date + "T00:00:00"))] ||
+                  "Latihan";
+                const label = new Date(date + "T00:00:00").toLocaleDateString(
+                  "id-ID",
+                  { day: "numeric", month: "long", year: "numeric" },
+                );
+                const exercises = (Array.isArray(day.ex) ? day.ex : [])
+                  .filter((exercise) => exercise.d)
+                  .map((exercise) => exercise.t)
+                  .filter(Boolean);
+                return `<article class="workout-card"><h3>${esc(label)} · ${esc(focus)}</h3>${
+                  exercises.length
+                    ? `<p class="sub" style="margin:6px 0 0">${exercises.map(esc).join(" · ")}</p>`
+                    : ""
+                }</article>`;
+              })
+              .join("")
+          : '<p class="social-empty">Sesi latihan yang sudah selesai akan muncul di sini.</p>';
+        $("profileActivitySummary").innerHTML =
+          `<div class="profile-activity-stat"><b>${stats.t}</b><span>Sesi selesai</span></div><div class="profile-activity-stat"><b>🔥 ${stats.s}</b><span>Hari streak</span></div><div class="profile-activity-stat"><b>${latestWeight ? esc(latestWeight.w) + " kg" : "—"}</b><span>Berat terakhir</span></div>` +
+          recentHtml;
+      }
+      PFS.forEach(
+        ([i, k]) =>
+          ($(i).oninput = (e) => {
+            PF()[k] = e.target.value;
+            save();
+            hero();
+            pdt();
+            profileHeaderR();
+          }),
+      );
+      $("pa").onchange = (e) => {
+        const f = e.target.files[0];
+        if (f)
+          shrink(f, 320, (s) => {
+            PH.avatar = s;
+            if (sPH()) {
+              pfR();
+              hero();
+            }
+          });
+        e.target.value = "";
+      };
+      $("pad").onclick = () => {
+        PH.avatar = "";
+        sPH();
+        pfR();
+        hero();
+      };
+      let GF = "Semua",
+        LBi = null;
+      function galR() {
+        $("gf").innerHTML = ["Semua", "Progres", "Kenangan"]
+          .map(
+            (c) =>
+              `<button class="chip ${GF === c ? "on" : ""}" data-f="${c}">${c}</button>`,
+          )
+          .join("");
+        $("gf")
+          .querySelectorAll("button")
+          .forEach(
+            (b) =>
+              (b.onclick = () => {
+                GF = b.dataset.f;
+                galR();
+              }),
+          );
+        const L = PH.list
+          .filter((p) => p.src && (GF === "Semua" || p.t === GF))
+          .sort((a, b) => (a.d < b.d ? 1 : -1));
+        $("gg").innerHTML = L.length
+          ? L.map(
+              (p) =>
+                `<button class="gt" data-id="${p.id}" aria-label="Buka foto"><img src="${p.src}" alt="${esc(p.c || p.t)}"><b>${p.t}</b></button>`,
+            ).join("")
+          : '<div class="card" style="grid-column:1/-1;text-align:center"><div class="flex">💪</div><p class="sub">Belum ada foto. Tambah foto progres atau kenangan pertamamu.</p></div>';
+        $("gg")
+          .querySelectorAll(".gt")
+          .forEach(
+            (b) =>
+              (b.onclick = () => {
+                const p = PH.list.find((x) => x.id === b.dataset.id);
+                LBi = p.id;
+                $("li").src = p.src;
+                $("lc").value = p.c || "";
+                $("lb").showModal();
+              }),
+          );
+      }
+      $("gu").onchange = (e) => {
+        [...e.target.files].forEach((f) =>
+          shrink(f, 900, (src) => {
+            const p = {
+              id: Date.now() + Math.random().toString(36).slice(2, 6),
+              src,
+              d: todayK,
+              t: $("gt").value,
+              c: "",
+            };
+            PH.list.push(p);
+            if (sPH()) galR();
+            else PH.list.pop();
+          }),
+        );
+        e.target.value = "";
+      };
+      $("lc").oninput = (e) => {
+        const p = PH.list.find((x) => x.id === LBi);
+        if (p) {
+          p.c = e.target.value;
+          sPH();
+        }
+      };
+      $("ld").onclick = () => {
+        PH.list = PH.list.filter((x) => x.id !== LBi);
+        sPH();
+        $("lb").close();
+        galR();
+      };
+      $("lx").onclick = () => $("lb").close();
+      if (!S.songs)
+        S.songs = [
+          ["Just Dance", "Lady Gaga"],
+          ["Animals", "Martin Garrix"],
+          ["Mabur Duwur Melayang", ""],
+          ["Stronger", "Kanye West"],
+          ["Till I Collapse", "Eminem"],
+          ["Eye of the Tiger", "Survivor"],
+          ["Can’t Hold Us", "Macklemore"],
+          ["Lose Yourself", "Eminem"],
+        ].map(([t, a]) => ({ t, a }));
+      const play = (s) =>
+        window.open(
+          "https://www.youtube.com/results?search_query=" +
+            encodeURIComponent((s.t + " " + s.a).trim()),
+          "_blank",
+          "noopener",
+        );
+      function muR() {
+        $("mu").innerHTML =
+          S.songs
+            .map(
+              (s, i) =>
+                `<div class="item music-item" style="flex-wrap:wrap"><span class="music-icon" aria-hidden="true">🎵</span><input type="text" class="t" data-st="${i}" value="${esc(s.t)}" aria-label="Judul lagu" style="min-width:140px;flex:1"><input type="text" data-sa="${i}" value="${esc(s.a)}" placeholder="Artis" aria-label="Artis" style="max-width:150px"><button class="btn" data-yt="${i}">▶ Putar</button><button class="btn ghost" data-sp="${i}">Spotify</button><button class="ico" data-sx="${i}" aria-label="Hapus">✕</button></div>`,
+            )
+            .join("") ||
+          '<p class="sub">Belum ada lagu. Tambah satu di bawah.</p>';
+        const q = (a) => $("mu").querySelectorAll(a);
+        q("[data-st]").forEach(
+          (c) =>
+            (c.oninput = () => {
+              S.songs[c.dataset.st].t = c.value;
+              save();
+            }),
+        );
+        q("[data-sa]").forEach(
+          (c) =>
+            (c.oninput = () => {
+              S.songs[c.dataset.sa].a = c.value;
+              save();
+            }),
+        );
+        q("[data-yt]").forEach(
+          (b) => (b.onclick = () => play(S.songs[b.dataset.yt])),
+        );
+        q("[data-sp]").forEach(
+          (b) =>
+            (b.onclick = () => {
+              const s = S.songs[b.dataset.sp];
+              window.open(
+                "https://open.spotify.com/search/" +
+                  encodeURIComponent((s.t + " " + s.a).trim()),
+                "_blank",
+                "noopener",
+              );
+            }),
+        );
+        q("[data-sx]").forEach(
+          (b) =>
+            (b.onclick = () => {
+              S.songs.splice(b.dataset.sx, 1);
+              save();
+              muR();
+            }),
+        );
+      }
+      $("mr").onclick = () => {
+        if (S.songs.length) play(S.songs[(Math.random() * S.songs.length) | 0]);
+      };
+      $("mf").onsubmit = (e) => {
+        e.preventDefault();
+        S.songs.push({ t: $("mt").value.trim(), a: $("ma").value.trim() });
+        $("mf").reset();
+        save();
+        muR();
+      };
+      const MV0 = [
+          "Bench press",
+          "Incline dumbbell press",
+          "Push up",
+          "Barbell curl",
+          "Hammer curl",
+          "Tricep pushdown",
+          "Overhead press",
+          "Lateral raise",
+          "Lat pulldown",
+          "Seated row",
+          "Pull up",
+          "Deadlift",
+          "Squat",
+          "Leg press",
+          "Lunges",
+          "Hip thrust",
+          "Plank",
+          "Crunch",
+        ],
+        MVL = () => S.moves || (S.moves = [...MV0]);
+      function dchips() {
+        $("chips").innerHTML =
+          S.chips
+            .map(
+              (c, i) =>
+                `<button type="button" class="chip" data-fc="${i}">${esc(c)}</button>`,
+            )
+            .join("") +
+          '<button type="button" class="chip" id="fadd" style="border-style:dashed">+ simpan fokus ini</button>';
+        $("chips")
+          .querySelectorAll("[data-fc]")
+          .forEach(
+            (b) =>
+              (b.onclick = () => {
+                const c = S.chips[b.dataset.fc],
+                  v = $("df1").value.trim();
+                $("df1").value = /^istirahat$/i.test(c)
+                  ? "Istirahat"
+                  : v && !/istirahat/i.test(v)
+                    ? v + " & " + c.toLowerCase()
+                    : c;
+              }),
+          );
+        $("fadd").onclick = () => {
+          const v = $("df1").value.trim();
+          if (v && !S.chips.includes(v)) {
+            S.chips.push(v);
+            save();
+            chipsR();
+            dchips();
+            toast("Fokus disimpan ke pilihan");
+          } else toast("Ketik fokusnya dulu di kolom atas");
+        };
+      }
+      function dmv() {
+        $("mchips").innerHTML =
+          MVL()
+            .map(
+              (m, i) =>
+                `<button type="button" class="chip" data-mv="${i}">${esc(m)}</button>`,
+            )
+            .join("") +
+          '<button type="button" class="chip" id="madd" style="border-style:dashed">+ simpan gerakan ini</button>';
+        $("mchips")
+          .querySelectorAll("[data-mv]")
+          .forEach(
+            (b) =>
+              (b.onclick = () => {
+                EX.push({ t: MVL()[b.dataset.mv], d: false });
+                exr();
+              }),
+          );
+        $("madd").onclick = () => {
+          const v = $("exi").value.trim();
+          if (v && !MVL().includes(v)) {
+            MVL().push(v);
+            save();
+            mvR();
+            dmv();
+            toast("Gerakan disimpan ke pilihan");
+          } else toast("Ketik nama gerakan dulu di kolom daftar gerakan");
+        };
+      }
+      function mvR() {
+        $("ml").innerHTML = MVL()
+          .map(
+            (c, i) =>
+              `<span class="chip"><span data-me="${i}" role="button" tabindex="0" title="Ketuk untuk ubah">${esc(c)}</span> <button class="ico" data-mx="${i}" aria-label="Hapus ${esc(c)}" style="padding:0 0 0 6px">✕</button></span>`,
+          )
+          .join("");
+        $("ml")
+          .querySelectorAll("[data-me]")
+          .forEach(
+            (s) =>
+              (s.onclick = () => {
+                const v = prompt("Ubah nama gerakan", MVL()[s.dataset.me]);
+                if (v && v.trim()) {
+                  MVL()[s.dataset.me] = v.trim();
+                  save();
+                  mvR();
+                }
+              }),
+          );
+        $("ml")
+          .querySelectorAll("[data-mx]")
+          .forEach(
+            (b) =>
+              (b.onclick = () => {
+                MVL().splice(b.dataset.mx, 1);
+                save();
+                mvR();
+              }),
+          );
+      }
+      $("mvf").onsubmit = (e) => {
+        e.preventDefault();
+        MVL().push($("mvi").value.trim());
+        $("mvf").reset();
+        save();
+        mvR();
+      };
+      mvR();
+      muR();
+      galR();
+      pfR();
+      const pick = () => Q()[(Math.random() * Q().length) | 0];
+      $("dg").onclick = () => {
+        $("dl").value = pick();
+      };
+      $("fill").onclick = () => {
+        let n = 0;
+        for (let i = 1; i <= new Date(Y, M + 1, 0).getDate(); i++) {
+          const k = key(new Date(Y, M, i));
+          if (!(S.days[k] || {}).love) {
+            upd(k, { love: pick() });
+            n++;
+          }
+        }
+        toast(
+          n
+            ? `${n} pesan semangat ditambahkan`
+            : "Semua hari sudah punya pesan.",
+        );
+        render();
+      };
+      $("wd").value = todayK;
+      plan();
+      shop();
+      chipsR();
+      qlR();
+      rs();
+      render();
+      const h = location.hash.slice(1),
+        incomingProfile = new URLSearchParams(location.search).get("user");
+      show(
+        incomingProfile
+          ? "profil"
+          : [
+              "jadwal",
+              "rutin",
+              "beli",
+              "teman",
+              "progres",
+              "galeri",
+              "teman",
+              "profil",
+              "musik",
+            ].includes(h)
+            ? h
+            : "jadwal",
+      );
+      if (incomingProfile || h === "teman") showProfilePane("friends");
+      /* ===== Sinkron antar perangkat (Vercel + Upstash Redis) ===== */
+      const SY = { uid: null, busy: false, known: null, t: null };
+      try {
+        SY.uid = localStorage.getItem("ilovegym.uid");
+      } catch (e) {}
+      async function sha(t) {
+        const b = await crypto.subtle.digest(
+          "SHA-256",
+          new TextEncoder().encode("ilovegym:" + t.trim().toLowerCase()),
+        );
+        return [...new Uint8Array(b)]
+          .map((x) => x.toString(16).padStart(2, "0"))
+          .join("");
+      }
+      async function api(op, p) {
+        const r = await fetch("/api/sync", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ uid: SY.uid, op, ...p }),
+        });
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok) {
+          const error = new Error(j.error || r.status);
+          error.status = r.status;
+          throw error;
+        }
+        return j;
+      }
+      const setSt = (t) => {
+        const e = $("sst");
+        if (e) e.textContent = t;
+      };
+      const avId = () => {
+        const s = PH.avatar;
+        if (!s) return "";
+        let x = 0;
+        for (let i = 0; i < s.length; i += 97)
+          x = (x * 31 + s.charCodeAt(i)) | 0;
+        return "a" + (x >>> 0).toString(36) + s.length.toString(36);
+      };
+      const SOCIAL_ID = /^[a-z0-9]{24}$/;
+      const SOC = { id: "", following: [], followers: [] };
+      function newSocialId() {
+        const bytes = new Uint8Array(18);
+        crypto.getRandomValues(bytes);
+        return [...bytes].map((x) => x.toString(16).padStart(2, "0")).join("");
+      }
+      async function ensureSocialIdentity() {
+        let id = SOCIAL_ID.test(S.social.publicId || "")
+          ? S.social.publicId
+          : newSocialId();
+        let result;
+        try {
+          result = await api("identity", { id });
+        } catch (e) {
+          if (e.status !== 409) throw e;
+          id = newSocialId();
+          result = await api("identity", { id });
+        }
+        S.social.publicId = result.id;
+        SOC.id = result.id;
+        return result.id;
+      }
+      function publicSnapshot() {
+        const workouts = Object.entries(S.days || {})
+          .filter(([date, day]) => /^\d{4}-\d{2}-\d{2}$/.test(date) && day && day.done)
+          .map(([date, day]) => ({
+            date,
+            focus:
+              day.focus ||
+              S.plan[wd(new Date(date + "T00:00:00"))] ||
+              "Latihan",
+            exercises: (Array.isArray(day.ex) ? day.ex : [])
+              .filter((exercise) => exercise.d)
+              .map((exercise) => ({
+                name: exercise.t || "",
+                weight: exercise.w || "",
+              })),
+          }))
+          .sort((a, b) => a.date.localeCompare(b.date));
+        return {
+          name: PF().name || "Pengguna iLovegym",
+          motto: PF().motto || "",
+          avatar:
+            PH.avatar.startsWith("data:image/jpeg;base64,") && PH.avatar.length <= 80000
+              ? PH.avatar
+              : "",
+          stats: { sessions: workouts.length, streak: stt().s },
+          workouts,
+          weightLogs: (Array.isArray(S.logs) ? S.logs : []).map((log) => ({
+            date: log.d || "",
+            weight: String(log.w || ""),
+          })),
+          badges: Array.isArray(S.badges) ? S.badges : [],
+        };
+      }
+      function publicIdFrom(value) {
+        const raw = String(value || "").trim();
+        if (SOCIAL_ID.test(raw)) return raw;
+        try {
+          const id = new URL(raw, location.origin).searchParams.get("user");
+          return SOCIAL_ID.test(id || "") ? id : "";
+        } catch (e) {
+          return "";
+        }
+      }
+      function shareUrl(id) {
+        const url = new URL(location.href);
+        url.search = "";
+        url.searchParams.set("user", id);
+        url.hash = "profil";
+        return url.href;
+      }
+      const localDayKey = (date) =>
+        date.getFullYear() +
+        "-" +
+        String(date.getMonth() + 1).padStart(2, "0") +
+        "-" +
+        String(date.getDate()).padStart(2, "0");
+      function jointStreak(profile) {
+        const mine = new Set(
+          Object.entries(S.days || {})
+            .filter(([, day]) => day && day.done)
+            .map(([date]) => date),
+        );
+        const theirs = new Set(
+          (profile.workouts || []).map((workout) => workout.date),
+        );
+        let date = new Date();
+        if (!mine.has(localDayKey(date)) || !theirs.has(localDayKey(date)))
+          date.setDate(date.getDate() - 1);
+        let count = 0;
+        while (
+          count < 3650 &&
+          mine.has(localDayKey(date)) &&
+          theirs.has(localDayKey(date))
+        ) {
+          count++;
+          date.setDate(date.getDate() - 1);
+        }
+        return count;
+      }
+      function profileResults(profile, followerCount = 0) {
+        const workouts = [...(profile.workouts || [])].sort((a, b) =>
+          a.date < b.date ? 1 : -1,
+        );
+        const weights = [...(profile.weightLogs || [])].sort((a, b) =>
+          a.date < b.date ? 1 : -1,
+        );
+        const workoutHtml = workouts.length
+          ? `<div class="workout-list">${workouts
+              .map((workout) => {
+                const date = new Date(workout.date + "T00:00:00").toLocaleDateString("id-ID", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                });
+                const exercises = (workout.exercises || []).filter((x) => x.name);
+                return `<article class="workout-card"><h3>${esc(date)} · ${esc(workout.focus || "Latihan")}</h3>${
+                  exercises.length
+                    ? `<ul>${exercises
+                        .map(
+                          (x) =>
+                            `<li>${esc(x.name)}${x.weight ? ` · ${esc(x.weight)} kg` : ""}</li>`,
+                        )
+                        .join("")}</ul>`
+                    : ""
+                }</article>`;
+              })
+              .join("")}</div>`
+          : '<p class="social-empty">Belum ada sesi latihan yang dibagikan.</p>';
+        const weightHtml = weights.length
+          ? `<div class="social-list">${weights
+              .map(
+                (log) =>
+                  `<div class="item"><span class="t">${esc(new Date(log.date + "T00:00:00").toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" }))}</span><b>${esc(log.weight)} kg</b></div>`,
+              )
+              .join("")}</div>`
+          : '<p class="social-empty">Belum ada catatan berat badan.</p>';
+        const badges = (profile.badges || []).length
+          ? (profile.badges || []).map(esc).join(" · ")
+          : "Belum ada lencana";
+        const avatar = profile.avatar
+          ? `<img class="social-avatar" src="${esc(profile.avatar)}" alt="">`
+          : '<span class="social-avatar" aria-hidden="true">💪</span>';
+        const isSelf = profile.id === SOC.id;
+        const isFollowing = SOC.following.some((item) => item.id === profile.id);
+        return `<div class="social-card"><div class="row" style="align-items:center"><div>${avatar}</div><div style="flex:1;min-width:0"><h2>${esc(profile.name || "Pengguna iLovegym")}</h2><p class="sub" style="margin:4px 0">${esc(profile.motto || "Terus bergerak.")}</p></div><div class="row"><span class="chip">${Number(profile.stats?.sessions || 0)} sesi</span><span class="chip">🔥 ${Number(profile.stats?.streak || 0)} hari</span><span class="chip">${Number(followerCount)} pengikut</span></div></div>${
+          !isSelf && SY.uid
+            ? `<button class="btn ${isFollowing ? "ghost" : ""}" id="profileFollow">${isFollowing ? "Berhenti mengikuti" : "Ikuti akun"}</button>`
+            : !isSelf
+              ? '<p class="sub">Hubungkan akunmu di tab Profil untuk mengikuti teman.</p>'
+              : ""
+        }</div><div class="card"><h2>Hasil latihan</h2><p class="sub">${workouts.length} sesi selesai dibagikan</p>${workoutHtml}</div><div class="two"><div class="card"><h2>Catatan berat</h2>${weightHtml}</div><div class="card"><h2>Lencana</h2><p>${badges}</p></div></div>`;
+      }
+      async function loadPublicProfile(id) {
+        if (!SOCIAL_ID.test(id || "")) return;
+        $("friendProfile").innerHTML = '<p class="social-empty">Memuat profil…</p>';
+        try {
+          const result = await api("public_get", { id });
+          if (!result.profile) {
+            $("friendProfile").innerHTML =
+              '<p class="social-empty">Profil ini belum dibagikan atau tautannya tidak tersedia.</p>';
+            return;
+          }
+          $("friendProfile").innerHTML = profileResults(
+            result.profile,
+            result.followers || 0,
+          );
+          const button = $("profileFollow");
+          if (button)
+            button.onclick = async () => {
+              if (!SY.uid) {
+                toast("Hubungkan akun di tab Profil sebelum mengikuti teman.");
+                return;
+              }
+              try {
+                await ensureSocialIdentity();
+                const following = SOC.following.some((item) => item.id === id);
+                await api(following ? "unfollow" : "follow", { id });
+                await refreshSocial();
+                await loadPublicProfile(id);
+              } catch (e) {
+                toast("Gagal memperbarui follow: " + e.message);
+              }
+            };
+        } catch (e) {
+          $("friendProfile").innerHTML =
+            `<p class="social-empty">Profil tidak bisa dimuat: ${esc(e.message)}</p>`;
+        }
+      }
+      function renderSocialLists() {
+        $("profileFollowerCount").textContent = SOC.followers.length;
+        $("profileFollowingCount").textContent = SOC.following.length;
+        const list = (items, isFollowing) =>
+          items.length
+            ? items
+                .map((item) => {
+                  const profile = item.profile;
+                  const name = profile?.name || "Profil tidak tersedia";
+                  const joint = isFollowing && profile ? jointStreak(profile) : 0;
+                  return `<div class="social-card"><div class="row" style="justify-content:space-between"><div><b>${esc(name)}</b><div class="sub" style="margin:3px 0 0">${isFollowing ? `🔥 ${joint} hari streak bareng` : "Mengikuti kamu"}</div></div><div class="row"><button class="btn ghost" data-open-profile="${item.id}">Lihat</button>${
+                    isFollowing
+                      ? `<button class="ico" data-unfollow="${item.id}" aria-label="Berhenti mengikuti">✕</button>`
+                      : ""
+                  }</div></div></div>`;
+                })
+                .join("")
+            : '<p class="social-empty">Belum ada akun di sini.</p>';
+        $("followingList").innerHTML = list(SOC.following, true);
+        $("followerList").innerHTML = list(SOC.followers, false);
+        document.querySelectorAll("[data-open-profile]").forEach(
+          (button) =>
+            (button.onclick = () => {
+              const id = button.dataset.openProfile;
+            $("friendInput").value = id;
+              loadPublicProfile(id);
+            }),
+        );
+        document.querySelectorAll("[data-unfollow]").forEach(
+          (button) =>
+            (button.onclick = async () => {
+              try {
+                await api("unfollow", { id: button.dataset.unfollow });
+                await refreshSocial();
+              } catch (e) {
+                toast("Gagal berhenti mengikuti: " + e.message);
+              }
+            }),
+        );
+      }
+      async function refreshSocial() {
+        if (!SY.uid) {
+          SOC.following = [];
+          SOC.followers = [];
+          renderSocialLists();
+          return;
+        }
+        try {
+          const result = await api("social_get");
+          SOC.id = result.id || SOC.id;
+          SOC.following = Array.isArray(result.following) ? result.following : [];
+          SOC.followers = Array.isArray(result.followers) ? result.followers : [];
+          renderSocialLists();
+        } catch (e) {
+          $("followingList").innerHTML = `<p class="social-empty">Gagal memuat teman: ${esc(e.message)}</p>`;
+          $("followerList").innerHTML = "";
+        }
+      }
+      $("friendForm").onsubmit = (event) => {
+        event.preventDefault();
+        const id = publicIdFrom($("friendInput").value);
+        if (!id) {
+          toast("Masukkan tautan profil iLovegym yang valid.");
+          return;
+        }
+        loadPublicProfile(id);
+      };
+      $("shareToggle").onchange = async () => {
+        if (!SY.uid) {
+          $("shareToggle").checked = false;
+          toast("Hubungkan akun di tab Profil untuk membagikan profil.");
+          return;
+        }
+        S.social.share = $("shareToggle").checked;
+        save();
+        await pushNow();
+        await refreshSocial();
+      };
+      $("shareLink").onclick = async () => {
+        const link = shareUrl(S.social.publicId);
+        try {
+          await navigator.clipboard.writeText(link);
+          toast("Tautan profil disalin. Kirim ke temanmu!");
+        } catch (e) {
+          window.prompt("Salin tautan profil ini:", link);
+        }
+      };
+      $("sharePreview").onclick = () => {
+        show("profil");
+        showProfilePane("friends");
+        $("friendInput").value = S.social.publicId;
+        loadPublicProfile(S.social.publicId);
+      };
+      function syncSoon() {
+        if (!SY.uid) return;
+        clearTimeout(SY.t);
+        SY.t = setTimeout(() => (SY.busy ? syncSoon() : pushNow()), 2500);
+      }
+      function refreshAll() {
+        render();
+        plan();
+        shop();
+        chipsR();
+        qlR();
+        muR();
+        mvR();
+        galR();
+        pfR();
+        rs();
+        $("rt").value = S.rem.time;
+        syncUi();
+      }
+      function syncUi() {
+        const on = !!SY.uid,
+          c = localStorage.getItem("ilovegym.code") || "",
+          sharing = !!S.social?.share;
+        $("sinfo").innerHTML = on
+          ? `Terhubung. Kode kamu: <b>${esc(c)}</b><br>Masukkan kode yang sama di perangkat lain. Jaga kodenya: siapa pun yang tahu kode ini bisa membuka datamu.`
+          : "Isi kode rahasia yang sama di semua perangkat (HP, laptop) dan datamu ikut ke mana-mana. Tanpa akun, tanpa email.";
+        $("scon").textContent = on ? "Sinkron sekarang" : "Hubungkan";
+        $("soff").hidden = !on;
+        $("scode").hidden = on;
+        $("sgen").hidden = on;
+        $("shareToggle").checked = sharing;
+        $("shareToggle").disabled = !on;
+        $("shareLink").hidden = !on || !sharing || !S.social.publicId;
+        $("sharePreview").hidden = !on || !sharing || !S.social.publicId;
+        $("profileShareButton").disabled = !on || !sharing || !S.social.publicId;
+        $("profileShareMobile").disabled = !on || !sharing || !S.social.publicId;
+        $("shareStatus").textContent = !on
+          ? "Hubungkan sinkronisasi dulu untuk membuat profil publik."
+          : sharing
+            ? "Profil publik aktif. Salin tautan untuk dibagikan."
+            : "Profilmu privat sampai opsi berbagi diaktifkan.";
+      }
+      async function applyRemote(rec) {
+        S = Object.assign({}, DEF, rec.data);
+        S.social = Object.assign({ publicId: "", share: false }, S.social || {});
+        S._ts = rec.ts;
+        try {
+          localStorage.setItem(K, JSON.stringify(S));
+        } catch (e) {}
+        const old = {};
+        PH.list.forEach((p) => (old[p.id] = p.src));
+        const ph = rec.ph || { list: [], avatar: "" };
+        PH.list = (ph.list || []).map((p) => ({ ...p, src: old[p.id] || "" }));
+        if (!ph.avatar) PH.avatar = "";
+        else if (avId() !== ph.avatar) {
+          const r = await api("photo_get", { id: ph.avatar });
+          PH.avatar = r.src || PH.avatar;
+        }
+        for (const p of PH.list) {
+          if (!p.src) {
+            try {
+              p.src = (await api("photo_get", { id: p.id })).src || "";
+            } catch (e) {}
+          }
+        }
+        try {
+          localStorage.setItem("ilovegym.photos", JSON.stringify(PH));
+        } catch (e) {
+          toast("Penyimpanan penuh, sebagian foto tidak tersimpan.");
+        }
+        try {
+          refreshAll();
+        } catch (e) {}
+      }
+      async function pushNow() {
+        if (!SY.uid || SY.busy) return;
+        SY.busy = true;
+        clearTimeout(SY.t);
+        setSt("Menyimpan ke cloud…");
+        try {
+          await ensureSocialIdentity();
+          try {
+            localStorage.setItem(K, JSON.stringify(S));
+          } catch (e) {}
+          const aid = avId(),
+            ph = {
+              avatar: aid,
+              list: PH.list.map(({ id, d, t, c }) => ({ id, d, t, c })),
+            },
+            want = new Set(ph.list.map((x) => x.id));
+          if (aid) want.add(aid);
+          if (!SY.known) SY.known = new Set((await api("get")).photos || []);
+          for (const id of want) {
+            if (SY.known.has(id)) continue;
+            const src =
+              id === aid
+                ? PH.avatar
+                : (PH.list.find((x) => x.id === id) || {}).src;
+            if (src) {
+              await api("photo_put", { id, src });
+              SY.known.add(id);
+            }
+          }
+          S._ts = S._ts || Date.now();
+          if (!S.social.share)
+            await api("publish", { id: S.social.publicId, enabled: false });
+          await api("put", { rec: { data: S, ph, ts: S._ts } });
+          if (S.social.share)
+            await api("publish", {
+              id: S.social.publicId,
+              enabled: true,
+              profile: publicSnapshot(),
+            });
+          for (const id of [...SY.known])
+            if (!want.has(id)) {
+              await api("photo_del", { id });
+              SY.known.delete(id);
+            }
+          setSt(
+            "Tersinkron ✓ " +
+              new Date().toLocaleTimeString("id-ID", {
+                hour: "2-digit",
+                minute: "2-digit",
+              }),
+          );
+          syncUi();
+        } catch (e) {
+          setSt("Gagal menyimpan: " + (e.message || e));
+          $("shareStatus").textContent =
+            "Gagal menyimpan perubahan berbagi: " +
+            (e.message || e) +
+            ". Profil mungkin masih terlihat sampai sinkronisasi berhasil.";
+          if (!S.social.share) {
+            $("shareLink").hidden = true;
+            $("sharePreview").hidden = true;
+          }
+        }
+        SY.busy = false;
+      }
+      async function pullNow(first) {
+        if (!SY.uid || SY.busy) return;
+        SY.busy = true;
+        setSt("Mengecek cloud…");
+        try {
+          const r = await api("get"),
+            rec = r.rec;
+          SY.known = new Set(r.photos || []);
+          if (rec && rec.ts > (S._ts || 0)) {
+            if (
+              first &&
+              Object.keys(S.days || {}).length &&
+              !confirm(
+                "Sudah ada data di cloud dengan kode ini.\nOK = pakai data cloud (data di perangkat ini diganti).\nBatal = timpa cloud dengan data perangkat ini.",
+              )
+            ) {
+              SY.busy = false;
+              S._ts = Date.now();
+              return pushNow();
+            }
+            await applyRemote(rec);
+            setSt("Tersinkron ✓");
+          } else if (!rec || rec.ts < (S._ts || 0)) {
+            SY.busy = false;
+            S._ts = S._ts || Date.now();
+            return pushNow();
+          } else setSt("Tersinkron ✓");
+          const previousId = S.social.publicId;
+          await ensureSocialIdentity();
+          if (previousId !== S.social.publicId) {
+            S._ts = Date.now();
+            try {
+              localStorage.setItem(K, JSON.stringify(S));
+            } catch (e) {}
+            SY.busy = false;
+            return pushNow();
+          }
+        } catch (e) {
+          setSt(
+            "Gagal: " +
+              (e.message || e) +
+              ". Sinkron hanya jalan di website yang sudah dipasang di Vercel.",
+          );
+        }
+        SY.busy = false;
+      }
+      $("sgen").onclick = () => {
+        const a = new Uint8Array(16),
+          al = "abcdefghjkmnpqrstuvwxyz23456789";
+        crypto.getRandomValues(a);
+        $("scode").value = [...a]
+          .map((x) => al[x % al.length])
+          .join("")
+          .match(/.{4}/g)
+          .join("-");
+      };
+      $("scon").onclick = async () => {
+        if (SY.uid) {
+          pullNow(false);
+          return;
+        }
+        const c = $("scode").value.trim();
+        if (c.replace(/-/g, "").length < 12) {
+          toast("Kode minimal 12 karakter. Tekan Buat kode baru.");
+          return;
+        }
+        SY.uid = await sha(c);
+        SY.known = null;
+        try {
+          localStorage.setItem("ilovegym.uid", SY.uid);
+          localStorage.setItem("ilovegym.code", c);
+        } catch (e) {}
+        syncUi();
+        await pullNow(true);
+        await refreshSocial();
+      };
+      $("soff").onclick = () => {
+        if (
+          !confirm(
+            "Putuskan sinkron di perangkat ini? Data di cloud tidak dihapus.",
+          )
+        )
+          return;
+        SY.uid = null;
+        try {
+          localStorage.removeItem("ilovegym.uid");
+          localStorage.removeItem("ilovegym.code");
+        } catch (e) {}
+        setSt("");
+        syncUi();
+      };
+      document.addEventListener("visibilitychange", () => {
+        if (!document.hidden && SY.uid && READY) pullNow(false);
+      });
+      renderSocialLists();
+      syncUi();
+      READY = true;
+      if (SY.uid) pullNow(false).then(refreshSocial);
+      if (SOCIAL_ID.test(incomingProfile || "")) {
+        $("friendInput").value = incomingProfile;
+        loadPublicProfile(incomingProfile);
+      }
+    </script>
+  </body>
+</html>
