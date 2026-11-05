@@ -1421,7 +1421,11 @@
         border: 1px solid var(--line);
         border-radius: 28px;
         background:
-          radial-gradient(400px 220px at 90% 0%, rgba(214, 51, 108, 0.17), transparent 70%),
+          radial-gradient(
+            400px 220px at 90% 0%,
+            rgba(214, 51, 108, 0.17),
+            transparent 70%
+          ),
           var(--card);
       }
       .profile-top #pav {
@@ -1570,8 +1574,16 @@
         border: 1px solid var(--line);
         border-radius: 24px;
         background:
-          radial-gradient(420px 220px at 100% 0%, rgba(160, 120, 255, 0.1), transparent 75%),
-          radial-gradient(360px 180px at 0% 100%, rgba(214, 51, 108, 0.16), transparent 75%),
+          radial-gradient(
+            420px 220px at 100% 0%,
+            rgba(160, 120, 255, 0.1),
+            transparent 75%
+          ),
+          radial-gradient(
+            360px 180px at 0% 100%,
+            rgba(214, 51, 108, 0.16),
+            transparent 75%
+          ),
           var(--card);
         box-shadow: 0 24px 80px -58px rgba(214, 51, 108, 0.72);
       }
@@ -1580,7 +1592,10 @@
       }
       .footer-brand strong {
         display: block;
-        font: italic 36px "DM Serif Display", Georgia, serif;
+        font:
+          italic 36px "DM Serif Display",
+          Georgia,
+          serif;
         letter-spacing: -0.04em;
         line-height: 1;
       }
@@ -1626,7 +1641,10 @@
       .footer-motto {
         margin: 14px 0 0;
         color: var(--sun);
-        font: italic 16px "DM Serif Display", Georgia, serif;
+        font:
+          italic 16px "DM Serif Display",
+          Georgia,
+          serif;
       }
       .footer-links {
         min-width: 0;
@@ -1672,7 +1690,10 @@
       }
       .music-item {
         display: grid !important;
-        grid-template-columns: 32px minmax(130px, 1fr) minmax(90px, 0.7fr) auto auto auto;
+        grid-template-columns: 32px minmax(130px, 1fr) minmax(
+            90px,
+            0.7fr
+          ) auto auto auto;
         gap: 10px;
       }
       .music-item .music-icon {
@@ -1980,6 +2001,235 @@
           transition: none !important;
         }
       }
+      .btn:disabled,
+      input:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+        filter: grayscale(0.4);
+      }
+
+      /* ===== Footer baru & poles semua halaman ===== */
+      .site-footer {
+        margin-top: 56px;
+        padding: 30px clamp(18px, 4vw, 38px) 22px;
+        border-radius: 32px;
+      }
+      .site-footer::before {
+        content: "";
+        position: absolute;
+        inset: 0 0 auto;
+        height: 3px;
+        background: linear-gradient(90deg, var(--forest), var(--sun), #a078ff);
+      }
+      .ft-pulse {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 54px;
+        width: 100%;
+        height: 46px;
+        opacity: 0.55;
+        pointer-events: none;
+        z-index: -1;
+      }
+      .ft-pulse path {
+        fill: none;
+        stroke: var(--sun);
+        stroke-width: 2;
+        vector-effect: non-scaling-stroke;
+        stroke-dasharray: 900;
+        stroke-dashoffset: 900;
+        animation: ecg 5s linear infinite;
+      }
+      @keyframes ecg {
+        60%,
+        100% {
+          stroke-dashoffset: 0;
+        }
+      }
+      .ft-hero {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 16px;
+        padding-bottom: 18px;
+      }
+      .ft-title {
+        margin: 8px 0 0;
+        font:
+          400 clamp(28px, 5vw, 46px)/1.05 "DM Serif Display",
+          Georgia,
+          serif;
+        max-width: 16ch;
+      }
+      .ft-title em {
+        background: linear-gradient(90deg, #ff7aa2, #ffb199);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .ft-stats {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+        padding: 6px 0 22px;
+      }
+      .ft-stat {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.03);
+        transition:
+          transform 0.2s,
+          border-color 0.2s;
+      }
+      .ft-stat:hover {
+        transform: translateY(-3px);
+        border-color: rgba(214, 51, 108, 0.6);
+      }
+      .ft-stat span {
+        font-size: 20px;
+      }
+      .ft-stat b {
+        font:
+          400 26px/1.1 "DM Serif Display",
+          Georgia,
+          serif;
+      }
+      .ft-stat small {
+        color: var(--mute);
+        font-size: 12px;
+      }
+      .site-footer .footer-content {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr) minmax(
+            0,
+            0.9fr
+          );
+        align-items: start;
+        border-top: 1px solid var(--line);
+      }
+      .ft-one {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .footer-bottomline {
+        flex-wrap: wrap;
+        padding-top: 16px;
+        border-top: 1px solid var(--line);
+        color: var(--mute);
+        font-size: 12px;
+      }
+      .ft-sync {
+        padding: 4px 12px;
+        border: 1px solid var(--line);
+        border-radius: 99px;
+      }
+      #sp {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        width: 0;
+        background: linear-gradient(90deg, var(--forest), var(--sun));
+        z-index: 60;
+        pointer-events: none;
+      }
+      section.show {
+        animation: none;
+      }
+      section.show > * {
+        animation: up 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+      }
+      section.show > *:nth-child(2) {
+        animation-delay: 0.07s;
+      }
+      section.show > *:nth-child(3) {
+        animation-delay: 0.14s;
+      }
+      section.show > *:nth-child(4) {
+        animation-delay: 0.21s;
+      }
+      .card:hover {
+        box-shadow: 0 18px 50px -32px rgba(214, 51, 108, 0.65);
+      }
+      .btn:not(.ghost) {
+        position: relative;
+        overflow: hidden;
+      }
+      .btn:not(.ghost)::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          110deg,
+          transparent 30%,
+          rgba(255, 255, 255, 0.28) 50%,
+          transparent 70%
+        );
+        transform: translateX(-120%);
+        transition: transform 0.6s;
+        pointer-events: none;
+      }
+      .btn:not(.ghost):hover::after {
+        transform: translateX(120%);
+      }
+      .mq {
+        -webkit-mask-image: linear-gradient(
+          90deg,
+          transparent,
+          #000 8%,
+          #000 92%,
+          transparent
+        );
+        mask-image: linear-gradient(
+          90deg,
+          transparent,
+          #000 8%,
+          #000 92%,
+          transparent
+        );
+      }
+      ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #3a2a40;
+        border-radius: 9px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      :focus-visible {
+        outline: 2px solid var(--sun);
+        outline-offset: 3px;
+      }
+      @media (max-width: 720px) {
+        .ft-hero {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .ft-stats {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .site-footer .footer-content {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .ft-pulse path {
+          animation: none;
+          stroke-dashoffset: 0;
+        }
+        section.show > * {
+          animation: none !important;
+        }
+        .btn:not(.ghost)::after {
+          display: none;
+        }
+      }
     </style>
   </head>
   <body>
@@ -1987,7 +2237,9 @@
       <header>
         <div class="logo">i<span>♥</span>gym</div>
         <nav id="nav" aria-label="Navigasi utama">
-          <button data-t="jadwal"><span aria-hidden="true">📅</span><span>Jadwal</span></button>
+          <button data-t="jadwal">
+            <span aria-hidden="true">📅</span><span>Jadwal</span>
+          </button>
           <div id="activityMenu">
             <button
               type="button"
@@ -2003,9 +2255,15 @@
               <button data-t="beli">🛒 <span>Mau dibeli</span></button>
             </div>
           </div>
-          <button data-t="progres"><span aria-hidden="true">📈</span><span>Progres</span></button>
-          <button data-t="galeri"><span aria-hidden="true">📸</span><span>Kenangan</span></button>
-          <button data-t="profil"><span aria-hidden="true">👤</span><span>Profil</span></button>
+          <button data-t="progres">
+            <span aria-hidden="true">📈</span><span>Progres</span>
+          </button>
+          <button data-t="galeri">
+            <span aria-hidden="true">📸</span><span>Kenangan</span>
+          </button>
+          <button data-t="profil">
+            <span aria-hidden="true">👤</span><span>Profil</span>
+          </button>
         </nav>
       </header>
 
@@ -2014,9 +2272,10 @@
         <div class="hero" id="hero"></div>
         <div class="mq" aria-hidden="true">
           <div>
-            Hadir dulu <b>♥</b> Pelan tapi pasti <b>♥</b> Satu hari, satu centang
-            <b>♥</b> Badanmu rumahmu <b>♥</b> Hadir dulu <b>♥</b> Pelan tapi pasti
-            <b>♥</b> Satu hari, satu centang <b>♥</b> Badanmu rumahmu <b>♥</b>
+            Hadir dulu <b>♥</b> Pelan tapi pasti <b>♥</b> Satu hari, satu
+            centang <b>♥</b> Badanmu rumahmu <b>♥</b> Hadir dulu <b>♥</b> Pelan
+            tapi pasti <b>♥</b> Satu hari, satu centang <b>♥</b> Badanmu rumahmu
+            <b>♥</b>
           </div>
         </div>
         <div class="stats" id="stats"></div>
@@ -2042,7 +2301,10 @@
         <div class="two">
           <div class="card">
             <h2>Mengikuti</h2>
-            <p class="sub">Streak bareng dihitung saat kalian berdua latihan di hari yang sama.</p>
+            <p class="sub">
+              Streak bareng dihitung saat kalian berdua latihan di hari yang
+              sama.
+            </p>
             <div class="social-list" id="followingList"></div>
           </div>
           <div class="card">
@@ -2117,68 +2379,162 @@
             <div class="profile-main">
               <div class="profile-name-row">
                 <h1 id="profileName">Profil kamu</h1>
-                <button class="btn ghost" id="profileEditButton">Edit profil</button>
-                <button class="btn" id="profileShareButton" disabled>Bagikan</button>
+                <button class="btn ghost" id="profileEditButton">
+                  Edit profil
+                </button>
+                <button class="btn" id="profileShareButton">Bagikan</button>
               </div>
               <div class="profile-counts">
-                <button type="button" class="profile-count" data-profile-view="friends">
+                <button
+                  type="button"
+                  class="profile-count"
+                  data-profile-view="friends"
+                >
                   <b id="profilePostCount">0</b><span>Sesi</span>
                 </button>
-                <button type="button" class="profile-count" data-profile-view="friends">
+                <button
+                  type="button"
+                  class="profile-count"
+                  data-profile-view="friends"
+                >
                   <b id="profileFollowerCount">0</b><span>Pengikut</span>
                 </button>
-                <button type="button" class="profile-count" data-profile-view="friends">
+                <button
+                  type="button"
+                  class="profile-count"
+                  data-profile-view="friends"
+                >
                   <b id="profileFollowingCount">0</b><span>Mengikuti</span>
                 </button>
                 <div class="profile-count">
                   <b id="profileStreakCount">0</b><span>Hari streak</span>
                 </div>
               </div>
-              <p class="profile-bio" id="profileMotto">Mulai perjalanan latihanmu.</p>
+              <p class="profile-bio" id="profileMotto">
+                Mulai perjalanan latihanmu.
+              </p>
               <p class="profile-goal" id="profileGoal"></p>
             </div>
           </div>
           <div class="profile-mobile-actions">
-            <button class="btn ghost" id="profileEditMobile">Edit profil</button>
-            <button class="btn" id="profileShareMobile" disabled>Bagikan profil</button>
+            <button class="btn ghost" id="profileEditMobile">
+              Edit profil
+            </button>
+            <button class="btn" id="profileShareMobile">Bagikan profil</button>
           </div>
           <div class="profile-tabs" role="tablist" aria-label="Bagian profil">
-            <button role="tab" id="profileTabActivity" aria-controls="profileActivityPanel" aria-selected="true" data-profile-view="activity">Aktivitas</button>
-            <button role="tab" id="profileTabFriends" aria-controls="profileFriendsPanel" aria-selected="false" data-profile-view="friends">Teman</button>
-            <button role="tab" id="profileTabEdit" aria-controls="profileEditPanel" aria-selected="false" data-profile-view="edit">Edit profil</button>
-            <button role="tab" id="profileTabAccount" aria-controls="profileAccountPanel" aria-selected="false" data-profile-view="account">Akun</button>
+            <button
+              role="tab"
+              id="profileTabActivity"
+              aria-controls="profileActivityPanel"
+              aria-selected="true"
+              data-profile-view="activity"
+            >
+              Aktivitas
+            </button>
+            <button
+              role="tab"
+              id="profileTabFriends"
+              aria-controls="profileFriendsPanel"
+              aria-selected="false"
+              data-profile-view="friends"
+            >
+              Teman
+            </button>
+            <button
+              role="tab"
+              id="profileTabEdit"
+              aria-controls="profileEditPanel"
+              aria-selected="false"
+              data-profile-view="edit"
+            >
+              Edit profil
+            </button>
+            <button
+              role="tab"
+              id="profileTabAccount"
+              aria-controls="profileAccountPanel"
+              aria-selected="false"
+              data-profile-view="account"
+            >
+              Akun
+            </button>
           </div>
-          <div class="profile-panel" id="profileActivityPanel" role="tabpanel" tabindex="0" aria-labelledby="profileTabActivity">
+          <div
+            class="profile-panel"
+            id="profileActivityPanel"
+            role="tabpanel"
+            tabindex="0"
+            aria-labelledby="profileTabActivity"
+          >
             <div class="card profile-card">
-              <div class="row" style="justify-content:space-between">
+              <div class="row" style="justify-content: space-between">
                 <div>
                   <h2>Aktivitas publik</h2>
-                  <p class="sub">Kontrol apa yang terlihat saat teman membuka profilmu.</p>
+                  <p class="sub">
+                    Kontrol apa yang terlihat saat teman membuka profilmu.
+                  </p>
                 </div>
-                <label class="row" style="font-weight:500">
-                  <input type="checkbox" id="shareToggle" style="width:22px;height:22px;accent-color:var(--forest)">
+                <label class="row" style="font-weight: 500">
+                  <input
+                    type="checkbox"
+                    id="shareToggle"
+                    style="
+                      width: 22px;
+                      height: 22px;
+                      accent-color: var(--forest);
+                    "
+                  />
                   Bagikan hasil latihan
                 </label>
               </div>
-              <div class="row" style="margin-top:8px">
-                <button class="btn ghost" id="shareLink" hidden>Salin tautan profil</button>
-                <button class="btn ghost" id="sharePreview" hidden>Lihat profil publik</button>
+              <div class="row" style="margin-top: 8px">
+                <button class="btn ghost" id="shareLink" hidden>
+                  Salin tautan profil
+                </button>
+                <button class="btn ghost" id="sharePreview" hidden>
+                  Lihat profil publik
+                </button>
+                <button class="btn" id="shareConnect">
+                  Hubungkan akun dulu
+                </button>
               </div>
-              <p class="sub" id="shareStatus" style="margin:10px 0 0"></p>
+              <p class="sub" id="shareStatus" style="margin: 10px 0 0"></p>
             </div>
             <div class="card profile-card">
-              <div class="row" style="justify-content:space-between">
+              <div class="row" style="justify-content: space-between">
                 <div>
                   <h2>Perjalanan latihan</h2>
-                  <p class="sub">Lihat catatan latihan terbaru dan progresmu.</p>
+                  <p class="sub">
+                    Lihat catatan latihan terbaru dan progresmu.
+                  </p>
                 </div>
-                <button class="btn ghost" id="profileProgressButton">Buka progres</button>
+                <button class="btn ghost" id="profileProgressButton">
+                  Buka progres
+                </button>
               </div>
-              <div id="profileActivitySummary" class="profile-activity-summary"></div>
+              <div
+                id="profileActivitySummary"
+                class="profile-activity-summary"
+              ></div>
             </div>
           </div>
-          <div class="profile-panel" id="profileFriendsPanel" role="tabpanel" tabindex="0" aria-labelledby="profileTabFriends" hidden></div>
-          <div class="profile-panel" id="profileEditPanel" role="tabpanel" tabindex="0" aria-labelledby="profileTabEdit" hidden>
+          <div
+            class="profile-panel"
+            id="profileFriendsPanel"
+            role="tabpanel"
+            tabindex="0"
+            aria-labelledby="profileTabFriends"
+            hidden
+          ></div>
+          <div
+            class="profile-panel"
+            id="profileEditPanel"
+            role="tabpanel"
+            tabindex="0"
+            aria-labelledby="profileTabEdit"
+            hidden
+          >
             <div class="card profile-card">
               <div class="profile-heading">
                 <div>
@@ -2186,41 +2542,81 @@
                   <p class="sub">Nama, foto, dan tujuan latihanmu.</p>
                 </div>
                 <div class="row">
-                  <label class="btn ghost" style="margin:0;cursor:pointer">Ganti foto<input type="file" id="pa" accept="image/*" hidden></label>
+                  <label class="btn ghost" style="margin: 0; cursor: pointer"
+                    >Ganti foto<input
+                      type="file"
+                      id="pa"
+                      accept="image/*"
+                      hidden
+                  /></label>
                   <button class="btn ghost" id="pad">Hapus foto</button>
                 </div>
               </div>
               <div class="two profile-fields">
                 <div>
-                  <label for="pn">Nama</label><input type="text" id="pn" placeholder="Nama kamu">
-                  <label for="ps">Mulai gym sejak</label><input type="date" id="ps">
-                  <label for="pb">Motto</label><input type="text" id="pb" placeholder="Misal: Pelan tapi pasti">
+                  <label for="pn">Nama</label
+                  ><input type="text" id="pn" placeholder="Nama kamu" />
+                  <label for="ps">Mulai gym sejak</label
+                  ><input type="date" id="ps" /> <label for="pb">Motto</label
+                  ><input
+                    type="text"
+                    id="pb"
+                    placeholder="Misal: Pelan tapi pasti"
+                  />
                 </div>
                 <div>
-                  <label for="ph">Tinggi (cm)</label><input type="number" id="ph">
-                  <label for="pg">Target besar</label><input type="text" id="pg" placeholder="Misal: bisa pull-up, lari 5K">
-                  <p class="sub" id="pd" style="margin-top:16px"></p>
+                  <label for="ph">Tinggi (cm)</label
+                  ><input type="number" id="ph" />
+                  <label for="pg">Target besar</label
+                  ><input
+                    type="text"
+                    id="pg"
+                    placeholder="Misal: bisa pull-up, lari 5K"
+                  />
+                  <p class="sub" id="pd" style="margin-top: 16px"></p>
                 </div>
               </div>
             </div>
           </div>
-          <div class="profile-panel" id="profileAccountPanel" role="tabpanel" tabindex="0" aria-labelledby="profileTabAccount" hidden>
+          <div
+            class="profile-panel"
+            id="profileAccountPanel"
+            role="tabpanel"
+            tabindex="0"
+            aria-labelledby="profileTabAccount"
+            hidden
+          >
             <div class="card profile-card">
               <h2>Sinkron antar perangkat</h2>
               <p class="sub" id="sinfo"></p>
               <div class="row profile-sync-code">
-                <input type="text" id="scode" placeholder="Kode rahasia kamu" autocomplete="off" spellcheck="false">
+                <input
+                  type="text"
+                  id="scode"
+                  placeholder="Kode rahasia kamu"
+                  autocomplete="off"
+                  spellcheck="false"
+                />
                 <button class="btn ghost" id="sgen">Buat kode baru</button>
                 <button class="btn" id="scon">Hubungkan</button>
                 <button class="btn ghost" id="soff" hidden>Putuskan</button>
               </div>
-              <p class="sub" id="sst" style="margin:10px 0 0"></p>
+              <p class="sub" id="sst" style="margin: 10px 0 0"></p>
             </div>
             <div class="card profile-card">
               <h2>Data akun</h2>
-              <p class="sub">Pulihkan data lama dari file atau hapus semua data dari perangkat ini.</p>
+              <p class="sub">
+                Pulihkan data lama dari file atau hapus semua data dari
+                perangkat ini.
+              </p>
               <div class="row">
-                <label class="btn ghost" style="margin:0;cursor:pointer">Pulihkan dari file<input type="file" id="imp" accept=".json" hidden></label>
+                <label class="btn ghost" style="margin: 0; cursor: pointer"
+                  >Pulihkan dari file<input
+                    type="file"
+                    id="imp"
+                    accept=".json"
+                    hidden
+                /></label>
                 <button class="btn ghost" id="rst">Hapus semua data</button>
               </div>
             </div>
@@ -2403,30 +2799,80 @@
           </div>
         </div>
       </section>
-      <footer class="site-footer">
-        <div class="footer-topline">
-          <span class="footer-kicker">iLOVEGYM · YOUR TRAINING JOURNAL</span>
-          <span class="footer-spark" aria-hidden="true">✦</span>
+      <footer class="site-footer" id="siteFooter">
+        <svg
+          class="ft-pulse"
+          viewBox="0 0 600 46"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path d="M0 24 H200 l14-18 l20 38 l18-30 l12 10 H600" />
+        </svg>
+        <div class="ft-hero">
+          <div>
+            <span class="footer-kicker">iLOVEGYM · YOUR TRAINING JOURNAL</span>
+            <p class="ft-title">Konsistensi <em>terlihat bagus</em> untukmu.</p>
+          </div>
+          <button class="btn ft-top" id="ftTop" type="button">↑ Ke atas</button>
         </div>
+        <div class="ft-stats" id="ftStats"></div>
         <div class="footer-content">
           <div class="footer-brand">
             <strong>i<span>♥</span>gym</strong>
-            <p>Gerak kecil, perubahan besar. Ruang personal untuk menjaga ritme dan merayakan setiap progresmu.</p>
-            <div class="footer-motto">Konsistensi terlihat bagus untukmu.</div>
+            <p>
+              Gerak kecil, perubahan besar. Ruang personal untuk menjaga ritme
+              dan merayakan setiap progresmu.
+            </p>
+            <div class="footer-motto" id="ftToday">Hari ini</div>
           </div>
           <div class="footer-links">
-            <p class="footer-label">Jelajahi iLovegym</p>
-            <div class="footer-nav" role="navigation" aria-label="Navigasi footer">
-              <button type="button" data-footer-view="jadwal">📅&nbsp; Jadwal</button>
-              <button type="button" data-footer-view="rutin">🏋️&nbsp; Rutinitas</button>
-              <button type="button" data-footer-view="progres">📈&nbsp; Progres</button>
-              <button type="button" data-footer-view="profil">♡&nbsp; Profil</button>
+            <p class="footer-label">Jelajahi</p>
+            <div
+              class="footer-nav"
+              role="navigation"
+              aria-label="Navigasi footer"
+            >
+              <button type="button" data-footer-view="jadwal">
+                📅&nbsp; Jadwal
+              </button>
+              <button type="button" data-footer-view="rutin">
+                🏋️&nbsp; Rutinitas
+              </button>
+              <button type="button" data-footer-view="progres">
+                📈&nbsp; Progres
+              </button>
+              <button type="button" data-footer-view="galeri">
+                📸&nbsp; Kenangan
+              </button>
+              <button type="button" data-footer-view="musik">
+                🎵&nbsp; Playlist
+              </button>
+              <button type="button" data-footer-view="beli">
+                🛒&nbsp; Mau dibeli
+              </button>
+            </div>
+          </div>
+          <div class="footer-links">
+            <p class="footer-label">Aksi cepat</p>
+            <div class="footer-nav ft-one" role="group" aria-label="Aksi cepat">
+              <button type="button" id="ftTimer">
+                ⏱&nbsp; Timer istirahat
+              </button>
+              <button type="button" id="ftBackup">
+                💾&nbsp; Unduh cadangan
+              </button>
+              <button type="button" data-footer-view="profil">
+                ♡&nbsp; Profil &amp; teman
+              </button>
             </div>
           </div>
         </div>
         <div class="footer-bottomline">
-          <span>Dibuat untuk hari-hari yang lebih kuat.</span>
-          <span>Terus bergerak&nbsp; ♥</span>
+          <span
+            >© <span id="ftYear"></span> iLovegym · Dibuat untuk hari-hari yang
+            lebih kuat.</span
+          >
+          <span class="ft-sync" id="ftSync"></span>
         </div>
       </footer>
     </div>
@@ -3011,7 +3457,9 @@
         $("teman").classList.toggle("show", profilePane === "friends");
         if (focus) {
           $("profil").scrollIntoView({ behavior: "smooth", block: "start" });
-          $("profileTab" + profilePane[0].toUpperCase() + profilePane.slice(1)).focus();
+          $(
+            "profileTab" + profilePane[0].toUpperCase() + profilePane.slice(1),
+          ).focus();
         }
       }
       document.querySelectorAll("[data-profile-view]").forEach((button) => {
@@ -3021,14 +3469,18 @@
             if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key))
               return;
             event.preventDefault();
-            const tabs = [...document.querySelectorAll(".profile-tabs [role=tab]")];
+            const tabs = [
+              ...document.querySelectorAll(".profile-tabs [role=tab]"),
+            ];
             const index = tabs.indexOf(button);
             const next =
               event.key === "Home"
                 ? 0
                 : event.key === "End"
                   ? tabs.length - 1
-                  : (index + (event.key === "ArrowRight" ? 1 : -1) + tabs.length) %
+                  : (index +
+                      (event.key === "ArrowRight" ? 1 : -1) +
+                      tabs.length) %
                     tabs.length;
             showProfilePane(tabs[next].dataset.profileView);
             tabs[next].focus();
@@ -3037,8 +3489,26 @@
       $("profileEditButton").onclick = () => showProfilePane("edit", true);
       $("profileEditMobile").onclick = () => showProfilePane("edit", true);
       $("profileProgressButton").onclick = () => show("progres");
-      $("profileShareButton").onclick = () => $("shareLink").click();
-      $("profileShareMobile").onclick = () => $("shareLink").click();
+      function profileShare() {
+        if (!SY.uid) {
+          toast("Hubungkan akun dulu di tab Akun, lalu coba lagi.");
+          showProfilePane("account", true);
+          return;
+        }
+        if (!S.social.share) {
+          toast("Nyalakan \u201cBagikan hasil latihan\u201d dulu.");
+          showProfilePane("activity", true);
+          return;
+        }
+        if (!S.social.publicId) {
+          toast("Sinkron masih berjalan. Coba lagi sebentar lagi.");
+          return;
+        }
+        $("shareLink").click();
+      }
+      $("profileShareButton").onclick = profileShare;
+      $("profileShareMobile").onclick = profileShare;
+      $("shareConnect").onclick = () => showProfilePane("account", true);
       const ACTIVITY_TABS = ["rutin", "musik", "beli"];
       const activityToggle = $("activityToggle");
       function setActivityMenu(open) {
@@ -3046,9 +3516,15 @@
         $("activityDropdown").hidden = !open;
       }
       activityToggle.onclick = () =>
-        setActivityMenu(activityToggle.getAttribute("aria-expanded") !== "true");
+        setActivityMenu(
+          activityToggle.getAttribute("aria-expanded") !== "true",
+        );
       activityToggle.onkeydown = (event) => {
-        if (event.key === "ArrowDown" || event.key === "Enter" || event.key === " ") {
+        if (
+          event.key === "ArrowDown" ||
+          event.key === "Enter" ||
+          event.key === " "
+        ) {
           event.preventDefault();
           setActivityMenu(true);
           $("activityDropdown").querySelector("button").focus();
@@ -3062,7 +3538,10 @@
           activityToggle.focus();
         } else if (event.key === "ArrowDown" || event.key === "ArrowUp") {
           event.preventDefault();
-          items[(index + (event.key === "ArrowDown" ? 1 : -1) + items.length) % items.length].focus();
+          items[
+            (index + (event.key === "ArrowDown" ? 1 : -1) + items.length) %
+              items.length
+          ].focus();
         } else if (event.key === "Home" || event.key === "End") {
           event.preventDefault();
           items[event.key === "Home" ? 0 : items.length - 1].focus();
@@ -3077,25 +3556,34 @@
       function show(t) {
         const openFriends = t === "teman";
         if (openFriends) t = "profil";
-        if (!["jadwal", "rutin", "musik", "beli", "progres", "galeri", "profil"].includes(t))
+        if (
+          ![
+            "jadwal",
+            "rutin",
+            "musik",
+            "beli",
+            "progres",
+            "galeri",
+            "profil",
+          ].includes(t)
+        )
           t = "jadwal";
         tab = t;
         $("homeDashboard").hidden = t !== "jadwal";
         document
           .querySelectorAll("section")
           .forEach((s) => s.classList.toggle("show", s.id === t));
-        document
-          .querySelectorAll("#nav [data-t]")
-          .forEach((button) => {
-            const selected = button.dataset.t === t;
-            button.setAttribute("aria-current", selected ? "page" : "false");
-          });
+        document.querySelectorAll("#nav [data-t]").forEach((button) => {
+          const selected = button.dataset.t === t;
+          button.setAttribute("aria-current", selected ? "page" : "false");
+        });
         activityToggle.setAttribute(
           "aria-current",
           ACTIVITY_TABS.includes(t) ? "page" : "false",
         );
         setActivityMenu(false);
-        if (t === "profil") showProfilePane(openFriends ? "friends" : profilePane);
+        if (t === "profil")
+          showProfilePane(openFriends ? "friends" : profilePane);
         try {
           history.replaceState(null, "", location.search + "#" + t);
         } catch (e) {}
@@ -3106,7 +3594,9 @@
       document.querySelectorAll("[data-footer-view]").forEach((button) => {
         button.onclick = () => {
           show(button.dataset.footerView);
-          document.querySelector("header").scrollIntoView({ behavior: "smooth" });
+          document
+            .querySelector("header")
+            .scrollIntoView({ behavior: "smooth" });
         };
       });
       function render() {
@@ -3115,6 +3605,9 @@
         cal();
         prog();
         banner();
+        try {
+          footerR();
+        } catch (e) {}
       }
       const Q = () => {
           if (!S.quotes) S.quotes = [...QS];
@@ -3797,11 +4290,14 @@
       }
       function profileHeaderR() {
         $("profileName").textContent = PF().name || "Profil kamu";
-        $("profileMotto").textContent = PF().motto || "Mulai perjalanan latihanmu.";
+        $("profileMotto").textContent =
+          PF().motto || "Mulai perjalanan latihanmu.";
         $("profileGoal").textContent = PF().goal ? "🎯 " + PF().goal : "";
         const stats = stt(),
           recent = Object.entries(S.days || {})
-            .filter(([date, day]) => /^\d{4}-\d{2}-\d{2}$/.test(date) && day?.done)
+            .filter(
+              ([date, day]) => /^\d{4}-\d{2}-\d{2}$/.test(date) && day?.done,
+            )
             .sort(([a], [b]) => b.localeCompare(a))
             .slice(0, 3);
         $("profilePostCount").textContent = stats.t;
@@ -4170,16 +4666,16 @@
         incomingProfile
           ? "profil"
           : [
-              "jadwal",
-              "rutin",
-              "beli",
-              "teman",
-              "progres",
-              "galeri",
-              "teman",
-              "profil",
-              "musik",
-            ].includes(h)
+                "jadwal",
+                "rutin",
+                "beli",
+                "teman",
+                "progres",
+                "galeri",
+                "teman",
+                "profil",
+                "musik",
+              ].includes(h)
             ? h
             : "jadwal",
       );
@@ -4227,7 +4723,9 @@
       const SOCIAL_ID = /^[a-z0-9]{24}$/;
       const SOC = { id: "", following: [], followers: [] };
       function newSocialId() {
-        const bytes = new Uint8Array(18);
+        const bytes = new Uint8Array(
+          12,
+        ); /* 12 byte = 24 karakter, sesuai aturan server */
         crypto.getRandomValues(bytes);
         return [...bytes].map((x) => x.toString(16).padStart(2, "0")).join("");
       }
@@ -4249,7 +4747,10 @@
       }
       function publicSnapshot() {
         const workouts = Object.entries(S.days || {})
-          .filter(([date, day]) => /^\d{4}-\d{2}-\d{2}$/.test(date) && day && day.done)
+          .filter(
+            ([date, day]) =>
+              /^\d{4}-\d{2}-\d{2}$/.test(date) && day && day.done,
+          )
           .map(([date, day]) => ({
             date,
             focus:
@@ -4268,7 +4769,8 @@
           name: PF().name || "Pengguna iLovegym",
           motto: PF().motto || "",
           avatar:
-            PH.avatar.startsWith("data:image/jpeg;base64,") && PH.avatar.length <= 80000
+            PH.avatar.startsWith("data:image/jpeg;base64,") &&
+            PH.avatar.length <= 80000
               ? PH.avatar
               : "",
           stats: { sessions: workouts.length, streak: stt().s },
@@ -4336,12 +4838,16 @@
         const workoutHtml = workouts.length
           ? `<div class="workout-list">${workouts
               .map((workout) => {
-                const date = new Date(workout.date + "T00:00:00").toLocaleDateString("id-ID", {
+                const date = new Date(
+                  workout.date + "T00:00:00",
+                ).toLocaleDateString("id-ID", {
                   day: "numeric",
                   month: "long",
                   year: "numeric",
                 });
-                const exercises = (workout.exercises || []).filter((x) => x.name);
+                const exercises = (workout.exercises || []).filter(
+                  (x) => x.name,
+                );
                 return `<article class="workout-card"><h3>${esc(date)} · ${esc(workout.focus || "Latihan")}</h3>${
                   exercises.length
                     ? `<ul>${exercises
@@ -4370,7 +4876,9 @@
           ? `<img class="social-avatar" src="${esc(profile.avatar)}" alt="">`
           : '<span class="social-avatar" aria-hidden="true">💪</span>';
         const isSelf = profile.id === SOC.id;
-        const isFollowing = SOC.following.some((item) => item.id === profile.id);
+        const isFollowing = SOC.following.some(
+          (item) => item.id === profile.id,
+        );
         return `<div class="social-card"><div class="row" style="align-items:center"><div>${avatar}</div><div style="flex:1;min-width:0"><h2>${esc(profile.name || "Pengguna iLovegym")}</h2><p class="sub" style="margin:4px 0">${esc(profile.motto || "Terus bergerak.")}</p></div><div class="row"><span class="chip">${Number(profile.stats?.sessions || 0)} sesi</span><span class="chip">🔥 ${Number(profile.stats?.streak || 0)} hari</span><span class="chip">${Number(followerCount)} pengikut</span></div></div>${
           !isSelf && SY.uid
             ? `<button class="btn ${isFollowing ? "ghost" : ""}" id="profileFollow">${isFollowing ? "Berhenti mengikuti" : "Ikuti akun"}</button>`
@@ -4381,7 +4889,8 @@
       }
       async function loadPublicProfile(id) {
         if (!SOCIAL_ID.test(id || "")) return;
-        $("friendProfile").innerHTML = '<p class="social-empty">Memuat profil…</p>';
+        $("friendProfile").innerHTML =
+          '<p class="social-empty">Memuat profil…</p>';
         try {
           const result = await api("public_get", { id });
           if (!result.profile) {
@@ -4424,7 +4933,8 @@
                 .map((item) => {
                   const profile = item.profile;
                   const name = profile?.name || "Profil tidak tersedia";
-                  const joint = isFollowing && profile ? jointStreak(profile) : 0;
+                  const joint =
+                    isFollowing && profile ? jointStreak(profile) : 0;
                   return `<div class="social-card"><div class="row" style="justify-content:space-between"><div><b>${esc(name)}</b><div class="sub" style="margin:3px 0 0">${isFollowing ? `🔥 ${joint} hari streak bareng` : "Mengikuti kamu"}</div></div><div class="row"><button class="btn ghost" data-open-profile="${item.id}">Lihat</button>${
                     isFollowing
                       ? `<button class="ico" data-unfollow="${item.id}" aria-label="Berhenti mengikuti">✕</button>`
@@ -4439,7 +4949,7 @@
           (button) =>
             (button.onclick = () => {
               const id = button.dataset.openProfile;
-            $("friendInput").value = id;
+              $("friendInput").value = id;
               loadPublicProfile(id);
             }),
         );
@@ -4465,11 +4975,16 @@
         try {
           const result = await api("social_get");
           SOC.id = result.id || SOC.id;
-          SOC.following = Array.isArray(result.following) ? result.following : [];
-          SOC.followers = Array.isArray(result.followers) ? result.followers : [];
+          SOC.following = Array.isArray(result.following)
+            ? result.following
+            : [];
+          SOC.followers = Array.isArray(result.followers)
+            ? result.followers
+            : [];
           renderSocialLists();
         } catch (e) {
-          $("followingList").innerHTML = `<p class="social-empty">Gagal memuat teman: ${esc(e.message)}</p>`;
+          $("followingList").innerHTML =
+            `<p class="social-empty">Gagal memuat teman: ${esc(e.message)}</p>`;
           $("followerList").innerHTML = "";
         }
       }
@@ -4542,8 +5057,10 @@
         $("shareToggle").disabled = !on;
         $("shareLink").hidden = !on || !sharing || !S.social.publicId;
         $("sharePreview").hidden = !on || !sharing || !S.social.publicId;
-        $("profileShareButton").disabled = !on || !sharing || !S.social.publicId;
-        $("profileShareMobile").disabled = !on || !sharing || !S.social.publicId;
+        $("shareConnect").hidden = on;
+        try {
+          footerR();
+        } catch (e) {}
         $("shareStatus").textContent = !on
           ? "Hubungkan sinkronisasi dulu untuk membuat profil publik."
           : sharing
@@ -4552,7 +5069,10 @@
       }
       async function applyRemote(rec) {
         S = Object.assign({}, DEF, rec.data);
-        S.social = Object.assign({ publicId: "", share: false }, S.social || {});
+        S.social = Object.assign(
+          { publicId: "", share: false },
+          S.social || {},
+        );
         S._ts = rec.ts;
         try {
           localStorage.setItem(K, JSON.stringify(S));
@@ -4705,7 +5225,7 @@
       };
       $("scon").onclick = async () => {
         if (SY.uid) {
-          pullNow(false);
+          pullNow(false).then(refreshSocial);
           return;
         }
         const c = $("scode").value.trim();
@@ -4722,6 +5242,8 @@
         syncUi();
         await pullNow(true);
         await refreshSocial();
+        const openId = publicIdFrom($("friendInput").value);
+        if (openId) loadPublicProfile(openId);
       };
       $("soff").onclick = () => {
         if (
@@ -4739,16 +5261,75 @@
         syncUi();
       };
       document.addEventListener("visibilitychange", () => {
-        if (!document.hidden && SY.uid && READY) pullNow(false);
+        if (!document.hidden && SY.uid && READY)
+          pullNow(false).then(refreshSocial);
       });
       renderSocialLists();
       syncUi();
       READY = true;
-      if (SY.uid) pullNow(false).then(refreshSocial);
       if (SOCIAL_ID.test(incomingProfile || "")) {
         $("friendInput").value = incomingProfile;
         loadPublicProfile(incomingProfile);
       }
+      if (SY.uid)
+        pullNow(false)
+          .then(refreshSocial)
+          .then(() => {
+            const openId = publicIdFrom($("friendInput").value);
+            if (openId) loadPublicProfile(openId);
+          });
+
+      /* ===== Footer ===== */
+      function footerR() {
+        const o = stt(),
+          y = new Date().getFullYear() + "-";
+        let ys = 0;
+        for (const k in S.days) if (S.days[k].done && k.startsWith(y)) ys++;
+        const lv = Math.floor(o.t / 5);
+        let on = false;
+        try {
+          on = !!SY.uid;
+        } catch (e) {}
+        $("ftStats").innerHTML = [
+          ["🔥", o.s, "hari beruntun"],
+          ["💪", ys, "sesi tahun ini"],
+          ["👑", LV[Math.min(lv, LV.length - 1)], "level " + (lv + 1)],
+          ["🏆", Object.keys(bestMap()).length, "rekor pribadi"],
+        ]
+          .map(
+            (a) =>
+              `<div class="ft-stat"><span aria-hidden="true">${a[0]}</span><b>${esc(a[1])}</b><small>${a[2]}</small></div>`,
+          )
+          .join("");
+        $("ftSync").textContent = on
+          ? "☁ Tersinkron antar perangkat"
+          : "Mode offline · data di perangkat ini";
+        const t = info(new Date());
+        $("ftToday").textContent = t.rest
+          ? "Hari ini: waktunya pulih"
+          : "Hari ini: " + t.f;
+        $("ftYear").textContent = new Date().getFullYear();
+      }
+      $("ftTop").onclick = () =>
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      $("ftTimer").onclick = () => {
+        $("tp").hidden = false;
+        $("tb").focus();
+      };
+      $("ftBackup").onclick = () => $("exp").click();
+      const spBar = document.createElement("div");
+      spBar.id = "sp";
+      document.body.appendChild(spBar);
+      addEventListener(
+        "scroll",
+        () => {
+          const d = document.documentElement,
+            m = d.scrollHeight - d.clientHeight;
+          spBar.style.width = (m > 0 ? (d.scrollTop / m) * 100 : 0) + "%";
+        },
+        { passive: true },
+      );
+      footerR();
     </script>
   </body>
 </html>
