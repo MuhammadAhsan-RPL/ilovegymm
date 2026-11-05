@@ -1563,6 +1563,17 @@
       .profile-heading .sub {
         margin: 0;
       }
+      .profile-save-row {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 14px;
+        margin-top: 20px;
+      }
+      .profile-save-status {
+        margin: 0;
+        text-align: right;
+      }
       .site-footer {
         position: relative;
         isolation: isolate;
@@ -2265,6 +2276,41 @@
           padding: 2px 7px;
         }
       }
+      @media (max-width: 720px) {
+        header {
+          gap: 7px;
+          margin: 0 0 14px;
+          padding: 4px 0 8px;
+        }
+        .logo {
+          padding-left: 2px;
+          font-size: 27px;
+          line-height: 1;
+        }
+        #nav {
+          gap: 2px;
+          padding: 4px;
+          border-radius: 18px;
+          background: rgba(255, 255, 255, 0.035);
+        }
+        #nav > button,
+        #activityToggle {
+          min-height: 46px;
+          gap: 2px;
+          padding: 4px 1px;
+          border-radius: 14px;
+          font-size: clamp(8.5px, 2.5vw, 10px);
+        }
+        #nav > button > span:first-child,
+        #activityToggle > span:first-child {
+          font-size: 15px;
+          line-height: 1;
+        }
+        #nav > button[aria-current="page"],
+        #activityToggle[aria-current="page"] {
+          box-shadow: 0 4px 12px -8px #d6336c;
+        }
+      }
       @media (prefers-reduced-motion: reduce) {
         .ft-pulse path {
           animation: none;
@@ -2332,16 +2378,25 @@
         <div class="card">
           <h2>Teman latihan</h2>
           <p class="sub">
-            Buka tautan profil teman untuk melihat hasil latihan yang mereka
-            bagikan, lalu ikuti untuk menjaga streak latihan bareng.
+            Cari teman dengan username atau buka tautan profilnya untuk melihat
+            hasil latihan yang mereka bagikan.
           </p>
           <form class="row" id="friendForm" style="flex-wrap: nowrap">
             <input
               type="text"
               id="friendInput"
-              placeholder="Tempel tautan profil teman"
-              autocomplete="url"
-            /><button class="btn">Lihat profil</button>
+              placeholder="Username atau tautan profil teman"
+              autocomplete="off"
+            /><button class="btn">Lihat profil</button
+            ><button
+              type="button"
+              class="btn ghost"
+              id="friendClear"
+              aria-label="Hapus pencarian dan hasil profil"
+              hidden
+            >
+              Hapus
+            </button>
           </form>
           <div id="friendProfile" style="margin-top: 16px"></div>
         </div>
@@ -2601,6 +2656,22 @@
               </div>
               <div class="two profile-fields">
                 <div>
+                  <label for="pu">Username</label
+                  ><input
+                    type="text"
+                    id="pu"
+                    placeholder="misal: mahmah_gym"
+                    minlength="3"
+                    maxlength="20"
+                    pattern="[A-Za-z0-9_]{3,20}"
+                    autocapitalize="off"
+                    autocomplete="username"
+                    aria-describedby="profileUsernameHint"
+                  />
+                  <p class="sub" id="profileUsernameHint">
+                    3–20 huruf, angka, atau garis bawah. Bisa dicari saat hasil
+                    latihan dibagikan.
+                  </p>
                   <label for="pn">Nama</label
                   ><input type="text" id="pn" placeholder="Nama kamu" />
                   <label for="ps">Mulai gym sejak</label
@@ -2622,6 +2693,16 @@
                   />
                   <p class="sub" id="pd" style="margin-top: 16px"></p>
                 </div>
+              </div>
+              <div class="profile-save-row">
+                <p
+                  class="sub profile-save-status"
+                  id="profileSaveStatus"
+                  role="status"
+                ></p>
+                <button type="button" class="btn" id="profileSaveButton">
+                  Simpan perubahan
+                </button>
               </div>
             </div>
           </div>
@@ -3047,8 +3128,11 @@
         if (READY) S._ts = Date.now();
         try {
           localStorage.setItem(K, JSON.stringify(S));
-        } catch (e) {}
+        } catch (e) {
+          return false;
+        }
         if (READY && typeof syncSoon === "function") syncSoon();
+        return true;
       };
       const $ = (i) => document.getElementById(i),
         esc = (s) =>
@@ -4299,6 +4383,7 @@
           : "";
       }
       const PFS = [
+        ["pu", "username"],
         ["pn", "name"],
         ["ps", "since"],
         ["pb", "motto"],
@@ -4360,6 +4445,9 @@
       PFS.forEach(
         ([i, k]) =>
           ($(i).oninput = (e) => {
+            if (k === "username") {
+              e.target.value = e.target.value.replace(/^@/, "").toLowerCase();
+            }
             PF()[k] = e.target.value;
             save();
             hero();
@@ -4367,6 +4455,15 @@
             profileHeaderR();
           }),
       );
+      $("profileSaveButton").onclick = () => {
+        const saved = save();
+        const username = PF().username || "";
+        $("profileSaveStatus").textContent = !saved
+          ? "Profil belum tersimpan. Periksa ruang penyimpanan perangkat."
+          : username && !/^[a-z0-9_]{3,20}$/.test(username)
+            ? "Profil tersimpan, tetapi username harus 3–20 huruf, angka, atau garis bawah."
+            : "Perubahan profil berhasil disimpan.";
+      };
       $("pa").onchange = (e) => {
         const f = e.target.files[0];
         if (f)
@@ -4792,6 +4889,7 @@
           .sort((a, b) => a.date.localeCompare(b.date));
         return {
           name: PF().name || "Pengguna iLovegym",
+          username: PF().username || "",
           motto: PF().motto || "",
           avatar:
             PH.avatar.startsWith("data:image/jpeg;base64,") &&
@@ -4904,7 +5002,7 @@
         const isFollowing = SOC.following.some(
           (item) => item.id === profile.id,
         );
-        return `<div class="social-card"><div class="row" style="align-items:center"><div>${avatar}</div><div style="flex:1;min-width:0"><h2>${esc(profile.name || "Pengguna iLovegym")}</h2><p class="sub" style="margin:4px 0">${esc(profile.motto || "Terus bergerak.")}</p></div><div class="row"><span class="chip">${Number(profile.stats?.sessions || 0)} sesi</span><span class="chip">🔥 ${Number(profile.stats?.streak || 0)} hari</span><span class="chip">${Number(followerCount)} pengikut</span></div></div>${
+        return `<div class="social-card"><div class="row" style="align-items:center"><div>${avatar}</div><div style="flex:1;min-width:0"><h2>${esc(profile.name || "Pengguna iLovegym")}</h2>${profile.username ? `<p class="sub" style="margin:2px 0">@${esc(profile.username)}</p>` : ""}<p class="sub" style="margin:4px 0">${esc(profile.motto || "Terus bergerak.")}</p></div><div class="row"><span class="chip">${Number(profile.stats?.sessions || 0)} sesi</span><span class="chip">🔥 ${Number(profile.stats?.streak || 0)} hari</span><span class="chip">${Number(followerCount)} pengikut</span></div></div>${
           !isSelf && SY.uid
             ? `<button class="btn ${isFollowing ? "ghost" : ""}" id="profileFollow">${isFollowing ? "Berhenti mengikuti" : "Ikuti akun"}</button>`
             : !isSelf
@@ -4912,15 +5010,34 @@
               : ""
         }</div><div class="card"><h2>Hasil latihan</h2><p class="sub">${workouts.length} sesi selesai dibagikan</p>${workoutHtml}</div><div class="two"><div class="card"><h2>Catatan berat</h2>${weightHtml}</div><div class="card"><h2>Lencana</h2><p>${badges}</p></div></div>`;
       }
+      let publicProfileRequest = 0;
+      function updateFriendClear() {
+        $("friendClear").hidden =
+          !$("friendInput").value.trim() &&
+          !$("friendProfile").textContent.trim();
+      }
+      function clearFriendSearch() {
+        publicProfileRequest++;
+        $("friendInput").value = "";
+        $("friendProfile").innerHTML = "";
+        updateFriendClear();
+        $("friendInput").focus();
+      }
+      $("friendInput").oninput = updateFriendClear;
+      $("friendClear").onclick = clearFriendSearch;
       async function loadPublicProfile(id) {
         if (!SOCIAL_ID.test(id || "")) return;
+        const request = ++publicProfileRequest;
         $("friendProfile").innerHTML =
           '<p class="social-empty">Memuat profil…</p>';
+        updateFriendClear();
         try {
           const result = await api("public_get", { id });
+          if (request !== publicProfileRequest) return;
           if (!result.profile) {
             $("friendProfile").innerHTML =
               '<p class="social-empty">Profil ini belum dibagikan atau tautannya tidak tersedia.</p>';
+            updateFriendClear();
             return;
           }
           $("friendProfile").innerHTML = profileResults(
@@ -4945,8 +5062,10 @@
               }
             };
         } catch (e) {
+          if (request !== publicProfileRequest) return;
           $("friendProfile").innerHTML =
             `<p class="social-empty">Profil tidak bisa dimuat: ${esc(e.message)}</p>`;
+          updateFriendClear();
         }
       }
       function renderSocialLists() {
@@ -5015,12 +5134,40 @@
       }
       $("friendForm").onsubmit = (event) => {
         event.preventDefault();
-        const id = publicIdFrom($("friendInput").value);
-        if (!id) {
-          toast("Masukkan tautan profil iLovegym yang valid.");
+        const value = $("friendInput").value.trim();
+        const id = publicIdFrom(value);
+        if (id) {
+          loadPublicProfile(id);
           return;
         }
-        loadPublicProfile(id);
+        const username = value.replace(/^@/, "").toLowerCase();
+        if (!/^[a-z0-9_]{3,20}$/.test(username)) {
+          toast(
+            "Masukkan username 3–20 huruf/angka/garis bawah atau tautan profil.",
+          );
+          return;
+        }
+        const request = ++publicProfileRequest;
+        $("friendProfile").innerHTML =
+          '<p class="social-empty">Mencari username…</p>';
+        updateFriendClear();
+        api("username_lookup", { username })
+          .then((result) => {
+            if (request !== publicProfileRequest) return;
+            if (!result.id) {
+              $("friendProfile").innerHTML =
+                '<p class="social-empty">Username tidak ditemukan atau profilnya belum dibagikan.</p>';
+              updateFriendClear();
+              return;
+            }
+            loadPublicProfile(result.id);
+          })
+          .catch((e) => {
+            if (request !== publicProfileRequest) return;
+            $("friendProfile").innerHTML =
+              `<p class="social-empty">Pencarian gagal: ${esc(e.message)}</p>`;
+            updateFriendClear();
+          });
       };
       $("shareToggle").onchange = async () => {
         if (!SY.uid) {
