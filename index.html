@@ -1440,6 +1440,210 @@
         font-size: 19px;
         margin: 0 0 4px;
       }
+      .chat-layout {
+        display: grid;
+        grid-template-columns: minmax(210px, 0.72fr) minmax(0, 1.5fr);
+        gap: 14px;
+        min-height: 360px;
+        margin-top: 16px;
+      }
+      .chat-contacts,
+      .chat-room,
+      .chat-empty {
+        min-width: 0;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.025);
+      }
+      .chat-contacts {
+        display: grid;
+        align-content: start;
+        gap: 8px;
+        padding: 10px;
+      }
+      .chat-contact {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        min-width: 0;
+        padding: 11px;
+        border: 1px solid transparent;
+        border-radius: 14px;
+        background: transparent;
+        color: var(--ink);
+        font: inherit;
+        text-align: left;
+        cursor: pointer;
+      }
+      .chat-contact:hover,
+      .chat-contact[aria-current="true"] {
+        border-color: var(--line);
+        background: rgba(255, 255, 255, 0.055);
+      }
+      .chat-contact-copy {
+        min-width: 0;
+        flex: 1;
+      }
+      .chat-contact-copy b,
+      .chat-contact-copy span {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .chat-contact-copy span {
+        margin-top: 3px;
+        color: var(--mute);
+        font-size: 12px;
+      }
+      .chat-contact-streak {
+        color: var(--sun);
+        font-size: 13px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+      .chat-room {
+        display: grid;
+        grid-template-rows: auto auto minmax(150px, 1fr) auto;
+        overflow: hidden;
+      }
+      .chat-room[hidden] {
+        display: none;
+      }
+      .chat-room-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--line);
+      }
+      .chat-room-head p {
+        margin: 3px 0 0;
+      }
+      .chat-streak-banner {
+        padding: 10px 16px;
+        border-bottom: 1px solid var(--line);
+        color: var(--mute);
+        font-size: 13px;
+      }
+      .chat-streak-banner.is-active {
+        color: var(--sun);
+      }
+      .chat-streak-banner.is-grace {
+        color: #b7a5a8;
+      }
+      .chat-messages {
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+        min-height: 180px;
+        max-height: 430px;
+        overflow-y: auto;
+        padding: 16px;
+      }
+      .chat-message {
+        max-width: min(82%, 440px);
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 16px 16px 16px 5px;
+        background: rgba(255, 255, 255, 0.045);
+        overflow-wrap: anywhere;
+      }
+      .chat-message.is-mine {
+        align-self: flex-end;
+        border-color: rgba(214, 51, 108, 0.35);
+        border-radius: 16px 16px 5px 16px;
+        background: rgba(214, 51, 108, 0.12);
+      }
+      .chat-message p {
+        margin: 0;
+        white-space: pre-wrap;
+      }
+      .chat-message time {
+        display: block;
+        margin-top: 5px;
+        color: var(--mute);
+        font-size: 10px;
+        text-align: right;
+      }
+      .chat-photo-button {
+        display: grid;
+        place-items: center;
+        min-width: 120px;
+        min-height: 54px;
+        margin-top: 7px;
+        padding: 8px 12px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--ink);
+        font: inherit;
+        cursor: pointer;
+      }
+      .chat-photo-button img {
+        display: block;
+        max-width: min(240px, 60vw);
+        max-height: 280px;
+        border-radius: 9px;
+        object-fit: cover;
+      }
+      .chat-form {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 8px;
+        padding: 12px;
+        border-top: 1px solid var(--line);
+      }
+      .chat-form textarea {
+        grid-column: 1 / -1;
+        min-height: 54px;
+        max-height: 130px;
+        resize: vertical;
+      }
+      .chat-form input[type="file"] {
+        align-self: center;
+        width: 100%;
+        min-width: 0;
+        color: var(--mute);
+        font-size: 12px;
+      }
+      .chat-empty {
+        display: grid;
+        align-content: center;
+        justify-items: center;
+        padding: 24px;
+        color: var(--mute);
+        text-align: center;
+      }
+      .chat-empty[hidden] {
+        display: none;
+      }
+      .joint-streak-card {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .joint-streak-count {
+        display: grid;
+        place-items: center;
+        min-width: 62px;
+        min-height: 62px;
+        padding: 8px;
+        border-radius: 18px;
+        background: rgba(235, 117, 84, 0.12);
+        color: var(--ink);
+        font-size: 22px;
+        font-weight: 800;
+        line-height: 1;
+      }
+      .joint-streak-copy {
+        min-width: 0;
+      }
+      .joint-streak-copy .sub {
+        margin: 4px 0 0;
+      }
       .social-avatar {
         width: 52px;
         height: 52px;
@@ -2028,6 +2232,19 @@
           align-items: flex-start;
           flex-direction: column;
           gap: 5px;
+        }
+        .chat-layout {
+          grid-template-columns: minmax(0, 1fr);
+        }
+        .chat-contacts {
+          max-height: 220px;
+          overflow-y: auto;
+        }
+        .chat-room {
+          min-height: 430px;
+        }
+        .chat-message {
+          max-width: 90%;
         }
       }
       @media (max-width: 380px) {
@@ -4025,6 +4242,861 @@
           opacity: 1;
         }
       }
+      /* ================= CHAT DRAWER & STREAK LENGKAP ================= */
+      .chat-fab {
+        position: fixed;
+        right: 0;
+        top: 42%;
+        z-index: 65;
+        display: grid;
+        justify-items: center;
+        gap: 4px;
+        padding: 13px 10px 11px 13px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-right: 0;
+        border-radius: 22px 0 0 22px;
+        color: #fff;
+        background: var(--grad);
+        box-shadow:
+          0 18px 40px -10px var(--glow),
+          inset 0 1px 0 rgba(255, 255, 255, 0.35);
+        transition:
+          transform 0.4s var(--ease),
+          padding 0.3s var(--ease),
+          opacity 0.3s;
+        animation: fabIn 0.8s var(--ease) 0.4s both;
+      }
+      .chat-fab:hover {
+        padding-right: 16px;
+        transform: translateX(-3px);
+      }
+      .chat-fab-ico {
+        font-size: 23px;
+        line-height: 1;
+        animation: wiggle 5s ease-in-out 2s infinite;
+      }
+      .chat-fab-label {
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      .chat-fab-streak {
+        padding: 2px 6px;
+        border-radius: 99px;
+        background: rgba(0, 0, 0, 0.28);
+        font-size: 10px;
+        font-weight: 800;
+        color: #ffd8b8;
+        white-space: nowrap;
+      }
+      .chat-fab-streak[hidden],
+      .chat-badge[hidden] {
+        display: none;
+      }
+      .chat-badge {
+        position: absolute;
+        top: -8px;
+        left: -8px;
+        min-width: 22px;
+        height: 22px;
+        padding: 0 6px;
+        display: grid;
+        place-items: center;
+        border-radius: 99px;
+        border: 2px solid var(--bg);
+        background: #ff2e63;
+        color: #fff;
+        font-size: 11px;
+        font-weight: 800;
+        animation: badgePulse 1.8s ease-in-out infinite;
+      }
+      body.chat-open .chat-fab {
+        transform: translateX(110%);
+        opacity: 0;
+        pointer-events: none;
+      }
+      .chat-scrim {
+        position: fixed;
+        inset: 0;
+        z-index: 80;
+        background: rgba(8, 4, 10, 0.6);
+        -webkit-backdrop-filter: blur(6px);
+        backdrop-filter: blur(6px);
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.35s,
+          visibility 0.35s;
+      }
+      body.chat-open .chat-scrim {
+        opacity: 1;
+        visibility: visible;
+      }
+      body.chat-open {
+        overflow: hidden;
+      }
+      .chat-drawer {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 90;
+        display: flex;
+        flex-direction: column;
+        width: min(440px, 100vw);
+        height: 100vh;
+        height: 100dvh;
+        border-left: 1px solid var(--line);
+        background:
+          radial-gradient(420px 260px at 100% 0%, rgba(224, 69, 127, 0.24), transparent 70%),
+          radial-gradient(360px 260px at 0% 100%, rgba(120, 60, 190, 0.2), transparent 70%),
+          #130d17;
+        box-shadow: -30px 0 80px -20px rgba(0, 0, 0, 0.88);
+        transform: translateX(104%);
+        visibility: hidden;
+        transition:
+          transform 0.48s var(--ease),
+          visibility 0.48s;
+        padding-top: env(safe-area-inset-top, 0px);
+      }
+      body.chat-open .chat-drawer {
+        transform: none;
+        visibility: visible;
+      }
+      .cd-head {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 16px 14px 12px 20px;
+        border-bottom: 1px solid var(--line);
+      }
+      .cd-title {
+        flex: 1;
+        min-width: 0;
+      }
+      .cd-title b {
+        display: block;
+        font: italic 400 26px/1.1 var(--head);
+        color: #fff;
+      }
+      .cd-title span {
+        color: var(--mute);
+        font-size: 12px;
+      }
+      .cd-icon {
+        flex: none;
+        width: 38px;
+        height: 38px;
+        display: grid;
+        place-items: center;
+        border: 1px solid var(--line);
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--ink);
+        font-size: 15px;
+        transition:
+          background 0.25s,
+          transform 0.3s var(--ease);
+      }
+      .cd-icon:hover {
+        background: rgba(224, 69, 127, 0.25);
+        transform: rotate(8deg) scale(1.06);
+      }
+      .cd-notice {
+        margin: 0;
+        padding: 10px 20px 4px;
+        color: var(--sun);
+        font-size: 12.5px;
+      }
+      .cd-notice:empty {
+        display: none;
+      }
+      .chat-drawer .chat-layout {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        gap: 0;
+      }
+      .chat-drawer .chat-contacts,
+      .chat-drawer .chat-room,
+      .chat-drawer .chat-empty {
+        border: 0;
+        border-radius: 0;
+        background: none;
+      }
+      .chat-drawer .chat-contacts {
+        flex: 1;
+        min-height: 0;
+        max-height: none;
+        overflow-y: auto;
+        padding: 10px 12px 24px;
+        align-content: start;
+        gap: 8px;
+      }
+      .chat-drawer.has-active .chat-contacts {
+        display: none;
+      }
+      .chat-drawer .chat-contact {
+        gap: 12px;
+        padding: 12px 13px;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        background: rgba(255, 255, 255, 0.03);
+        transition:
+          background 0.25s,
+          transform 0.3s var(--ease),
+          border-color 0.25s;
+        animation: pageIn 0.45s var(--ease) both;
+      }
+      .chat-drawer .chat-contact:hover {
+        transform: translateX(-3px);
+        border-color: rgba(224, 69, 127, 0.45);
+        background: rgba(224, 69, 127, 0.11);
+      }
+      .cd-av {
+        flex: none;
+        width: 46px;
+        height: 46px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        object-fit: cover;
+        background: var(--grad);
+        color: #fff;
+        font: 700 18px var(--ui);
+        box-shadow: 0 6px 16px -6px var(--glow);
+      }
+      .chat-contact.is-unread {
+        border-color: rgba(255, 122, 168, 0.45);
+        background: rgba(224, 69, 127, 0.09);
+      }
+      .chat-contact.is-unread .chat-contact-copy b {
+        color: #fff;
+      }
+      .chat-contact.is-unread .chat-contact-copy span {
+        color: var(--ink);
+        font-weight: 600;
+      }
+      .chat-contact-meta {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 4px;
+      }
+      .chat-contact-streak {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 10px;
+        border-radius: 99px;
+        background: rgba(255, 171, 145, 0.14);
+        border: 1px solid rgba(255, 171, 145, 0.3);
+        color: #ffd2b8;
+        font-size: 12px;
+        font-weight: 800;
+        white-space: nowrap;
+      }
+      .chat-contact-streak.is-building {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(255, 255, 255, 0.14);
+        color: var(--mute);
+      }
+      .chat-contact-streak.is-dim {
+        filter: grayscale(0.85);
+        opacity: 0.65;
+        border-style: dashed;
+      }
+      .chat-contact-today {
+        font-size: 10.5px;
+        color: var(--mute);
+        white-space: nowrap;
+      }
+      .chat-contact-dot {
+        flex: none;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #ff2e63;
+        box-shadow: 0 0 10px #ff2e63;
+      }
+      .chat-drawer .chat-room {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+      .chat-drawer .chat-room[hidden] {
+        display: none;
+      }
+      .chat-drawer .chat-room-head {
+        justify-content: flex-start;
+        gap: 10px;
+        padding: 10px 16px;
+        border-bottom: 1px solid var(--line);
+      }
+      .cd-who-avatar .cd-av {
+        width: 38px;
+        height: 38px;
+        font-size: 15px;
+      }
+      .cd-who {
+        flex: 1;
+        min-width: 0;
+      }
+      .cd-who b {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 16px;
+      }
+      .cd-who .sub {
+        font-size: 12px;
+      }
+      .cd-room-pill {
+        flex: none;
+        font-size: 12.5px;
+        font-weight: 800;
+      }
+      /* Banner Streak Interaktif di Ruang Chat */
+      .chat-drawer .chat-streak-banner {
+        margin: 10px 14px 0;
+        padding: 11px 14px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.035);
+        text-align: left;
+        font-size: 12.5px;
+        transition: 0.3s;
+      }
+      .chat-drawer .chat-streak-banner.is-active {
+        border-color: rgba(255, 171, 145, 0.45);
+        background: linear-gradient(135deg, rgba(255, 120, 80, 0.16), rgba(224, 69, 127, 0.12));
+        color: #ffe2d1;
+        box-shadow: 0 10px 26px -14px rgba(255, 120, 80, 0.65);
+      }
+      .chat-drawer .chat-streak-banner.is-grace {
+        border-color: rgba(255, 255, 255, 0.22);
+        border-style: dashed;
+        background: rgba(255, 255, 255, 0.03);
+        filter: grayscale(0.75);
+        opacity: 0.78;
+      }
+      .cs-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        font-weight: 700;
+      }
+      .cs-top-title {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        color: #fff;
+      }
+      .cs-flame {
+        font-size: 18px;
+        line-height: 1;
+      }
+      .chat-streak-banner.is-active .cs-flame {
+        animation: fl 0.9s ease-in-out infinite alternate;
+      }
+      .cs-badge {
+        padding: 2px 8px;
+        border-radius: 99px;
+        background: rgba(255, 255, 255, 0.09);
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .cs-bar {
+        height: 5px;
+        margin: 8px 0;
+        border-radius: 99px;
+        background: rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+      }
+      .cs-bar i {
+        display: block;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, #ffab91, #ff5c8a);
+        transition: width 0.4s var(--ease);
+      }
+      .cs-checks {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6px;
+        font-size: 11.5px;
+        color: var(--mute);
+      }
+      .cs-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 2px 8px;
+        border-radius: 99px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.09);
+      }
+      .cs-chip.is-done {
+        background: rgba(72, 219, 151, 0.14);
+        border-color: rgba(72, 219, 151, 0.4);
+        color: #a8f5d0;
+      }
+      .chat-drawer .chat-messages {
+        flex: 1;
+        min-height: 0;
+        max-height: none;
+        gap: 8px;
+        padding: 14px 16px;
+        scroll-behavior: smooth;
+      }
+      .chat-day-sep {
+        align-self: center;
+        margin: 6px 0;
+        padding: 3px 11px;
+        border-radius: 99px;
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--mute);
+        font-size: 11px;
+        font-weight: 600;
+      }
+      .chat-drawer .chat-message {
+        max-width: 84%;
+        padding: 10px 14px 7px;
+        border: 0;
+        border-radius: 20px 20px 20px 6px;
+        background: rgba(255, 255, 255, 0.08);
+        animation: msgIn 0.35s var(--ease) both;
+      }
+      .chat-drawer .chat-message.is-mine {
+        border-radius: 20px 20px 6px 20px;
+        background: var(--grad);
+        color: #fff;
+        box-shadow: 0 10px 24px -14px var(--glow);
+      }
+      .chat-drawer .chat-message.is-mine time {
+        color: rgba(255, 255, 255, 0.78);
+      }
+      .chat-drawer .chat-photo-button {
+        margin-top: 4px;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        color: inherit;
+        font-size: 13px;
+        overflow: hidden;
+        border-radius: 14px;
+      }
+      .chat-drawer .chat-photo-button img {
+        max-width: 100%;
+        width: 240px;
+        max-height: 280px;
+        border-radius: 14px;
+        display: block;
+        cursor: zoom-in;
+        transition: transform 0.25s var(--ease);
+      }
+      .chat-drawer .chat-photo-button img:hover {
+        transform: scale(1.02);
+      }
+      .chat-drawer .social-empty {
+        margin: auto;
+        padding: 28px 20px;
+        text-align: center;
+        color: var(--mute);
+      }
+      .cd-file {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0 14px 6px;
+        padding: 8px 10px;
+        border-radius: 16px;
+        border: 1px solid rgba(224, 69, 127, 0.35);
+        background: rgba(224, 69, 127, 0.14);
+        font-size: 12.5px;
+      }
+      .cd-file[hidden] {
+        display: none;
+      }
+      .cd-file img {
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+        object-fit: cover;
+        flex: none;
+      }
+      .cd-file-meta {
+        flex: 1;
+        min-width: 0;
+      }
+      .cd-file-meta b,
+      .cd-file-meta small {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .cd-file-meta small {
+        color: var(--sun);
+        font-size: 11px;
+      }
+      .cd-file button {
+        width: 28px;
+        height: 28px;
+        border: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.14);
+        color: #fff;
+      }
+      .cd-emoji-bar {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 14px 2px;
+        overflow-x: auto;
+      }
+      .cd-emoji-bar button {
+        flex: none;
+        padding: 4px 10px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 99px;
+        background: rgba(255, 255, 255, 0.04);
+        font-size: 15px;
+        line-height: 1.2;
+        transition: transform 0.2s var(--ease), background 0.2s;
+      }
+      .cd-emoji-bar button:hover {
+        transform: translateY(-2px) scale(1.1);
+        background: rgba(224, 69, 127, 0.2);
+      }
+      .chat-drawer .chat-form {
+        display: flex;
+        align-items: flex-end;
+        gap: 8px;
+        padding: 8px 14px calc(14px + env(safe-area-inset-bottom, 0px));
+        border-top: 0;
+      }
+      .chat-drawer .chat-form textarea {
+        flex: 1;
+        min-width: 0;
+        grid-column: auto;
+        min-height: 44px;
+        max-height: 110px;
+        padding: 11px 15px;
+        border-radius: 22px;
+        resize: none;
+        font-size: 16px;
+        line-height: 1.4;
+      }
+      .cd-attach,
+      .cd-send {
+        flex: none;
+        width: 44px;
+        height: 44px;
+        display: grid;
+        place-items: center;
+        margin: 0;
+        padding: 0;
+        border-radius: 50%;
+        cursor: pointer;
+        transition:
+          transform 0.25s var(--ease),
+          background 0.25s;
+      }
+      .cd-attach {
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.05);
+        font-size: 19px;
+      }
+      .cd-attach.has-file {
+        background: rgba(224, 69, 127, 0.3);
+        border-color: var(--forest);
+      }
+      .cd-send {
+        border: 0;
+        background: var(--grad);
+        color: #fff;
+        font-size: 17px;
+        box-shadow: 0 12px 24px -12px var(--glow);
+      }
+      .cd-attach:hover,
+      .cd-send:hover {
+        transform: scale(1.08);
+      }
+      .cd-send:disabled,
+      .cd-send.is-busy {
+        opacity: 0.6;
+        animation: spinPulse 1s linear infinite;
+      }
+      /* Kartu Ringkasan Streak di Tab Teman */
+      .streak-hub-overview {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 10px;
+        margin-top: 14px;
+      }
+      .streak-hub-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 12px 14px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .streak-hub-item.is-grace {
+        filter: grayscale(0.8);
+        opacity: 0.75;
+        border-style: dashed;
+      }
+      /* Lightbox Foto Chat */
+      .chat-lightbox {
+        max-width: min(92vw, 680px);
+        padding: 14px;
+        text-align: center;
+        background: rgba(19, 13, 23, 0.96);
+      }
+      .chat-lightbox img {
+        display: block;
+        max-width: 100%;
+        max-height: 75vh;
+        margin: 0 auto 12px;
+        border-radius: 18px;
+        object-fit: contain;
+      }
+      @keyframes fabIn {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+      }
+      @keyframes wiggle {
+        0%, 90%, 100% { transform: rotate(0); }
+        93% { transform: rotate(-14deg); }
+        96% { transform: rotate(12deg); }
+      }
+      @keyframes badgePulse {
+        50% { box-shadow: 0 0 0 7px rgba(255, 46, 99, 0.25); }
+      }
+      @keyframes msgIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px) scale(0.97);
+        }
+      }
+      @keyframes spinPulse {
+        50% { transform: scale(0.9); }
+      }
+      @media (max-width: 720px) {
+        .chat-fab {
+          top: 36%;
+          padding: 11px 8px 10px 10px;
+        }
+        .chat-fab-ico {
+          font-size: 20px;
+        }
+        .chat-drawer {
+          width: 100vw;
+          border-left: 0;
+        }
+        .chat-drawer .chat-message {
+          max-width: 88%;
+        }
+      }
+      /* ================= MODAL STATISTIK PROFIL (TANPA PINDAH HALAMAN) ================= */
+      .profile-counts {
+        gap: 10px;
+      }
+      button.profile-count {
+        position: relative;
+        padding: 12px 16px;
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.035);
+        text-align: left;
+        cursor: pointer;
+        transition:
+          transform 0.28s var(--ease),
+          border-color 0.28s,
+          background 0.28s,
+          box-shadow 0.28s;
+      }
+      button.profile-count:hover {
+        transform: translateY(-3px);
+        border-color: rgba(224, 69, 127, 0.55);
+        background: rgba(224, 69, 127, 0.12);
+        box-shadow: 0 14px 28px -18px var(--glow);
+      }
+      button.profile-count:active {
+        transform: scale(0.97);
+      }
+      button.profile-count span::after {
+        content: " ↗";
+        font-size: 10px;
+        opacity: 0.55;
+      }
+      dialog.stat-modal {
+        width: min(540px, 94vw);
+        max-height: min(82vh, 680px);
+        padding: 0;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 30px;
+        background:
+          radial-gradient(380px 220px at 100% 0%, rgba(224, 69, 127, 0.22), transparent 70%),
+          radial-gradient(340px 220px at 0% 100%, rgba(120, 60, 190, 0.18), transparent 70%),
+          #16101b;
+        color: var(--ink);
+        box-shadow: 0 40px 90px -20px rgba(0, 0, 0, 0.92);
+        overflow: hidden;
+      }
+      dialog.stat-modal[open] {
+        display: flex;
+        flex-direction: column;
+      }
+      .sm-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 18px 20px 12px;
+      }
+      .sm-kicker {
+        display: block;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        color: var(--sun);
+      }
+      .sm-head h3 {
+        margin-top: 2px;
+        font-size: 26px;
+        font-style: italic;
+      }
+      .sm-tabs {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 6px;
+        margin: 0 16px 12px;
+        padding: 5px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.035);
+      }
+      .sm-tabs button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 9px 6px;
+        border: 0;
+        border-radius: 13px;
+        background: transparent;
+        color: var(--mute);
+        font-size: 12.5px;
+        font-weight: 700;
+        transition: background 0.25s, color 0.25s, box-shadow 0.25s;
+      }
+      .sm-tabs button[aria-selected="true"] {
+        background: var(--grad);
+        color: #fff;
+        box-shadow: 0 8px 20px -10px var(--glow);
+      }
+      .sm-body {
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        padding: 4px 18px 20px;
+      }
+      .sm-pane[hidden] {
+        display: none;
+      }
+      .sm-session-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 13px 15px;
+        margin-bottom: 9px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.035);
+        transition: border-color 0.25s, transform 0.25s var(--ease);
+      }
+      .sm-session-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(224, 69, 127, 0.45);
+      }
+      .sm-session-meta b {
+        display: block;
+        font-size: 15px;
+      }
+      .sm-session-meta span {
+        display: block;
+        margin-top: 2px;
+        color: var(--mute);
+        font-size: 12.5px;
+      }
+      .sm-streak-hero {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 18px;
+        margin-bottom: 12px;
+        border-radius: 22px;
+        border: 1px solid rgba(255, 171, 145, 0.35);
+        background: linear-gradient(135deg, rgba(255, 120, 80, 0.18), rgba(224, 69, 127, 0.14));
+      }
+      .sm-streak-hero b {
+        display: block;
+        font: 400 42px/1 var(--head);
+        color: #fff;
+      }
+      .sm-week {
+        display: grid;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        gap: 6px;
+        margin-bottom: 14px;
+      }
+      .sm-day {
+        display: grid;
+        justify-items: center;
+        gap: 5px;
+        padding: 10px 4px;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+        font-size: 11px;
+        color: var(--mute);
+      }
+      .sm-day.is-done {
+        border-color: rgba(255, 171, 145, 0.5);
+        background: var(--grad);
+        color: #fff;
+        font-weight: 700;
+      }
+      .sm-day i {
+        font-style: normal;
+        font-size: 14px;
+      }
+      @media (max-width: 520px) {
+        .sm-tabs button {
+          flex-direction: column;
+          gap: 2px;
+          padding: 7px 2px;
+          font-size: 11px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -4078,14 +5150,19 @@
       </div>
 
       <section id="teman">
-        <div class="card">
-          <h2>Streak bareng 🔥</h2>
-          <p class="sub">
-            Hubungkan akunmu, aktifkan <b>Bagikan hasil latihan</b>, lalu cari
-            dan ikuti teman. Temanmu juga perlu menghubungkan akun dan membagikan
-            hasilnya. Setiap hari kalian berdua menandai latihan selesai, streak
-            bersama bertambah satu hari.
-          </p>
+        <div class="card streak-hub-card">
+          <div class="row" style="justify-content: space-between; align-items: flex-start; gap: 14px">
+            <div>
+              <h2>Streak chat 🔥</h2>
+              <p class="sub" style="margin-top: 6px">
+                Chat tersedia di samping kanan semua halaman! Saling kirim minimal 1 pesan setiap hari WIB selama 3 hari berturut-turut untuk menyalakan 🔥. Jika lewat 24 jam tanpa chat dua arah, api meredup (🩶) dan bisa dipulihkan sebelum 48 jam.
+              </p>
+            </div>
+            <button type="button" class="btn" id="openChatFromFriends">
+              💬 Buka Chat
+            </button>
+          </div>
+          <div class="streak-hub-overview" id="streakHubOverview"></div>
         </div>
         <div class="card">
           <h2>Teman latihan</h2>
@@ -4111,21 +5188,6 @@
             </button>
           </form>
           <div id="friendProfile" style="margin-top: 16px"></div>
-        </div>
-        <div class="two">
-          <div class="card">
-            <h2>Streak teman yang kamu ikuti</h2>
-            <p class="sub">
-              Angka ini menghitung hari berturut-turut saat kalian sama-sama
-              menyelesaikan latihan pada tanggal yang sama.
-            </p>
-            <div class="social-list" id="followingList"></div>
-          </div>
-          <div class="card">
-            <h2>Pengikut</h2>
-            <p class="sub">Teman yang mengikuti profil publikmu.</p>
-            <div class="social-list" id="followerList"></div>
-          </div>
         </div>
       </section>
 
@@ -4202,27 +5264,35 @@
                 <button
                   type="button"
                   class="profile-count"
-                  data-profile-view="friends"
+                  data-stat-modal="sessions"
+                  aria-haspopup="dialog"
                 >
                   <b id="profilePostCount">0</b><span>Sesi</span>
                 </button>
                 <button
                   type="button"
                   class="profile-count"
-                  data-profile-view="friends"
+                  data-stat-modal="followers"
+                  aria-haspopup="dialog"
                 >
                   <b id="profileFollowerCount">0</b><span>Pengikut</span>
                 </button>
                 <button
                   type="button"
                   class="profile-count"
-                  data-profile-view="friends"
+                  data-stat-modal="following"
+                  aria-haspopup="dialog"
                 >
                   <b id="profileFollowingCount">0</b><span>Mengikuti</span>
                 </button>
-                <div class="profile-count">
+                <button
+                  type="button"
+                  class="profile-count"
+                  data-stat-modal="streak"
+                  aria-haspopup="dialog"
+                >
                   <b id="profileStreakCount">0</b><span>Hari streak</span>
-                </div>
+                </button>
               </div>
               <p class="profile-bio" id="profileMotto">
                 Mulai perjalanan latihanmu.
@@ -4672,6 +5742,7 @@
           <nav class="ft-col" aria-label="Navigasi footer">
             <p class="ft-label">Jelajahi</p>
             <div class="ft-links">
+              <button type="button" data-footer-view="beranda">⌂ Beranda</button>
               <button type="button" data-footer-view="jadwal">📅 Jadwal</button>
               <button type="button" data-footer-view="rutin">🏋️ Rutinitas</button>
               <button type="button" data-footer-view="musik">🎵 Playlist</button>
@@ -4679,7 +5750,6 @@
               <button type="button" data-footer-view="progres">📈 Progres</button>
               <button type="button" data-footer-view="galeri">📸 Kenangan</button>
               <button type="button" data-footer-view="profil">👤 Profil</button>
-              <button type="button" data-footer-view="beranda">⌂ Beranda</button>
             </div>
           </nav>
           <div class="ft-col" role="group" aria-label="Aksi cepat">
@@ -4716,6 +5786,178 @@
       <div class="row" style="margin-top: 14px; justify-content: space-between">
         <button class="btn ghost" id="ld">Hapus foto</button
         ><button class="btn" id="lx">Tutup</button>
+      </div>
+    </dialog>
+    <button
+      type="button"
+      class="chat-fab"
+      id="chatFab"
+      aria-label="Buka chat"
+      aria-expanded="false"
+      aria-controls="chatDrawer"
+    >
+      <span class="chat-fab-ico" aria-hidden="true">💬</span>
+      <span class="chat-fab-label">Chat</span>
+      <span class="chat-fab-streak" id="chatFabStreak" hidden>🔥 0</span>
+      <span class="chat-badge" id="chatBadge" hidden>0</span>
+    </button>
+    <div class="chat-scrim" id="chatScrim"></div>
+    <aside
+      class="chat-drawer"
+      id="chatDrawer"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="chatDrawerTitle"
+      inert
+    >
+      <div class="cd-head">
+        <div class="cd-title">
+          <b id="chatDrawerTitle">Streak &amp; Chat 🔥</b>
+          <span id="chatDrawerSub">Pesan instan &amp; streak harian WIB</span>
+        </div>
+        <button
+          type="button"
+          class="cd-icon"
+          id="chatRefresh"
+          aria-label="Muat ulang chat"
+          title="Muat ulang"
+        >
+          ⟳
+        </button>
+        <button
+          type="button"
+          class="cd-icon"
+          id="chatDrawerClose"
+          aria-label="Tutup chat"
+          title="Tutup"
+        >
+          ✕
+        </button>
+      </div>
+      <p class="cd-notice" id="chatNotice" role="status"></p>
+      <div class="chat-layout">
+        <div class="chat-contacts" id="chatContacts"></div>
+        <div class="chat-empty" id="chatEmpty" hidden></div>
+        <div class="chat-room" id="chatRoom" hidden>
+          <div class="chat-room-head">
+            <button
+              type="button"
+              class="cd-icon"
+              id="chatClose"
+              aria-label="Kembali ke daftar teman"
+              title="Kembali"
+            >
+              ←
+            </button>
+            <div class="cd-who-avatar" id="chatRoomAvatar"></div>
+            <div class="cd-who">
+              <b id="chatTitle">Teman</b>
+              <p class="sub" id="chatSubtitle"></p>
+            </div>
+            <div class="cd-room-pill" id="chatRoomPill"></div>
+          </div>
+          <div class="chat-streak-banner" id="chatStreak"></div>
+          <div
+            class="chat-messages"
+            id="chatMessages"
+            role="log"
+            aria-live="polite"
+            aria-relevant="additions text"
+          ></div>
+          <div class="cd-file" id="chatFile" hidden>
+            <img id="chatFileThumb" alt="Preview foto" />
+            <div class="cd-file-meta">
+              <b id="chatFileName">Foto siap dikirim</b>
+              <small id="chatFileSize">Dikompres otomatis ke Redis</small>
+            </div>
+            <button
+              type="button"
+              id="chatFileClear"
+              aria-label="Batalkan foto"
+              title="Hapus foto"
+            >
+              ✕
+            </button>
+          </div>
+          <div class="cd-emoji-bar" id="chatEmojiBar" aria-label="Emoji cepat">
+            <button type="button" data-chat-emoji="🔥">🔥</button>
+            <button type="button" data-chat-emoji="💪">💪</button>
+            <button type="button" data-chat-emoji="❤️">❤️</button>
+            <button type="button" data-chat-emoji="😂">😂</button>
+            <button type="button" data-chat-emoji="👏">👏</button>
+            <button type="button" data-chat-emoji="🙌">🙌</button>
+            <button type="button" data-chat-emoji="🏋️">🏋️</button>
+            <button type="button" data-chat-emoji="⚡">⚡</button>
+          </div>
+          <form class="chat-form" id="chatForm">
+            <label class="cd-attach" for="chatPhoto" title="Kirim foto (dikompres otomatis)">
+              <span aria-hidden="true">📷</span>
+              <input
+                id="chatPhoto"
+                type="file"
+                accept="image/*"
+                aria-label="Pilih foto untuk dikirim"
+                hidden
+              />
+            </label>
+            <textarea
+              id="chatText"
+              rows="1"
+              maxlength="1000"
+              placeholder="Tulis pesan atau ketuk emoji..."
+              aria-label="Pesan chat"
+            ></textarea>
+            <button
+              type="submit"
+              class="cd-send"
+              id="chatSend"
+              aria-label="Kirim pesan"
+            >
+              ➤
+            </button>
+          </form>
+        </div>
+      </div>
+    </aside>
+    <dialog class="chat-lightbox" id="chatLightbox">
+      <img id="chatLightboxImg" alt="Foto chat diperbesar" />
+      <button type="button" class="btn" id="chatLightboxClose">Tutup</button>
+    </dialog>
+    <dialog class="stat-modal" id="profileStatDialog" aria-labelledby="statModalTitle">
+      <div class="sm-head">
+        <div>
+          <span class="sm-kicker">RINGKASAN PROFIL</span>
+          <h3 id="statModalTitle">Detail Profil</h3>
+        </div>
+        <button type="button" class="cd-icon" id="statModalClose" aria-label="Tutup">✕</button>
+      </div>
+      <div class="sm-tabs" role="tablist" aria-label="Kategori statistik profil">
+        <button type="button" role="tab" data-stat-tab="sessions" aria-selected="true">
+          🏋️ <span>Sesi</span>
+        </button>
+        <button type="button" role="tab" data-stat-tab="followers" aria-selected="false">
+          👥 <span>Pengikut</span>
+        </button>
+        <button type="button" role="tab" data-stat-tab="following" aria-selected="false">
+          🤝 <span>Mengikuti</span>
+        </button>
+        <button type="button" role="tab" data-stat-tab="streak" aria-selected="false">
+          🔥 <span>Streak</span>
+        </button>
+      </div>
+      <div class="sm-body">
+        <div class="sm-pane" id="statPaneSessions" data-stat-pane="sessions">
+          <div id="statSessionsList"></div>
+        </div>
+        <div class="sm-pane" id="statPaneFollowers" data-stat-pane="followers" hidden>
+          <div class="social-list" id="followerList"></div>
+        </div>
+        <div class="sm-pane" id="statPaneFollowing" data-stat-pane="following" hidden>
+          <div class="social-list" id="followingList"></div>
+        </div>
+        <div class="sm-pane" id="statPaneStreak" data-stat-pane="streak" hidden>
+          <div id="statStreakContent"></div>
+        </div>
       </div>
     </dialog>
     <div id="tm">
@@ -4869,7 +6111,7 @@
         todayK = key(now);
       let Y = now.getFullYear(),
         M = now.getMonth(),
-        tab = "jadwal",
+        tab = "beranda",
         editK = null;
       const wd = (d) => (d.getDay() + 6) % 7;
       const info = (d) => {
@@ -5262,6 +6504,7 @@
       };
       $("profileFriendsPanel").appendChild($("teman"));
       let profilePane = "activity";
+      let socialReady = false;
       function showProfilePane(name, focus = false) {
         const valid = ["activity", "friends", "edit", "account"];
         profilePane = valid.includes(name) ? name : "activity";
@@ -5290,7 +6533,13 @@
         }
       }
       document.querySelectorAll("[data-profile-view]").forEach((button) => {
-        button.onclick = () => showProfilePane(button.dataset.profileView);
+        button.onclick = () => {
+          showProfilePane(button.dataset.profileView);
+          if (button.dataset.profileView === "friends") {
+            refreshSocial();
+            refreshChatList();
+          }
+        };
         if (button.getAttribute("role") === "tab")
           button.onkeydown = (event) => {
             if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key))
@@ -5336,7 +6585,7 @@
       $("profileShareButton").onclick = profileShare;
       $("profileShareMobile").onclick = profileShare;
       $("shareConnect").onclick = () => showProfilePane("account", true);
-      const ACTIVITY_TABS = ["rutin", "musik", "beli"];
+      const ACTIVITY_TABS = ["jadwal", "rutin", "musik", "beli"];
       const activityToggle = $("activityToggle");
       function setActivityMenu(open) {
         activityToggle.setAttribute("aria-expanded", String(open));
@@ -5385,6 +6634,7 @@
         if (openFriends) t = "profil";
         if (
           ![
+            "beranda",
             "jadwal",
             "rutin",
             "musik",
@@ -5394,9 +6644,9 @@
             "profil",
           ].includes(t)
         )
-          t = "jadwal";
+          t = "beranda";
         tab = t;
-        $("homeDashboard").hidden = t !== "jadwal";
+        $("homeDashboard").hidden = t !== "beranda";
         document
           .querySelectorAll("section")
           .forEach((s) => s.classList.toggle("show", s.id === t));
@@ -5409,8 +6659,13 @@
           ACTIVITY_TABS.includes(t) ? "page" : "false",
         );
         setActivityMenu(false);
-        if (t === "profil")
+        if (t === "profil") {
           showProfilePane(openFriends ? "friends" : profilePane);
+          if (socialReady && profilePane === "friends") {
+            refreshSocial();
+            refreshChatList();
+          }
+        }
         try {
           history.replaceState(null, "", location.search + "#" + t);
         } catch (e) {}
@@ -6519,6 +7774,7 @@
         incomingProfile
           ? "profil"
           : [
+                "beranda",
                 "jadwal",
                 "rutin",
                 "beli",
@@ -6530,7 +7786,7 @@
                 "musik",
               ].includes(h)
             ? h
-            : "jadwal",
+            : "beranda",
       );
       if (incomingProfile || h === "teman") showProfilePane("friends");
       /* ===== Sinkron antar perangkat (Vercel + Upstash Redis) ===== */
@@ -6575,6 +7831,8 @@
       };
       const SOCIAL_ID = /^[a-z0-9]{24}$/;
       const SOC = { id: "", following: [], followers: [] };
+      const CHAT_STATE = { chats: [], activeId: "", polling: false };
+      const CHAT_IMAGE_URLS = new Map();
       function newSocialId() {
         const bytes = new Uint8Array(
           12,
@@ -6787,6 +8045,7 @@
                 const following = SOC.following.some((item) => item.id === id);
                 await api(following ? "unfollow" : "follow", { id });
                 await refreshSocial();
+                await refreshChatList();
                 await loadPublicProfile(id);
               } catch (e) {
                 toast("Gagal memperbarui follow: " + e.message);
@@ -6802,30 +8061,60 @@
       function renderSocialLists() {
         $("profileFollowerCount").textContent = SOC.followers.length;
         $("profileFollowingCount").textContent = SOC.following.length;
+        const followerIds = new Set(SOC.followers.map((f) => f.id));
         const list = (items, isFollowing) =>
           items.length
             ? items
                 .map((item) => {
                   const profile = item.profile;
-                  const name = profile?.name || "Profil tidak tersedia";
-                  const joint =
-                    isFollowing && profile ? jointStreak(profile) : 0;
-                  return `<div class="social-card"><div class="row" style="justify-content:space-between"><div><b>${esc(name)}</b><div class="sub" style="margin:3px 0 0">${isFollowing ? `🔥 ${joint} hari streak bareng` : "Mengikuti kamu"}</div></div><div class="row"><button class="btn ghost" data-open-profile="${item.id}">Lihat</button>${
+                  const name = profile?.name || "Profil belum dibagikan";
+                  const isMutual = isFollowing && followerIds.has(item.id);
+                  const joint = isFollowing && profile
+                    ? jointStreak(profile)
+                    : null;
+                  const status = !isFollowing
+                    ? "Mengikuti kamu"
+                    : !profile
+                      ? "Streak belum bisa dihitung karena hasil latihan belum dibagikan."
+                      : joint === 0
+                        ? "Belum ada hari latihan yang sama. Selesaikan latihan pada hari yang sama untuk memulai."
+                        : "Hari berturut-turut kalian menyelesaikan latihan bersama.";
+                  return `<div class="social-card"><div class="row" style="justify-content:space-between;align-items:center"><div class="joint-streak-card"><div class="joint-streak-count">${isFollowing && profile ? `🔥 ${joint}` : "—"}</div><div class="joint-streak-copy"><b>${esc(name)}</b><p class="sub">${status}</p></div></div><div class="row">${
+                    isMutual
+                      ? `<button type="button" class="btn" data-open-chat="${esc(item.id)}">💬 Chat</button>`
+                      : ""
+                  }<button class="btn ghost" data-open-profile="${item.id}">Lihat</button>${
                     isFollowing
                       ? `<button class="ico" data-unfollow="${item.id}" aria-label="Berhenti mengikuti">✕</button>`
                       : ""
                   }</div></div></div>`;
                 })
                 .join("")
-            : '<p class="social-empty">Belum ada akun di sini.</p>';
+            : `<p class="social-empty">${
+                isFollowing
+                  ? SY.uid
+                    ? "Kamu belum mengikuti siapa pun. Cari teman lewat nama pengguna di atas untuk mulai streak bareng."
+                    : "Hubungkan akunmu di Profil → Akun, aktifkan Bagikan hasil latihan di Profil → Aktivitas, lalu ikuti teman untuk mulai streak bareng."
+                  : "Belum ada teman yang mengikuti kamu."
+              }</p>`;
         $("followingList").innerHTML = list(SOC.following, true);
         $("followerList").innerHTML = list(SOC.followers, false);
         document.querySelectorAll("[data-open-profile]").forEach(
           (button) =>
             (button.onclick = () => {
               const id = button.dataset.openProfile;
+              $("profileStatDialog")?.close();
+              showProfilePane("friends");
               $("friendInput").value = id;
               loadPublicProfile(id);
+            }),
+        );
+        document.querySelectorAll("[data-open-chat]").forEach(
+          (button) =>
+            (button.onclick = () => {
+              $("profileStatDialog")?.close();
+              setChatDrawer(true);
+              openChat(button.dataset.openChat);
             }),
         );
         document.querySelectorAll("[data-unfollow]").forEach(
@@ -6834,6 +8123,7 @@
               try {
                 await api("unfollow", { id: button.dataset.unfollow });
                 await refreshSocial();
+                await refreshChatList();
               } catch (e) {
                 toast("Gagal berhenti mengikuti: " + e.message);
               }
@@ -6863,6 +8153,711 @@
           $("followerList").innerHTML = "";
         }
       }
+
+      /* ===== CHAT DRAWER, KOMPRESI BASE64 REDIS, & STREAK HARIAN WIB ===== */
+      const CHAT_SEEN_KEY = "ilovegym.chatSeen";
+      const CHAT_PHOTO_FAIL = new Set();
+      let PENDING_CHAT_PHOTO = "";
+
+      const chatSeen = () => {
+        try {
+          return JSON.parse(localStorage.getItem(CHAT_SEEN_KEY) || "{}");
+        } catch (e) {
+          return {};
+        }
+      };
+      function markChatSeen(id, at) {
+        if (!id || !at) return;
+        const seen = chatSeen();
+        if ((seen[id] || 0) >= at) return;
+        seen[id] = at;
+        try {
+          localStorage.setItem(CHAT_SEEN_KEY, JSON.stringify(seen));
+        } catch (e) {}
+      }
+      const chatIsOpen = () => document.body.classList.contains("chat-open");
+      function chatUnread(chat) {
+        const at = chat.latest?.at || 0;
+        if (!at || chat.latest.from === SOC.id) return false;
+        if (chatIsOpen() && CHAT_STATE.activeId === chat.id) return false;
+        return at > (chatSeen()[chat.id] || 0);
+      }
+      function chatStreakInfo(streak) {
+        const rawCount = Number(streak?.count || 0);
+        const lastAt = Number(streak?.lastAt || 0);
+        const age = lastAt ? Date.now() - lastAt : Infinity;
+        const expired = rawCount > 0 && age > 48 * 36e5;
+        const count = expired ? 0 : rawCount;
+        const isGrace = count >= 1 && age > 24 * 36e5 && age <= 48 * 36e5;
+        const isActive = count >= 3 && age <= 24 * 36e5;
+        const hoursLeft = isGrace
+          ? Math.max(1, Math.ceil((48 * 36e5 - age) / 36e5))
+          : 0;
+        const mySent = !!streak?.mySentToday;
+        const partnerSent = !!streak?.partnerSentToday;
+        return {
+          count,
+          rawCount,
+          lastAt,
+          age,
+          expired,
+          isGrace,
+          isActive,
+          hoursLeft,
+          mySent,
+          partnerSent,
+        };
+      }
+      function chatStreakLabel(streak) {
+        const s = chatStreakInfo(streak);
+        if (s.expired)
+          return "Streak sempat putus (>48 jam) · mulai lagi hari ini!";
+        if (s.count < 1)
+          return "💬 Kirim pesan dua arah 3 hari WIB berturut-turut untuk menyalakan 🔥";
+        if (s.count < 3)
+          return `💬 Pemanasan ${s.count}/3 hari · sedikit lagi 🔥 menyala!`;
+        if (s.isGrace)
+          return `🩶 Streak ${s.count} hari meredup · saling chat dalam ${s.hoursLeft} jam untuk memulihkan!`;
+        return `🔥 ${s.count} hari streak chat aktif!`;
+      }
+      function chatAvatar(profile) {
+        const name = (profile && profile.name) || "Teman";
+        const av = profile && profile.avatar;
+        return typeof av === "string" && av.startsWith("data:image/")
+          ? `<img class="cd-av" src="${esc(av)}" alt="" />`
+          : `<span class="cd-av" aria-hidden="true">${esc(
+              ([...name.trim()][0] || "💪").toUpperCase(),
+            )}</span>`;
+      }
+      function updateChatBadge() {
+        const unreadCount = CHAT_STATE.chats.filter(chatUnread).length;
+        const badge = $("chatBadge");
+        if (badge) {
+          badge.hidden = unreadCount === 0;
+          badge.textContent = unreadCount > 9 ? "9+" : unreadCount;
+        }
+        let maxStreak = 0;
+        let anyGrace = false;
+        CHAT_STATE.chats.forEach((c) => {
+          const st = chatStreakInfo(c.streak);
+          if (st.count >= 3 && !st.expired) {
+            if (st.count > maxStreak) maxStreak = st.count;
+            if (st.isGrace) anyGrace = true;
+          }
+        });
+        const fabStreak = $("chatFabStreak");
+        if (fabStreak) {
+          fabStreak.hidden = maxStreak < 3;
+          fabStreak.textContent = `${anyGrace ? "🩶" : "🔥"} ${maxStreak}`;
+        }
+        const sub = $("chatDrawerSub");
+        if (sub) {
+          const total = CHAT_STATE.chats.length;
+          sub.textContent = total
+            ? `${total} teman saling follow${maxStreak >= 3 ? ` · Rekor 🔥 ${maxStreak} hari` : ""}`
+            : "Saling follow untuk mulai chat & streak";
+        }
+        $("chatFab")?.setAttribute(
+          "aria-label",
+          unreadCount ? `Buka chat, ${unreadCount} pesan baru` : "Buka chat",
+        );
+      }
+      function renderStreakHubOverview() {
+        const box = $("streakHubOverview");
+        if (!box) return;
+        if (!SY.uid) {
+          box.innerHTML =
+            '<p class="social-empty" style="margin:0">Hubungkan akunmu di tab <b>Akun</b> untuk mengaktifkan Chat &amp; Streak.</p>';
+          return;
+        }
+        if (!CHAT_STATE.chats.length) {
+          box.innerHTML =
+            '<p class="social-empty" style="margin:0">Belum ada teman yang saling mengikuti. Cari username teman di bawah lalu saling follow untuk menyalakan streak 🔥</p>';
+          return;
+        }
+        box.innerHTML = CHAT_STATE.chats
+          .map((chat) => {
+            const name = chat.profile?.name || "Teman iLovegym";
+            const st = chatStreakInfo(chat.streak);
+            const pill =
+              st.count >= 3
+                ? `${st.isGrace ? "🩶" : "🔥"} ${st.count} hari`
+                : st.count > 0
+                  ? `💬 ${st.count}/3 hari`
+                  : "💬 Mulai streak";
+            const todayStatus =
+              st.mySent && st.partnerSent
+                ? "Hari ini: Kalian berdua sudah chat ✓"
+                : st.mySent
+                  ? "Hari ini: Kamu ✓ · menunggu balasan teman"
+                  : st.partnerSent
+                    ? "Hari ini: Temanmu sudah chat · balas sekarang!"
+                    : "Hari ini: Belum ada chat dua arah";
+            return `<div class="streak-hub-item${st.isGrace ? " is-grace" : ""}"><div style="min-width:0"><b>${esc(name)}</b><p class="sub" style="margin:2px 0 0;font-size:12px">${todayStatus}</p></div><button type="button" class="btn ghost" style="padding:7px 13px;min-height:36px;font-size:12.5px" data-hub-chat="${esc(chat.id)}">${pill}</button></div>`;
+          })
+          .join("");
+        box.querySelectorAll("[data-hub-chat]").forEach((btn) => {
+          btn.onclick = () => {
+            setChatDrawer(true);
+            openChat(btn.dataset.hubChat);
+          };
+        });
+      }
+      function renderChatContacts() {
+        const active = CHAT_STATE.activeId;
+        $("chatRoom").hidden = !active;
+        $("chatEmpty").hidden = true;
+        $("chatDrawer").classList.toggle("has-active", !!active);
+        $("chatContacts").innerHTML = CHAT_STATE.chats.length
+          ? CHAT_STATE.chats
+              .map((chat, index) => {
+                const profile = chat.profile || {};
+                const name = profile.name || "Teman iLovegym";
+                const preview = chat.latest
+                  ? `${chat.latest.from === SOC.id ? "Kamu: " : ""}${
+                      chat.latest.text ||
+                      (chat.latest.photo ? "📷 Mengirim foto" : "Pesan")
+                    }`
+                  : "Ketuk untuk sapa & mulai streak 🔥";
+                const st = chatStreakInfo(chat.streak);
+                const unread = chatUnread(chat);
+                let pillHtml = "";
+                if (st.count >= 3) {
+                  pillHtml = `<span class="chat-contact-streak${st.isGrace ? " is-dim" : ""}">${st.isGrace ? "🩶" : "🔥"} ${st.count}</span>`;
+                } else if (st.count > 0) {
+                  pillHtml = `<span class="chat-contact-streak is-building">💬 ${st.count}/3</span>`;
+                }
+                const todayHint =
+                  st.mySent && st.partnerSent
+                    ? "Hari ini ✓✓"
+                    : st.mySent
+                      ? "Kamu ✓"
+                      : st.partnerSent
+                        ? "Balas yuk!"
+                        : "";
+                return `<button type="button" class="chat-contact${unread ? " is-unread" : ""}" style="animation-delay:${index * 0.04}s" data-chat-open="${esc(chat.id)}" aria-current="${chat.id === active}">${chatAvatar(profile)}<span class="chat-contact-copy"><b>${esc(name)}</b><span>${esc(preview)}</span></span>${unread ? '<span class="chat-contact-dot" aria-label="Pesan baru"></span>' : ""}<span class="chat-contact-meta">${pillHtml}${todayHint ? `<small class="chat-contact-today">${todayHint}</small>` : ""}</span></button>`;
+              })
+              .join("")
+          : `<div class="social-empty"><div style="font-size:34px;margin-bottom:8px">💬</div><b>Belum ada ruang chat</b><p class="sub" style="margin:6px 0 14px">Chat terbuka otomatis setelah kamu dan temanmu saling mengikuti.</p><button type="button" class="btn ghost" id="chatGoFindFriend">Cari Teman Latihan</button></div>`;
+        $("chatContacts")
+          .querySelectorAll("[data-chat-open]")
+          .forEach((button) => {
+            button.onclick = () => openChat(button.dataset.chatOpen);
+          });
+        const goBtn = $("chatGoFindFriend");
+        if (goBtn) {
+          goBtn.onclick = () => {
+            setChatDrawer(false);
+            show("teman");
+            setTimeout(() => $("friendInput")?.focus(), 200);
+          };
+        }
+        updateChatBadge();
+        renderStreakHubOverview();
+      }
+
+      async function refreshChatList() {
+        if (CHAT_STATE.polling) return;
+        CHAT_STATE.polling = true;
+        try {
+          if (!SY.uid) {
+            CHAT_STATE.chats = [];
+            CHAT_STATE.activeId = "";
+            $("chatNotice").textContent =
+              "Hubungkan akunmu di Profil → Akun untuk memakai chat & streak.";
+            renderChatContacts();
+            return;
+          }
+          const result = await api("chat_list");
+          SOC.id = result.id || SOC.id;
+          CHAT_STATE.chats = Array.isArray(result.chats) ? result.chats : [];
+          if (
+            CHAT_STATE.activeId &&
+            !CHAT_STATE.chats.some((chat) => chat.id === CHAT_STATE.activeId)
+          )
+            CHAT_STATE.activeId = "";
+          $("chatNotice").textContent = "";
+          renderChatContacts();
+          if (CHAT_STATE.activeId) await refreshChatThread();
+        } catch (error) {
+          $("chatNotice").textContent =
+            "Chat gagal dimuat: " + error.message;
+        } finally {
+          CHAT_STATE.polling = false;
+        }
+      }
+
+      function renderChatStreak(streak, partnerName = "Teman") {
+        const s = chatStreakInfo(streak);
+        const banner = $("chatStreak");
+        banner.classList.toggle("is-active", s.isActive);
+        banner.classList.toggle("is-grace", s.isGrace);
+        const pill = $("chatRoomPill");
+        if (pill) {
+          pill.textContent =
+            s.count >= 3
+              ? `${s.isGrace ? "🩶" : "🔥"} ${s.count}`
+              : s.count > 0
+                ? `💬 ${s.count}/3`
+                : "";
+        }
+        const icon = s.isGrace ? "🩶" : s.count >= 3 ? "🔥" : "💬";
+        const progressPct =
+          s.count >= 3
+            ? 100
+            : Math.min(100, Math.round(((s.count + (s.mySent && s.partnerSent ? 0 : (s.mySent || s.partnerSent ? 0.4 : 0))) / 3) * 100));
+        const badgeText =
+          s.count >= 3
+            ? s.isGrace
+              ? `Sisa ${s.hoursLeft}j`
+              : "Menyala"
+            : `${s.count}/3 hari`;
+        banner.innerHTML = `<div class="cs-top"><span class="cs-top-title"><span class="cs-flame">${icon}</span><span>${esc(chatStreakLabel(streak))}</span></span><span class="cs-badge">${esc(badgeText)}</span></div><div class="cs-bar"><i style="width:${progressPct}%"></i></div><div class="cs-checks"><span>Hari ini (WIB):</span><span><span class="cs-chip${s.mySent ? " is-done" : ""}">${s.mySent ? "✓" : "○"} Kamu</span> <span class="cs-chip${s.partnerSent ? " is-done" : ""}">${s.partnerSent ? "✓" : "○"} ${esc(partnerName.split(" ")[0] || "Teman")}</span></span></div>`;
+      }
+
+      function openPhotoLightbox(src) {
+        if (!src) return;
+        const dlg = $("chatLightbox");
+        $("chatLightboxImg").src = src;
+        if (dlg && typeof dlg.showModal === "function") dlg.showModal();
+      }
+      $("chatLightboxClose").onclick = () => $("chatLightbox")?.close();
+      $("chatLightbox").onclick = (e) => {
+        if (e.target === $("chatLightbox")) $("chatLightbox").close();
+      };
+
+      function renderChatMessages(messages) {
+        const container = $("chatMessages");
+        const wasNearBottom =
+          container.scrollHeight - container.scrollTop - container.clientHeight <
+          90;
+        let lastDateLabel = "";
+        container.innerHTML = messages.length
+          ? messages
+              .map((message) => {
+                const mine = message.from === SOC.id;
+                const dObj = new Date(message.at);
+                const dateLabel = dObj.toLocaleDateString("id-ID", {
+                  weekday: "short",
+                  day: "numeric",
+                  month: "short",
+                });
+                let sep = "";
+                if (dateLabel !== lastDateLabel) {
+                  lastDateLabel = dateLabel;
+                  sep = `<div class="chat-day-sep">${esc(dateLabel)}</div>`;
+                }
+                const inlineUrl =
+                  typeof message.src === "string" &&
+                  message.src.startsWith("data:image/")
+                    ? message.src
+                    : message.photo
+                      ? CHAT_IMAGE_URLS.get(message.photo) || ""
+                      : "";
+                if (inlineUrl && message.photo) {
+                  CHAT_IMAGE_URLS.set(message.photo, inlineUrl);
+                }
+                const photo =
+                  inlineUrl || message.photo
+                    ? `<button type="button" class="chat-photo-button" data-chat-photo="${esc(message.photo || "")}" data-chat-to="${esc(CHAT_STATE.activeId)}">${
+                        inlineUrl
+                          ? `<img src="${inlineUrl}" alt="Foto chat" loading="lazy" />`
+                          : "📷 Memuat foto…"
+                      }</button>`
+                    : "";
+                const time = dObj.toLocaleTimeString("id-ID", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                });
+                return `${sep}<article class="chat-message${mine ? " is-mine" : ""}">${message.text ? `<p>${esc(message.text)}</p>` : ""}${photo}<time>${time}</time></article>`;
+              })
+              .join("")
+          : '<div class="social-empty"><div style="font-size:32px;margin-bottom:6px">👋</div><b>Belum ada obrolan</b><p class="sub" style="margin:4px 0 0">Kirim pesan atau foto latihan hari ini untuk memulai streak!</p></div>';
+        container.querySelectorAll("[data-chat-photo]").forEach((button) => {
+          button.onclick = () => {
+            const img = button.querySelector("img");
+            if (img && img.src) openPhotoLightbox(img.src);
+            else if (button.dataset.chatPhoto) loadChatPhoto(button);
+          };
+        });
+        if (wasNearBottom || !messages.length)
+          container.scrollTop = container.scrollHeight;
+        container
+          .querySelectorAll("[data-chat-photo]:not(:has(img))")
+          .forEach((button) => {
+            if (!button.dataset.chatPhoto) return;
+            if (CHAT_PHOTO_FAIL.has(button.dataset.chatPhoto))
+              button.textContent = "📷 Foto sudah kedaluwarsa";
+            else
+              loadChatPhoto(button).then(() => {
+                if (wasNearBottom) container.scrollTop = container.scrollHeight;
+              });
+          });
+      }
+
+      async function refreshChatThread() {
+        const partnerId = CHAT_STATE.activeId;
+        if (!partnerId || CHAT_STATE.loading) return;
+        CHAT_STATE.loading = true;
+        try {
+          const result = await api("chat_history", { id: partnerId });
+          if (CHAT_STATE.activeId !== partnerId) return;
+          const chat = CHAT_STATE.chats.find((item) => item.id === partnerId);
+          const partnerName = chat?.profile?.name || "Teman iLovegym";
+          $("chatTitle").textContent = partnerName;
+          $("chatSubtitle").textContent = chat?.profile?.username
+            ? "@" + chat.profile.username
+            : "Saling mengikuti";
+          const avBox = $("chatRoomAvatar");
+          if (avBox) avBox.innerHTML = chatAvatar(chat?.profile);
+          if (chat && result.streak) chat.streak = result.streak;
+          renderChatStreak(result.streak, partnerName);
+          const msgs = Array.isArray(result.messages) ? result.messages : [];
+          renderChatMessages(msgs);
+          if (chatIsOpen() && msgs.length)
+            markChatSeen(partnerId, msgs[msgs.length - 1].at);
+          updateChatBadge();
+          renderStreakHubOverview();
+        } catch (error) {
+          $("chatNotice").textContent = "Chat gagal dimuat: " + error.message;
+        } finally {
+          CHAT_STATE.loading = false;
+        }
+      }
+
+      async function openChat(id) {
+        CHAT_STATE.activeId = id;
+        renderChatContacts();
+        await refreshChatThread();
+        $("chatText").focus();
+      }
+
+      async function loadChatPhoto(button) {
+        const pathname = button.dataset.chatPhoto;
+        if (!pathname) return;
+        let url = CHAT_IMAGE_URLS.get(pathname);
+        try {
+          if (!url) {
+            button.disabled = true;
+            button.textContent = "Memuat foto…";
+            const response = await fetch("/api/chat-media", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                uid: SY.uid,
+                id: button.dataset.chatTo,
+                pathname,
+              }),
+            });
+            if (!response.ok) {
+              const error = await response.json().catch(() => ({}));
+              throw new Error(error.error || response.status);
+            }
+            url = URL.createObjectURL(await response.blob());
+            CHAT_IMAGE_URLS.set(pathname, url);
+          }
+          button.disabled = false;
+          button.innerHTML = `<img src="${url}" alt="Foto yang dikirim di chat" loading="lazy" />`;
+        } catch (error) {
+          CHAT_PHOTO_FAIL.add(pathname);
+          button.disabled = true;
+          button.textContent = "📷 Foto sudah kedaluwarsa";
+        }
+      }
+
+      /* Opsi A: Kompresi foto di browser ke ~600px JPEG (kualitas 0.55–0.62, ~20–45 KB)
+         agar tersimpan ringan sebagai Base64 langsung di Upstash Redis tanpa Vercel Blob. */
+      async function compressChatPhoto(file) {
+        if (!file || !file.type.startsWith("image/"))
+          throw new Error("Pilih file gambar yang valid.");
+        if (file.size > 15_000_000)
+          throw new Error("Ukuran foto asli maksimal 15 MB.");
+        const imageUrl = URL.createObjectURL(file);
+        try {
+          const image = new Image();
+          image.src = imageUrl;
+          await image.decode();
+          let side = 640,
+            quality = 0.6,
+            data = "";
+          for (let attempt = 0; attempt < 5; attempt++) {
+            const scale = Math.min(
+              1,
+              side / Math.max(image.naturalWidth, image.naturalHeight),
+            );
+            const canvas = document.createElement("canvas");
+            canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+            canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+            const context = canvas.getContext("2d");
+            if (!context)
+              throw new Error("Foto tidak bisa diproses di perangkat ini.");
+            context.fillStyle = "#fff";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            context.drawImage(image, 0, 0, canvas.width, canvas.height);
+            data = canvas.toDataURL("image/jpeg", quality);
+            if (data.length <= 115_000) return data;
+            side = Math.round(side * 0.8);
+            quality = Math.max(0.46, quality - 0.05);
+          }
+          if (data.length <= 300_000) return data;
+          throw new Error("Foto masih terlalu besar setelah dikompres.");
+        } finally {
+          URL.revokeObjectURL(imageUrl);
+        }
+      }
+
+      function setChatDrawer(open) {
+        document.body.classList.toggle("chat-open", open);
+        $("chatDrawer").inert = !open;
+        $("chatFab").setAttribute("aria-expanded", String(open));
+        if (open) {
+          refreshChatList();
+          setTimeout(() => {
+            if (CHAT_STATE.activeId) $("chatText")?.focus();
+            else $("chatDrawerClose")?.focus();
+          }, 300);
+        } else {
+          $("chatFab")?.focus();
+          updateChatBadge();
+        }
+      }
+      $("chatFab").onclick = () => setChatDrawer(true);
+      $("chatDrawerClose").onclick = () => setChatDrawer(false);
+      $("chatScrim").onclick = () => setChatDrawer(false);
+      if ($("openChatFromFriends"))
+        $("openChatFromFriends").onclick = () => setChatDrawer(true);
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && chatIsOpen() && !$("chatLightbox")?.open)
+          setChatDrawer(false);
+      });
+
+      const chatTextEl = $("chatText");
+      const growChatText = () => {
+        chatTextEl.style.height = "auto";
+        chatTextEl.style.height = Math.min(chatTextEl.scrollHeight, 110) + "px";
+      };
+      chatTextEl.addEventListener("input", growChatText);
+      chatTextEl.addEventListener("keydown", (e) => {
+        if (
+          e.key === "Enter" &&
+          !e.shiftKey &&
+          !e.isComposing &&
+          matchMedia("(hover: hover)").matches
+        ) {
+          e.preventDefault();
+          $("chatForm").requestSubmit();
+        }
+      });
+
+      $("chatEmojiBar")
+        .querySelectorAll("[data-chat-emoji]")
+        .forEach((btn) => {
+          btn.onclick = () => {
+            chatTextEl.value += btn.dataset.chatEmoji;
+            growChatText();
+            chatTextEl.focus();
+          };
+        });
+
+      async function syncChatFile() {
+        const file = $("chatPhoto").files[0];
+        const attach = document.querySelector(".cd-attach");
+        if (!file) {
+          PENDING_CHAT_PHOTO = "";
+          $("chatFile").hidden = true;
+          $("chatFileThumb").removeAttribute("src");
+          attach?.classList.remove("has-file");
+          return;
+        }
+        try {
+          $("chatFile").hidden = false;
+          $("chatFileName").textContent = file.name;
+          $("chatFileSize").textContent = "Mengompres foto…";
+          attach?.classList.add("has-file");
+          PENDING_CHAT_PHOTO = await compressChatPhoto(file);
+          $("chatFileThumb").src = PENDING_CHAT_PHOTO;
+          const kb = Math.max(
+            1,
+            Math.round(((PENDING_CHAT_PHOTO.length - 23) * 3) / 4 / 1024),
+          );
+          $("chatFileSize").textContent = `Siap dikirim · ~${kb} KB (hemat kuota Redis)`;
+        } catch (err) {
+          PENDING_CHAT_PHOTO = "";
+          $("chatPhoto").value = "";
+          $("chatFile").hidden = true;
+          attach?.classList.remove("has-file");
+          toast(err.message || "Gagal memproses foto.");
+        }
+      }
+      $("chatPhoto").addEventListener("change", syncChatFile);
+      $("chatFileClear").onclick = () => {
+        $("chatPhoto").value = "";
+        syncChatFile();
+      };
+
+      $("chatRefresh").onclick = refreshChatList;
+      $("chatClose").onclick = () => {
+        CHAT_STATE.activeId = "";
+        renderChatContacts();
+      };
+      $("chatForm").onsubmit = async (event) => {
+        event.preventDefault();
+        if (!CHAT_STATE.activeId) return;
+        const button = $("chatSend");
+        const text = $("chatText").value.trim();
+        const file = $("chatPhoto").files[0];
+        if (!text && !file && !PENDING_CHAT_PHOTO) {
+          toast("Tulis pesan atau pilih foto dulu.");
+          return;
+        }
+        button.disabled = true;
+        button.classList.add("is-busy");
+        try {
+          const src =
+            PENDING_CHAT_PHOTO || (file ? await compressChatPhoto(file) : "");
+          await api("chat_send", {
+            to: CHAT_STATE.activeId,
+            text,
+            src,
+          });
+          $("chatText").value = "";
+          $("chatPhoto").value = "";
+          await syncChatFile();
+          growChatText();
+          await refreshChatList();
+        } catch (error) {
+          toast("Pesan gagal dikirim: " + error.message);
+        } finally {
+          button.disabled = false;
+          button.classList.remove("is-busy");
+        }
+      };
+      let chatTick = 0;
+      window.setInterval(() => {
+        if (document.hidden || !SY.uid) return;
+        chatTick++;
+        if (chatIsOpen() || profilePane === "friends" || chatTick % 3 === 0)
+          refreshChatList();
+      }, 10000);
+      socialReady = true;
+      if (profilePane === "friends") refreshSocial();
+      refreshChatList();
+
+      /* ===== MODAL POP-UP STATISTIK PROFIL (SESI, PENGIKUT, MENGIKUTI, STREAK) ===== */
+      const STAT_TITLES = {
+        sessions: "Riwayat Sesi Selesai",
+        followers: "Daftar Pengikut",
+        following: "Akun yang Kamu Ikuti",
+        streak: "Rincian Hari Streak 🔥",
+      };
+      function renderStatModalContent(tabKey) {
+        if (tabKey === "sessions") {
+          const entries = Object.entries(S.days || {})
+            .filter(([k, v]) => /^\d{4}-\d{2}-\d{2}$/.test(k) && v && v.done)
+            .sort((a, b) => (a[0] < b[0] ? 1 : -1));
+          $("statSessionsList").innerHTML = entries.length
+            ? entries
+                .map(([dateKey, day]) => {
+                  const dt = new Date(dateKey + "T00:00:00");
+                  const label = dt.toLocaleDateString("id-ID", {
+                    weekday: "long",
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  });
+                  const focus =
+                    day.focus || S.plan[wd(dt)] || "Sesi latihan";
+                  const exDone = (Array.isArray(day.ex) ? day.ex : []).filter(
+                    (x) => x && x.d && x.t,
+                  );
+                  const exSummary = exDone.length
+                    ? exDone
+                        .map((x) => `${x.t}${x.w ? ` (${x.w} kg)` : ""}`)
+                        .join(" · ")
+                    : day.note || "Sesi selesai tercatat ✓";
+                  return `<div class="sm-session-card"><div class="sm-session-meta"><b>${esc(focus)}</b><span>${esc(label)}</span><span style="color:var(--sun)">${esc(exSummary)}</span></div><button type="button" class="btn ghost" style="padding:7px 13px;min-height:36px;font-size:12px" data-sm-day="${esc(dateKey)}">Buka</button></div>`;
+                })
+                .join("")
+            : '<div class="social-empty"><div style="font-size:32px;margin-bottom:6px">🏋️</div><b>Belum ada sesi selesai</b><p class="sub" style="margin:4px 0 0">Centang latihan harianmu di halaman Jadwal agar tercatat di sini.</p></div>';
+          $("statSessionsList")
+            .querySelectorAll("[data-sm-day]")
+            .forEach((btn) => {
+              btn.onclick = () => {
+                $("profileStatDialog")?.close();
+                openDay(btn.dataset.smDay);
+              };
+            });
+        } else if (tabKey === "streak") {
+          const st = stt();
+          let weekHtml = "";
+          for (let i = 6; i >= 0; i--) {
+            const d = new Date(now);
+            d.setDate(d.getDate() - i);
+            const inf = info(d);
+            const dayShort = d.toLocaleDateString("id-ID", { weekday: "short" });
+            const dayNum = d.getDate();
+            weekHtml += `<div class="sm-day${inf.done ? " is-done" : ""}"><span>${esc(dayShort)}</span><i>${inf.done ? "🔥" : inf.rest ? "🌙" : "○"}</i><small>${dayNum}</small></div>`;
+          }
+          const chatStreaks = CHAT_STATE.chats
+            .map((c) => ({
+              id: c.id,
+              name: c.profile?.name || "Teman iLovegym",
+              info: chatStreakInfo(c.streak),
+            }))
+            .filter((x) => x.info.count > 0);
+          const chatStreakHtml = chatStreaks.length
+            ? chatStreaks
+                .map(
+                  (x) =>
+                    `<div class="sm-session-card"><div class="sm-session-meta"><b>${esc(x.name)}</b><span>${esc(chatStreakLabel({ count: x.info.count, lastAt: x.info.lastAt }))}</span></div><button type="button" class="btn ghost" style="padding:7px 13px;min-height:36px;font-size:12px" data-sm-chat="${esc(x.id)}">${x.info.isGrace ? "🩶" : "🔥"} ${x.info.count}</button></div>`,
+                )
+                .join("")
+            : '<p class="social-empty" style="margin:6px 0 0">Belum ada streak chat aktif bersama teman.</p>';
+          $("statStreakContent").innerHTML = `<div class="sm-streak-hero"><div><span class="sm-kicker">STREAK LATIHAN PRIBADI</span><b>🔥 ${st.s} hari</b><span class="sub" style="font-size:12.5px">Total ${st.t} sesi selesai tercatat</span></div></div><p class="sm-kicker" style="margin:4px 0 8px">7 HARI TERAKHIR</p><div class="sm-week">${weekHtml}</div><p class="sm-kicker" style="margin:14px 0 8px">STREAK CHAT BARENG TEMAN</p>${chatStreakHtml}`;
+          $("statStreakContent")
+            .querySelectorAll("[data-sm-chat]")
+            .forEach((btn) => {
+              btn.onclick = () => {
+                $("profileStatDialog")?.close();
+                setChatDrawer(true);
+                openChat(btn.dataset.smChat);
+              };
+            });
+        }
+      }
+      function switchStatModalTab(tabKey) {
+        const key = STAT_TITLES[tabKey] ? tabKey : "sessions";
+        $("statModalTitle").textContent = STAT_TITLES[key];
+        document.querySelectorAll("[data-stat-tab]").forEach((btn) => {
+          btn.setAttribute("aria-selected", String(btn.dataset.statTab === key));
+        });
+        document.querySelectorAll("[data-stat-pane]").forEach((pane) => {
+          pane.hidden = pane.dataset.statPane !== key;
+        });
+        renderStatModalContent(key);
+      }
+      function openStatModal(tabKey) {
+        const dlg = $("profileStatDialog");
+        if (!dlg) return;
+        if (SY.uid && (tabKey === "followers" || tabKey === "following" || tabKey === "streak")) {
+          refreshSocial();
+          refreshChatList();
+        }
+        renderSocialLists();
+        switchStatModalTab(tabKey);
+        if (!dlg.open && typeof dlg.showModal === "function") dlg.showModal();
+      }
+      document.querySelectorAll("[data-stat-modal]").forEach((btn) => {
+        btn.onclick = () => openStatModal(btn.dataset.statModal);
+      });
+      document.querySelectorAll("[data-stat-tab]").forEach((btn) => {
+        btn.onclick = () => switchStatModalTab(btn.dataset.statTab);
+      });
+      $("statModalClose").onclick = () => $("profileStatDialog")?.close();
+      $("profileStatDialog").onclick = (e) => {
+        if (e.target === $("profileStatDialog")) $("profileStatDialog").close();
+      };
+
       $("friendForm").onsubmit = (event) => {
         event.preventDefault();
         const value = $("friendInput").value.trim();
