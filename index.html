@@ -308,6 +308,48 @@
         max-width: 90vw;
         text-align: center;
       }
+      .toast.profile-saved {
+        top: calc(14px + env(safe-area-inset-top, 0px));
+        bottom: auto;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: max-content;
+        max-width: min(460px, calc(100vw - 28px));
+        padding: 13px 18px 13px 14px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 16px;
+        background: linear-gradient(135deg, #261c2b, #171219);
+        color: #fff;
+        box-shadow: 0 16px 42px rgba(0, 0, 0, 0.32);
+        animation: profile-toast-in 0.24s ease-out both;
+      }
+      .toast.profile-saved::before {
+        content: "✓";
+        display: grid;
+        width: 28px;
+        height: 28px;
+        flex: 0 0 28px;
+        place-items: center;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #ee5a93, #d6336c);
+        font-weight: 800;
+      }
+      @keyframes profile-toast-in {
+        from {
+          opacity: 0;
+          transform: translate(-50%, -8px);
+        }
+        to {
+          opacity: 1;
+          transform: translate(-50%, 0);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .toast.profile-saved {
+          animation: none;
+        }
+      }
       #tm {
         position: fixed;
         right: 16px;
@@ -1570,9 +1612,8 @@
         gap: 14px;
         margin-top: 20px;
       }
-      .profile-save-status {
-        margin: 0;
-        text-align: right;
+      .profile-save-row[hidden] {
+        display: none;
       }
       .site-footer {
         position: relative;
@@ -2694,12 +2735,7 @@
                   <p class="sub" id="pd" style="margin-top: 16px"></p>
                 </div>
               </div>
-              <div class="profile-save-row">
-                <p
-                  class="sub profile-save-status"
-                  id="profileSaveStatus"
-                  role="status"
-                ></p>
+              <div class="profile-save-row" id="profileSaveRow" hidden>
                 <button type="button" class="btn" id="profileSaveButton">
                   Simpan perubahan
                 </button>
@@ -4004,10 +4040,14 @@
         qlR();
         hero();
       };
-      function toast(m) {
+      function toast(m, variant = "") {
         const e = document.createElement("div");
-        e.className = "toast";
+        e.className = `toast${variant ? " " + variant : ""}`;
         e.textContent = m;
+        if (variant === "profile-saved") {
+          e.setAttribute("role", "status");
+          e.setAttribute("aria-live", "polite");
+        }
         document.body.appendChild(e);
         setTimeout(() => e.remove(), 3600);
       }
@@ -4449,6 +4489,7 @@
               e.target.value = e.target.value.replace(/^@/, "").toLowerCase();
             }
             PF()[k] = e.target.value;
+            $("profileSaveRow").hidden = false;
             save();
             hero();
             pdt();
@@ -4458,11 +4499,19 @@
       $("profileSaveButton").onclick = () => {
         const saved = save();
         const username = PF().username || "";
-        $("profileSaveStatus").textContent = !saved
-          ? "Profil belum tersimpan. Periksa ruang penyimpanan perangkat."
-          : username && !/^[a-z0-9_]{3,20}$/.test(username)
-            ? "Profil tersimpan, tetapi username harus 3–20 huruf, angka, atau garis bawah."
-            : "Perubahan profil berhasil disimpan.";
+        if (!saved) {
+          toast(
+            "Perubahan belum tersimpan. Periksa ruang penyimpanan perangkat.",
+          );
+          return;
+        }
+        if (username && !/^[a-z0-9_]{3,20}$/.test(username)) {
+          toast("Username harus 3–20 huruf, angka, atau garis bawah.");
+          $("pu").focus();
+          return;
+        }
+        $("profileSaveRow").hidden = true;
+        toast("Perubahan profil berhasil disimpan.", "profile-saved");
       };
       $("pa").onchange = (e) => {
         const f = e.target.files[0];
