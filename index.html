@@ -2657,7 +2657,7 @@
       /* ---------- layout ---------- */
       .wrap {
         max-width: 1160px;
-        padding: 14px 24px 140px;
+        padding: 14px 24px 32px;
       }
 
       /* ---------- header & nav ---------- */
@@ -3213,7 +3213,7 @@
           font-size: 15px;
         }
         .wrap {
-          padding: 10px 14px calc(120px + env(safe-area-inset-bottom, 0px));
+          padding: 10px 14px calc(88px + env(safe-area-inset-bottom, 0px));
         }
         header {
           top: calc(6px + env(safe-area-inset-top, 0px));
@@ -3961,8 +3961,8 @@
           display: grid;
           grid-column: 1 / -1;
           grid-row: 2;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 0 8px;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 6px;
         }
         footer.ft .ft-col[role="group"] .ft-label {
           grid-column: 1 / -1;
@@ -5097,12 +5097,586 @@
           font-size: 11px;
         }
       }
+
+      /* ================= PANDUAN INTERAKTIF & SPOTLIGHT TOUR ================= */
+      .guide-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        min-height: 36px;
+        padding: 7px 14px;
+        border-radius: 99px;
+        border: 1px solid rgba(255, 171, 145, 0.4);
+        background: linear-gradient(135deg, rgba(224, 69, 127, 0.22), rgba(255, 171, 145, 0.14));
+        color: #fff;
+        font: 700 12px/1 var(--body);
+        letter-spacing: 0.04em;
+        cursor: pointer;
+        white-space: nowrap;
+        box-shadow: 0 8px 22px -10px rgba(224, 69, 127, 0.55);
+        transition: transform 0.25s var(--ease), border-color 0.25s, box-shadow 0.25s;
+      }
+      .guide-pill:hover {
+        transform: translateY(-2px) scale(1.03);
+        border-color: rgba(255, 171, 145, 0.85);
+        box-shadow: 0 14px 28px -10px rgba(224, 69, 127, 0.75);
+      }
+      .guide-pill .gp-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--sun);
+        box-shadow: 0 0 10px var(--sun);
+        animation: pulseDot 2s ease-in-out infinite;
+      }
+      @media (max-width: 720px) {
+        header::after {
+          display: none !important;
+        }
+        .guide-pill {
+          min-height: 32px;
+          padding: 5px 11px;
+          font-size: 11px;
+        }
+      }
+      dialog.guide-modal {
+        max-width: 760px;
+        width: calc(100% - 24px);
+        padding: 0;
+        border-radius: 30px;
+        border: 1px solid var(--line-hi);
+        background: linear-gradient(165deg, rgba(31, 22, 37, 0.98), rgba(16, 11, 20, 0.99));
+        color: var(--ink);
+        box-shadow: 0 38px 100px -16px rgba(0, 0, 0, 0.92), 0 0 60px -20px var(--glow);
+        overflow: hidden;
+      }
+      .gm-hero {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 20px 24px 16px;
+        border-bottom: 1px solid var(--line);
+        background:
+          radial-gradient(480px 200px at 0% 0%, rgba(224, 69, 127, 0.28), transparent 70%),
+          radial-gradient(380px 180px at 100% 0%, rgba(255, 171, 145, 0.18), transparent 70%);
+      }
+      .gm-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        border-radius: 99px;
+        background: rgba(255, 171, 145, 0.14);
+        border: 1px solid rgba(255, 171, 145, 0.35);
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--sun);
+      }
+      .gm-hero h2 {
+        margin: 6px 0 3px;
+        font: 400 clamp(22px, 3.8vw, 29px)/1.1 var(--head);
+        color: #fff;
+      }
+      .gm-hero p {
+        margin: 0;
+        color: var(--mute);
+        font-size: 13px;
+      }
+      .gm-tabs {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 6px;
+        padding: 8px 16px;
+        background: rgba(0, 0, 0, 0.3);
+        border-bottom: 1px solid var(--line);
+      }
+      .gm-tabs button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        min-height: 38px;
+        padding: 7px 10px;
+        border-radius: 13px;
+        border: 1px solid transparent;
+        background: transparent;
+        color: var(--mute);
+        font: 700 12.5px/1.15 var(--body);
+        cursor: pointer;
+        transition: all 0.22s var(--ease);
+      }
+      .gm-tabs button:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.05);
+      }
+      .gm-tabs button[aria-selected="true"] {
+        background: var(--grad);
+        color: #fff;
+        box-shadow: 0 10px 24px -10px var(--glow);
+      }
+      .gm-body {
+        padding: 18px 20px;
+        max-height: min(64vh, 520px);
+        overflow-y: auto;
+      }
+      .gm-pane[hidden] {
+        display: none;
+      }
+      /* Banner Tur Halaman Aktif */
+      .gm-current-banner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 15px 18px;
+        margin-bottom: 14px;
+        border-radius: 22px;
+        border: 1px solid rgba(255, 171, 145, 0.42);
+        background: linear-gradient(135deg, rgba(224, 69, 127, 0.24), rgba(255, 171, 145, 0.12));
+        box-shadow: 0 16px 36px -18px var(--glow);
+      }
+      .gm-current-banner b {
+        display: block;
+        font-size: 15px;
+        color: #fff;
+      }
+      .gm-current-banner span {
+        display: block;
+        margin-top: 2px;
+        font-size: 12.5px;
+        color: var(--rose-2);
+      }
+      .gm-sec-label {
+        margin: 0 0 10px;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--sun);
+      }
+      /* Grid Pilihan Halaman */
+      .gm-page-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .gm-page-card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 13px 14px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.035);
+        color: var(--ink);
+        text-align: left;
+        cursor: pointer;
+        transition: transform 0.22s var(--ease), border-color 0.22s, background 0.22s;
+      }
+      .gm-page-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(255, 171, 145, 0.55);
+        background: rgba(255, 255, 255, 0.06);
+      }
+      .gm-page-card.is-full {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        align-items: center;
+        background: linear-gradient(135deg, rgba(255, 171, 145, 0.14), rgba(224, 69, 127, 0.14));
+        border-color: rgba(255, 171, 145, 0.38);
+      }
+      .gm-pc-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        gap: 8px;
+      }
+      .gm-pc-ico {
+        display: grid;
+        place-items: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 12px;
+        background: rgba(224, 69, 127, 0.18);
+        border: 1px solid rgba(255, 171, 145, 0.28);
+        font-size: 18px;
+      }
+      .gm-pc-badge {
+        padding: 3px 8px;
+        border-radius: 99px;
+        background: rgba(255, 255, 255, 0.07);
+        color: var(--sun);
+        font-size: 10px;
+        font-weight: 800;
+      }
+      .gm-page-card b {
+        display: block;
+        font-size: 14px;
+        color: #fff;
+      }
+      .gm-page-card small {
+        display: block;
+        color: var(--mute);
+        font-size: 11.5px;
+        line-height: 1.35;
+      }
+      /* Resep Cepat / Skenario */
+      .gm-recipe-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin-bottom: 14px;
+      }
+      .gm-recipe-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 13px;
+        border-radius: 99px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--mute);
+        font: 700 12px/1 var(--body);
+        cursor: pointer;
+        transition: all 0.2s var(--ease);
+      }
+      .gm-recipe-pill:hover {
+        color: #fff;
+        border-color: rgba(255, 171, 145, 0.4);
+      }
+      .gm-recipe-pill.active {
+        background: var(--grad);
+        color: #fff;
+        border-color: transparent;
+        box-shadow: 0 8px 20px -8px var(--glow);
+      }
+      .gm-recipe-stage {
+        padding: 18px;
+        border-radius: 22px;
+        border: 1px solid rgba(255, 171, 145, 0.3);
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .gm-recipe-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+      .gm-recipe-head h4 {
+        margin: 0;
+        font-size: 17px;
+        color: #fff;
+      }
+      .gm-recipe-flow {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+      .gm-rf-step {
+        position: relative;
+        padding: 13px;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.25);
+      }
+      .gm-rf-num {
+        display: inline-grid;
+        place-items: center;
+        width: 24px;
+        height: 24px;
+        margin-bottom: 6px;
+        border-radius: 50%;
+        background: var(--grad);
+        color: #fff;
+        font-size: 11px;
+        font-weight: 800;
+      }
+      .gm-rf-step b {
+        display: block;
+        margin-bottom: 3px;
+        font-size: 13px;
+        color: #fff;
+      }
+      .gm-rf-step span {
+        display: block;
+        color: var(--mute);
+        font-size: 12px;
+        line-height: 1.4;
+      }
+      /* Kamus Visual Interaktif (Anti Pusing) */
+      .gm-visual-Explorer {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        gap: 12px;
+        align-items: start;
+      }
+      .gm-ve-nav {
+        display: grid;
+        gap: 5px;
+      }
+      .gm-ve-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 12px;
+        border-radius: 13px;
+        border: 1px solid transparent;
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--mute);
+        font: 700 12.5px/1.15 var(--body);
+        text-align: left;
+        cursor: pointer;
+        transition: all 0.2s var(--ease);
+      }
+      .gm-ve-btn:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.06);
+      }
+      .gm-ve-btn.active {
+        background: rgba(224, 69, 127, 0.2);
+        border-color: rgba(255, 171, 145, 0.45);
+        color: #fff;
+      }
+      .gm-ve-detail {
+        padding: 18px;
+        border-radius: 22px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .gm-ve-top {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+      .gm-ve-ico {
+        display: grid;
+        place-items: center;
+        width: 48px;
+        height: 48px;
+        border-radius: 16px;
+        background: var(--grad);
+        font-size: 24px;
+        box-shadow: 0 10px 24px -8px var(--glow);
+      }
+      .gm-ve-top h4 {
+        margin: 2px 0 0;
+        font-size: 17px;
+        color: #fff;
+      }
+      .gm-ve-chips {
+        display: grid;
+        gap: 8px;
+        margin: 12px 0 16px;
+      }
+      .gm-ve-chip {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 10px 12px;
+        border-radius: 14px;
+        background: rgba(0, 0, 0, 0.26);
+        border: 1px solid var(--line);
+        font-size: 12.5px;
+        color: var(--mute);
+      }
+      .gm-ve-chip i {
+        font-style: normal;
+        font-size: 16px;
+        line-height: 1.2;
+      }
+      .gm-ve-chip b {
+        color: #fff;
+      }
+      .gm-foot {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 12px 20px;
+        border-top: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.34);
+      }
+      .gm-foot small {
+        color: var(--mute);
+        font-size: 12px;
+      }
+      /* ================= SPOTLIGHT TOUR ENGINE ================= */
+      .tour-layer {
+        position: fixed;
+        inset: 0;
+        z-index: 120;
+        pointer-events: none;
+      }
+      .tour-layer[hidden] {
+        display: none !important;
+      }
+      .tour-ring {
+        position: fixed;
+        z-index: 121;
+        border-radius: 22px;
+        border: 2px solid var(--sun);
+        box-shadow:
+          0 0 0 9999px rgba(10, 6, 14, 0.76),
+          0 0 0 6px rgba(255, 171, 145, 0.24),
+          0 0 32px 4px rgba(224, 69, 127, 0.65);
+        pointer-events: none;
+        transition:
+          top 0.36s cubic-bezier(0.22, 1, 0.36, 1),
+          left 0.36s cubic-bezier(0.22, 1, 0.36, 1),
+          width 0.36s cubic-bezier(0.22, 1, 0.36, 1),
+          height 0.36s cubic-bezier(0.22, 1, 0.36, 1),
+          border-radius 0.3s;
+      }
+      .tour-card {
+        position: fixed;
+        z-index: 122;
+        width: min(350px, calc(100vw - 24px));
+        padding: 18px 18px 16px;
+        border-radius: 24px;
+        border: 1px solid rgba(255, 171, 145, 0.48);
+        background: linear-gradient(165deg, rgba(32, 22, 39, 0.98), rgba(17, 12, 22, 0.99));
+        color: var(--ink);
+        box-shadow: 0 28px 70px -12px rgba(0, 0, 0, 0.95), 0 0 40px -12px var(--glow);
+        pointer-events: auto;
+        transition: top 0.34s cubic-bezier(0.22, 1, 0.36, 1), left 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .tc-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+      .tc-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        border-radius: 99px;
+        background: rgba(224, 69, 127, 0.22);
+        border: 1px solid rgba(255, 171, 145, 0.35);
+        color: var(--sun);
+        font-size: 10.5px;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+      }
+      .tc-skip {
+        border: 0;
+        background: rgba(255, 255, 255, 0.07);
+        color: var(--mute);
+        padding: 4px 9px;
+        border-radius: 99px;
+        font: 700 11px/1 var(--body);
+        cursor: pointer;
+      }
+      .tc-skip:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.14);
+      }
+      .tour-card h4 {
+        margin: 0 0 5px;
+        font: 400 20px/1.15 var(--head);
+        color: #fff;
+      }
+      .tour-card p {
+        margin: 0 0 12px;
+        color: var(--mute);
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      .tc-dots {
+        display: flex;
+        gap: 5px;
+        margin-bottom: 12px;
+      }
+      .tc-dots i {
+        height: 5px;
+        flex: 1;
+        border-radius: 99px;
+        background: rgba(255, 255, 255, 0.14);
+        transition: background 0.25s;
+      }
+      .tc-dots i.on {
+        background: var(--grad);
+      }
+      .tc-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+      }
+      .tc-actions .btn {
+        min-height: 36px;
+        padding: 7px 14px;
+        font-size: 12.5px;
+      }
+      @media (max-width: 640px) {
+        .gm-hero {
+          padding: 16px 16px 12px;
+        }
+        .gm-tabs {
+          padding: 6px 10px;
+        }
+        .gm-tabs button {
+          flex-direction: column;
+          gap: 2px;
+          padding: 6px 4px;
+          font-size: 10.5px;
+        }
+        .gm-body {
+          padding: 14px;
+          max-height: 64vh;
+        }
+        .gm-current-banner {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .gm-page-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .gm-recipe-flow {
+          grid-template-columns: 1fr;
+        }
+        .gm-visual-Explorer {
+          grid-template-columns: 1fr;
+        }
+        .gm-ve-nav {
+          display: flex;
+          overflow-x: auto;
+          padding-bottom: 4px;
+        }
+        .gm-ve-btn {
+          white-space: nowrap;
+        }
+        .gm-foot {
+          padding: 12px 14px;
+        }
+        .gm-foot .btn {
+          width: 100%;
+        }
+      }
     </style>
   </head>
   <body>
     <div class="wrap">
       <header>
         <div class="logo">i<span>♥</span>gym</div>
+        <button type="button" class="guide-pill" id="guideHeaderBtn" aria-label="Buka panduan penggunaan website">
+          <span class="gp-dot" aria-hidden="true"></span>
+          <span>📖 Panduan</span>
+        </button>
         <nav id="nav" aria-label="Navigasi utama">
           <button data-t="beranda">
             <span aria-hidden="true">⌂</span><span>Beranda</span>
@@ -5121,6 +5695,7 @@
               <button data-t="rutin">🏋️ <span>Rutinitas</span></button>
               <button data-t="musik">🎵 <span>Playlist gym</span></button>
               <button data-t="beli">🛒 <span>Mau dibeli</span></button>
+              <button type="button" data-open-guide>📖 <span>Panduan &amp; cara pakai</span></button>
             </div>
           </div>
           <button data-t="progres">
@@ -5754,6 +6329,10 @@
           </nav>
           <div class="ft-col" role="group" aria-label="Aksi cepat">
             <p class="ft-label">Aksi cepat</p>
+            <button type="button" class="ft-action" id="ftGuide" data-open-guide>
+              <span aria-hidden="true">📖</span>
+              <span><b>Panduan &amp; cara pakai</b><small>Penjelasan semua fitur</small></span>
+            </button>
             <button type="button" class="ft-action" id="ftTimer">
               <span aria-hidden="true">⏱</span>
               <span><b>Timer istirahat</b><small>Atur jeda antar set</small></span>
@@ -5903,7 +6482,7 @@
             <textarea
               id="chatText"
               rows="1"
-              maxlength="1000"
+              maxlength="400"
               placeholder="Tulis pesan atau ketuk emoji..."
               aria-label="Pesan chat"
             ></textarea>
@@ -5960,6 +6539,125 @@
         </div>
       </div>
     </dialog>
+    <dialog class="guide-modal" id="guideDialog" aria-labelledby="guideModalTitle">
+      <div class="gm-hero">
+        <div>
+          <span class="gm-kicker">✨ ASISTEN INTERAKTIF iLOVEGYM</span>
+          <h2 id="guideModalTitle">Mau dibimbing di bagian mana?</h2>
+          <p>Pilih tur sorotan langsung di halaman, resep cepat 3 langkah, atau kamus visual singkat.</p>
+        </div>
+        <button type="button" class="cd-icon" id="guideModalClose" aria-label="Tutup panduan">✕</button>
+      </div>
+      <div class="gm-tabs" role="tablist" aria-label="Mode panduan">
+        <button type="button" role="tab" data-guide-tab="pages" aria-selected="true">
+          🎯 <span>Tur Per Halaman</span>
+        </button>
+        <button type="button" role="tab" data-guide-tab="recipes" aria-selected="false">
+          ⚡ <span>Cara Cepat (Misi)</span>
+        </button>
+        <button type="button" role="tab" data-guide-tab="visual" aria-selected="false">
+          🗺️ <span>Kamus Fitur</span>
+        </button>
+      </div>
+      <div class="gm-body">
+        <!-- TAB 1: TUR SOROTAN PER HALAMAN -->
+        <div class="gm-pane" data-guide-pane="pages">
+          <div class="gm-current-banner">
+            <div>
+              <b id="gmCurrentTitle">📍 Kamu sedang di halaman Beranda</b>
+              <span id="gmCurrentSub">Klik tombol di samping untuk menunjuk &amp; menjelaskan tiap tombol di halaman ini secara langsung!</span>
+            </div>
+            <button type="button" class="btn" id="gmTourCurrentBtn">✨ Mulai Tur Halaman Ini</button>
+          </div>
+          <p class="gm-sec-label">Pilih halaman yang ingin dibuka &amp; dijelaskan langsung:</p>
+          <div class="gm-page-grid">
+            <button type="button" class="gm-page-card" data-start-tour="beranda">
+              <div class="gm-pc-top"><span class="gm-pc-ico">⌂</span><span class="gm-pc-badge">3 Sorotan</span></div>
+              <div><b>Beranda</b><small>Centang selesai, fokus &amp; 4 kartu statistik</small></div>
+            </button>
+            <button type="button" class="gm-page-card" data-start-tour="jadwal">
+              <div class="gm-pc-top"><span class="gm-pc-ico">📅</span><span class="gm-pc-badge">3 Sorotan</span></div>
+              <div><b>Kalender Jadwal</b><small>Klik tanggal, catat beban (kg) &amp; pesan semangat</small></div>
+            </button>
+            <button type="button" class="gm-page-card" data-start-tour="rutin">
+              <div class="gm-pc-top"><span class="gm-pc-ico">🏋️</span><span class="gm-pc-badge">3 Sorotan</span></div>
+              <div><b>Rutinitas &amp; Alarm</b><small>Pola Senin–Minggu, pengingat &amp; bank gerakan</small></div>
+            </button>
+            <button type="button" class="gm-page-card" data-start-tour="musik">
+              <div class="gm-pc-top"><span class="gm-pc-ico">🎵</span><span class="gm-pc-badge">2 Sorotan</span></div>
+              <div><b>Playlist Gym</b><small>Putar lagu di YouTube/Spotify tanpa unduh</small></div>
+            </button>
+            <button type="button" class="gm-page-card" data-start-tour="beli">
+              <div class="gm-pc-top"><span class="gm-pc-ico">🛒</span><span class="gm-pc-badge">2 Sorotan</span></div>
+              <div><b>Mau Dibeli</b><small>Wishlist barang gym &amp; hitung anggaran</small></div>
+            </button>
+            <button type="button" class="gm-page-card" data-start-tour="progres">
+              <div class="gm-pc-top"><span class="gm-pc-ico">📈</span><span class="gm-pc-badge">3 Sorotan</span></div>
+              <div><b>Progres &amp; PR</b><small>Level lencana, rekor beban &amp; grafik berat</small></div>
+            </button>
+            <button type="button" class="gm-page-card" data-start-tour="galeri">
+              <div class="gm-pc-top"><span class="gm-pc-ico">📸</span><span class="gm-pc-badge">2 Sorotan</span></div>
+              <div><b>Kenangan Foto</b><small>Galeri Before–After &amp; momen di gym</small></div>
+            </button>
+            <button type="button" class="gm-page-card" data-start-tour="profil">
+              <div class="gm-pc-top"><span class="gm-pc-ico">👤</span><span class="gm-pc-badge">4 Sorotan</span></div>
+              <div><b>Profil &amp; Akun</b><small>Pop-up angka, bagikan link, teman &amp; kode sinkron</small></div>
+            </button>
+            <button type="button" class="gm-page-card" data-start-tour="chat">
+              <div class="gm-pc-top"><span class="gm-pc-ico">💬</span><span class="gm-pc-badge">2 Sorotan</span></div>
+              <div><b>Side Chat &amp;Timer</b><small>Chat samping layar, Streak 🔥 WIB &amp; timer set</small></div>
+            </button>
+            <button type="button" class="gm-page-card is-full" data-start-tour="all">
+              <div style="display:flex;align-items:center;gap:12px">
+                <span class="gm-pc-ico">🚀</span>
+                <div>
+                  <b>Tur Keliling Semua Halaman (Otomatis Berurutan)</b>
+                  <small>Duduk santai—kami bukakan halaman demi halaman sambil menunjuk fitur utamanya!</small>
+                </div>
+              </div>
+              <span class="gm-pc-badge">Mulai Semua →</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- TAB 2: CARA CEPAT / MISI POPULER -->
+        <div class="gm-pane" data-guide-pane="recipes" hidden>
+          <p class="gm-sec-label">Pilih hal yang ingin kamu lakukan sekarang:</p>
+          <div class="gm-recipe-pills" id="gmRecipePills"></div>
+          <div class="gm-recipe-stage" id="gmRecipeStage"></div>
+        </div>
+
+        <!-- TAB 3: KAMUS FITUR RINGKAS -->
+        <div class="gm-pane" data-guide-pane="visual" hidden>
+          <div class="gm-visual-Explorer">
+            <div class="gm-ve-nav" id="gmVeNav"></div>
+            <div class="gm-ve-detail" id="gmVeDetail"></div>
+          </div>
+        </div>
+      </div>
+      <div class="gm-foot">
+        <small>💡 Tip: Saat pindah ke halaman baru pertama kali, tur singkat halaman tersebut akan otomatis menyapamu.</small>
+        <button type="button" class="btn ghost" id="guideModalDone">Tutup Panduan</button>
+      </div>
+    </dialog>
+
+    <!-- SPOTLIGHT INTERACTIVE TOUR OVERLAY -->
+    <div class="tour-layer" id="tourLayer" hidden aria-live="polite">
+      <div class="tour-ring" id="tourRing"></div>
+      <div class="tour-card" id="tourCard" role="dialog" aria-modal="false" aria-labelledby="tourTitle">
+        <div class="tc-top">
+          <span class="tc-badge" id="tourBadge">LANGKAH 1/3</span>
+          <button type="button" class="tc-skip" id="tourSkip">Lewati ✕</button>
+        </div>
+        <h4 id="tourTitle">Judul Fitur</h4>
+        <p id="tourDesc">Penjelasan singkat fitur ini.</p>
+        <div class="tc-dots" id="tourDots"></div>
+        <div class="tc-actions">
+          <button type="button" class="btn ghost" id="tourPrev">← Sebelumnya</button>
+          <button type="button" class="btn" id="tourNext">Lanjut →</button>
+        </div>
+      </div>
+    </div>
     <div id="tm">
       <div id="tp" hidden>
         <b id="tt">01:00</b>
@@ -7324,12 +8022,24 @@
         r.onload = () => {
           const i = new Image();
           i.onload = () => {
-            const k = Math.min(1, max / Math.max(i.width, i.height)),
-              c = document.createElement("canvas");
-            c.width = i.width * k;
-            c.height = i.height * k;
-            c.getContext("2d").drawImage(i, 0, 0, c.width, c.height);
-            cb(c.toDataURL("image/jpeg", 0.72));
+            let side = max,
+              q = 0.58,
+              out = "";
+            for (let step = 0; step < 4; step++) {
+              const k = Math.min(1, side / Math.max(i.width, i.height)),
+                c = document.createElement("canvas");
+              c.width = Math.max(1, Math.round(i.width * k));
+              c.height = Math.max(1, Math.round(i.height * k));
+              const ctx = c.getContext("2d");
+              ctx.fillStyle = "#fff";
+              ctx.fillRect(0, 0, c.width, c.height);
+              ctx.drawImage(i, 0, 0, c.width, c.height);
+              out = c.toDataURL("image/jpeg", q);
+              if (out.length <= 135000) break;
+              side = Math.round(side * 0.8);
+              q = Math.max(0.45, q - 0.05);
+            }
+            cb(out);
           };
           i.src = r.result;
         };
@@ -7509,8 +8219,15 @@
           );
       }
       $("gu").onchange = (e) => {
-        [...e.target.files].forEach((f) =>
-          shrink(f, 900, (src) => {
+        const files = [...e.target.files].slice(0, 3);
+        if (PH.list.length >= 24) {
+          toast("Maksimal 24 foto di galeri agar penyimpanan & kuota cloud tetap hemat.");
+          e.target.value = "";
+          return;
+        }
+        files.forEach((f) =>
+          shrink(f, 560, (src) => {
+            if (PH.list.length >= 24) return;
             const p = {
               id: Date.now() + Math.random().toString(36).slice(2, 6),
               src,
@@ -7841,6 +8558,13 @@
         return [...bytes].map((x) => x.toString(16).padStart(2, "0")).join("");
       }
       async function ensureSocialIdentity() {
+        if (
+          SOC.verified &&
+          SOCIAL_ID.test(S.social.publicId || "") &&
+          SOC.id === S.social.publicId
+        ) {
+          return SOC.id;
+        }
         let id = SOCIAL_ID.test(S.social.publicId || "")
           ? S.social.publicId
           : newSocialId();
@@ -7854,6 +8578,7 @@
         }
         S.social.publicId = result.id;
         SOC.id = result.id;
+        SOC.verified = true;
         return result.id;
       }
       function publicSnapshot() {
@@ -8565,20 +9290,20 @@
         }
       }
 
-      /* Opsi A: Kompresi foto di browser ke ~600px JPEG (kualitas 0.55–0.62, ~20–45 KB)
-         agar tersimpan ringan sebagai Base64 langsung di Upstash Redis tanpa Vercel Blob. */
+      /* Opsi A Super Hemat Kuota Redis: Kompresi foto di browser ke ~420px JPEG
+         (kualitas 0.45–0.54, ~12–30 KB) agar ruang 256 MB Upstash sangat awet. */
       async function compressChatPhoto(file) {
         if (!file || !file.type.startsWith("image/"))
           throw new Error("Pilih file gambar yang valid.");
-        if (file.size > 15_000_000)
-          throw new Error("Ukuran foto asli maksimal 15 MB.");
+        if (file.size > 12_000_000)
+          throw new Error("Ukuran foto asli maksimal 12 MB.");
         const imageUrl = URL.createObjectURL(file);
         try {
           const image = new Image();
           image.src = imageUrl;
           await image.decode();
-          let side = 640,
-            quality = 0.6,
+          let side = 440,
+            quality = 0.54,
             data = "";
           for (let attempt = 0; attempt < 5; attempt++) {
             const scale = Math.min(
@@ -8595,15 +9320,43 @@
             context.fillRect(0, 0, canvas.width, canvas.height);
             context.drawImage(image, 0, 0, canvas.width, canvas.height);
             data = canvas.toDataURL("image/jpeg", quality);
-            if (data.length <= 115_000) return data;
-            side = Math.round(side * 0.8);
-            quality = Math.max(0.46, quality - 0.05);
+            if (data.length <= 58_000) return data;
+            side = Math.round(side * 0.78);
+            quality = Math.max(0.4, quality - 0.04);
           }
-          if (data.length <= 300_000) return data;
+          if (data.length <= 66_000) return data;
           throw new Error("Foto masih terlalu besar setelah dikompres.");
         } finally {
           URL.revokeObjectURL(imageUrl);
         }
+      }
+
+      /* Smart Polling Hemat Request:
+         - Saat drawer chat TERTUTUP: 0 polling background (hemat 500k request/bulan!).
+         - Saat drawer chat TERBUKA: polling ringan tiap 5 detik (jika room aktif)
+           atau 15 detik (jika hanya daftar kontak), dan otomatis mati saat ditutup. */
+      let chatPollTimer = null;
+      let chatPollStep = 0;
+      function stopChatPolling() {
+        if (chatPollTimer) {
+          clearInterval(chatPollTimer);
+          chatPollTimer = null;
+        }
+      }
+      function startChatPolling() {
+        stopChatPolling();
+        if (!SY.uid || !chatIsOpen()) return;
+        chatPollStep = 0;
+        chatPollTimer = window.setInterval(() => {
+          if (document.hidden || !SY.uid || !chatIsOpen()) return;
+          chatPollStep++;
+          if (CHAT_STATE.activeId) {
+            if (chatPollStep % 3 === 0) refreshChatList();
+            else refreshChatThread();
+          } else if (chatPollStep % 3 === 0) {
+            refreshChatList();
+          }
+        }, 5000);
       }
 
       function setChatDrawer(open) {
@@ -8612,11 +9365,13 @@
         $("chatFab").setAttribute("aria-expanded", String(open));
         if (open) {
           refreshChatList();
+          startChatPolling();
           setTimeout(() => {
             if (CHAT_STATE.activeId) $("chatText")?.focus();
             else $("chatDrawerClose")?.focus();
           }, 300);
         } else {
+          stopChatPolling();
           $("chatFab")?.focus();
           updateChatBadge();
         }
@@ -8653,8 +9408,10 @@
         .querySelectorAll("[data-chat-emoji]")
         .forEach((btn) => {
           btn.onclick = () => {
-            chatTextEl.value += btn.dataset.chatEmoji;
-            growChatText();
+            if (chatTextEl.value.length + btn.dataset.chatEmoji.length <= 400) {
+              chatTextEl.value += btn.dataset.chatEmoji;
+              growChatText();
+            }
             chatTextEl.focus();
           };
         });
@@ -8672,7 +9429,7 @@
         try {
           $("chatFile").hidden = false;
           $("chatFileName").textContent = file.name;
-          $("chatFileSize").textContent = "Mengompres foto…";
+          $("chatFileSize").textContent = "Mengompres ukuran super hemat…";
           attach?.classList.add("has-file");
           PENDING_CHAT_PHOTO = await compressChatPhoto(file);
           $("chatFileThumb").src = PENDING_CHAT_PHOTO;
@@ -8680,7 +9437,7 @@
             1,
             Math.round(((PENDING_CHAT_PHOTO.length - 23) * 3) / 4 / 1024),
           );
-          $("chatFileSize").textContent = `Siap dikirim · ~${kb} KB (hemat kuota Redis)`;
+          $("chatFileSize").textContent = `Siap dikirim · ~${kb} KB (maks 6 foto/hari)`;
         } catch (err) {
           PENDING_CHAT_PHOTO = "";
           $("chatPhoto").value = "";
@@ -8704,7 +9461,7 @@
         event.preventDefault();
         if (!CHAT_STATE.activeId) return;
         const button = $("chatSend");
-        const text = $("chatText").value.trim();
+        const text = $("chatText").value.trim().slice(0, 400);
         const file = $("chatPhoto").files[0];
         if (!text && !file && !PENDING_CHAT_PHOTO) {
           toast("Tulis pesan atau pilih foto dulu.");
@@ -8732,17 +9489,9 @@
           button.classList.remove("is-busy");
         }
       };
-      let chatTick = 0;
-      window.setInterval(() => {
-        if (document.hidden || !SY.uid) return;
-        chatTick++;
-        if (chatIsOpen() || profilePane === "friends" || chatTick % 3 === 0)
-          refreshChatList();
-      }, 10000);
       socialReady = true;
       if (profilePane === "friends") refreshSocial();
-      refreshChatList();
-
+      if (SY.uid) refreshChatList();
       /* ===== MODAL POP-UP STATISTIK PROFIL (SESI, PENGIKUT, MENGIKUTI, STREAK) ===== */
       const STAT_TITLES = {
         sessions: "Riwayat Sesi Selesai",
@@ -8924,7 +9673,7 @@
       function syncSoon() {
         if (!SY.uid) return;
         clearTimeout(SY.t);
-        SY.t = setTimeout(() => (SY.busy ? syncSoon() : pushNow()), 2500);
+        SY.t = setTimeout(() => (SY.busy ? syncSoon() : pushNow()), 6000);
       }
       function refreshAll() {
         render();
@@ -9295,6 +10044,631 @@
           }).observe(st, { childList: true });
       })();
       footerR();
+
+      /* ===== Asisten Tur Interaktif Per Halaman & Pusat Panduan Visual ===== */
+      (() => {
+        const SEEN_PAGES_KEY = "ilovegym.pageTours_v2";
+        const dlg = $("guideDialog");
+        const layer = $("tourLayer");
+        const ring = $("tourRing");
+        const card = $("tourCard");
+        if (!dlg || !layer) return;
+
+        const PAGE_LABELS = {
+          beranda: "⌂ Beranda",
+          jadwal: "📅 Kalender Jadwal",
+          rutin: "🏋️ Rutinitas & Pengingat",
+          musik: "🎵 Playlist Gym",
+          beli: "🛒 Mau Dibeli",
+          progres: "📈 Progres & Rekor",
+          galeri: "📸 Kenangan Foto",
+          profil: "👤 Profil & Akun",
+          chat: "💬 Side Chat & Timer",
+        };
+
+        // Daftar langkah tur kontekstual per halaman
+        const PAGE_TOURS = {
+          beranda: [
+            {
+              page: "beranda",
+              sel: "#hero",
+              title: "Kartu Fokus Latihan Hari Ini 🎯",
+              desc: "Menampilkan jadwal latihanmu hari ini secara otomatis. Ketuk kalimat semangat di bawahnya kapan saja untuk mengganti motivasi!",
+            },
+            {
+              page: "beranda",
+              sel: "#tk",
+              title: "Tombol Selesai & Konfeti 🎉",
+              desc: "Sudah selesai olahraga hari ini? Ketuk lingkaran besar ini! Streak latihanmu langsung bertambah.",
+            },
+            {
+              page: "beranda",
+              sel: "#stats",
+              title: "4 Kartu Statistik & Tombol Chat 💬",
+              desc: "Pantau hari beruntun, sesi bulan ini, total sesi tahun ini, dan berat badan terakhirmu dalam sekali lihat.",
+            },
+          ],
+          jadwal: [
+            {
+              page: "jadwal",
+              sel: "#months",
+              title: "Pilih Bulan & Tahun 📅",
+              desc: "Berpindah cepat dari Januari hingga Desember untuk melihat riwayat latihanmu sepanjang tahun.",
+            },
+            {
+              page: "jadwal",
+              sel: "#cal",
+              title: "Ketuk Tanggal Mana Saja ✍️",
+              desc: "Klik kotak tanggal untuk mengganti fokus latihan, mencatat daftar gerakan + beban (kg), atau menandai Hari Istirahat.",
+            },
+            {
+              page: "jadwal",
+              sel: "#fill",
+              title: "Isi Pesan Semangat Sebulan ✨",
+              desc: "Satu ketukan untuk mengisi kalimat motivasi otomatis ke seluruh tanggal kosong di bulan ini.",
+            },
+          ],
+          rutin: [
+            {
+              page: "rutin",
+              sel: "#plan",
+              title: "Pola Mingguan Otomatis 🗓️",
+              desc: "Atur fokus Senin–Minggu di sini. Ketik 'Istirahat' pada hari liburmu supaya streak latihan tidak putus saat kamu istirahat.",
+            },
+            {
+              page: "rutin",
+              sel: "#rn",
+              title: "Pengingat Harian & Kalender HP 🔔",
+              desc: "Nyalakan notifikasi browser atau unduh jadwal langsung ke Kalender HP (.ics) dan Google Calendar.",
+            },
+            {
+              page: "rutin",
+              sel: "#ml",
+              title: "Bank Gerakan & Fokus Cepat ⚡",
+              desc: "Simpan nama gerakan favoritmu di sini supaya tinggal sekali ketuk saat mencatat latihan harian.",
+            },
+          ],
+          musik: [
+            {
+              page: "musik",
+              sel: "#mr",
+              title: "Putar Lagu Tanpa Unduh 🎵",
+              desc: "Ketuk Putar atau Putar Acak untuk langsung membuka lagu pembakar semangat di YouTube atau Spotify.",
+            },
+            {
+              page: "musik",
+              sel: "#mf",
+              title: "Tambah Lagu Favoritmu ➕",
+              desc: "Ketik judul lagu dan nama penyanyi untuk menyimpannya ke daftar playlist gym pribadimu.",
+            },
+          ],
+          beli: [
+            {
+              page: "beli",
+              sel: "#sf",
+              title: "Catat Incaran Perlengkapan Gym 🛒",
+              desc: "Tulis barang yang sedang kamu incar (sepatu, whey, strap) beserta harganya.",
+            },
+            {
+              page: "beli",
+              sel: "#sl",
+              title: "Hitung Anggaran Otomatis 💰",
+              desc: "Centang barang yang sudah terbeli—sisa anggaran yang belum dibeli dihitung otomatis di bawah.",
+            },
+          ],
+          progres: [
+            {
+              page: "progres",
+              sel: "#bd",
+              title: "Level & Lencana Otomatis 👑",
+              desc: "Setiap menyelesaikan 5 sesi latihan, kamu otomatis naik level dan membuka lencana baru!",
+            },
+            {
+              page: "progres",
+              sel: "#pr",
+              title: "Rekor Pribadi (PR) Beban 🏆",
+              desc: "Otomatis merekam beban terberat (kg) yang pernah kamu angkat dari catatan gerakan harianmu.",
+            },
+            {
+              page: "progres",
+              sel: "#wf",
+              title: "Grafik & Target Berat Badan ⚖️",
+              desc: "Catat berat badanmu secara berkala dan pasang Target Berat (kg) untuk melihat grafik kemajuannya.",
+            },
+          ],
+          galeri: [
+            {
+              page: "galeri",
+              sel: "#gf",
+              title: "Upload & Filter Foto 📸",
+              desc: "Pilih kategori 'Progres' (Before-After) atau 'Kenangan', lalu tambahkan foto. Foto otomatis dikompres hemat kuota!",
+            },
+            {
+              page: "galeri",
+              sel: "#gg",
+              title: "Klik Foto untuk Keterangan 🖼️",
+              desc: "Ketuk foto di galeri untuk memperbesar, menulis catatan (misal 'Minggu ke-4, 62 kg'), atau menghapusnya.",
+            },
+          ],
+          profil: [
+            {
+              page: "profil",
+              sel: ".profile-counts",
+              title: "Klik Angka untuk Pop-up Instan ✨",
+              desc: "Ketuk angka Sesi, Pengikut, Mengikuti, atau Hari Streak di sini untuk melihat rinciannya langsung tanpa pindah halaman!",
+            },
+            {
+              page: "profil",
+              sel: "#profileShareButton",
+              title: "Bagikan Profil ke Teman 🔗",
+              desc: "Salin tautan profil publikmu setelah menyalakan opsi 'Bagikan hasil latihan' di tab Aktivitas.",
+            },
+            {
+              page: "profil",
+              sel: ".profile-tabs",
+              title: "4 Sub-Tab Lengkap 👤",
+              desc: "Pindah antara Aktivitas publik, pencarian Teman, Edit profil (@username & foto), serta tab Akun (Kode Rahasia sinkron cloud).",
+            },
+          ],
+          chat: [
+            {
+              page: "beranda",
+              sel: "#chatFab",
+              title: "Side Chat & Streak Api Harian 🔥",
+              desc: "Buka chat dari samping halaman mana saja! Saling kirim minimal 1 pesan/emoji/foto tiap hari WIB bersama teman mutual follow untuk menyalakan 🔥.",
+            },
+            {
+              page: "beranda",
+              sel: "#tb",
+              title: "Timer Istirahat Antar-Set ⏱",
+              desc: "Sedang jeda antar-set? Klik tombol ini untuk hitung mundur 30d–120d lengkap dengan alarm & getar.",
+            },
+          ],
+        };
+
+        // Resep Cepat (Misi Populer)
+        const RECIPES = [
+          {
+            id: "share",
+            icon: "🔗",
+            label: "Cara Bagikan Profil",
+            title: "Cara membagikan profil & hasil latihan ke teman",
+            steps: [
+              { t: "Hubungkan Kode Akun", d: "Buka Profil → tab Akun, klik 'Buat kode baru' lalu tekan 'Hubungkan'." },
+              { t: "Isi Username Unik", d: "Buka tab 'Edit profil', ketik @username pilihanmu lalu simpan." },
+              { t: "Aktifkan & Salin Link", d: "Di tab 'Aktivitas', centang 'Bagikan hasil latihan' lalu klik 'Bagikan'!" },
+            ],
+            ctaText: "Buka Pengaturan Bagikan →",
+            action: () => {
+              show("profil");
+              showProfilePane("activity", true);
+            },
+          },
+          {
+            id: "streak",
+            icon: "🔥",
+            label: "Cara Bikin Streak Chat 🔥",
+            title: "Cara menyalakan Streak Api 🔥 bareng teman",
+            steps: [
+              { t: "Saling Follow Teman", d: "Cari @username temanmu di Profil → tab Teman, lalu kalian berdua saling klik 'Ikuti akun'." },
+              { t: "Buka Tombol 💬 Chat", d: "Klik tombol mengambang '💬 Chat' di sisi kanan layar dari halaman mana saja." },
+              { t: "Chat Dua Arah Tiap Hari WIB", d: "Saling kirim minimal 1 teks, emoji, atau foto setiap hari WIB. Hari ke-3 api 🔥 menyala!" },
+            ],
+            ctaText: "Buka Panel Side Chat 💬 →",
+            action: () => {
+              setChatDrawer(true);
+            },
+          },
+          {
+            id: "sync",
+            icon: "☁️",
+            label: "Sinkron HP & Laptop",
+            title: "Cara agar data sama di HP dan Laptop (Tanpa Email)",
+            steps: [
+              { t: "Buat Kode Rahasia", d: "Di perangkat pertama, buka Profil → tab Akun lalu klik 'Buat kode baru' & 'Hubungkan'." },
+              { t: "Catat Kodenya", d: "Simpan kode 16 huruf/angka tersebut di catatan pribadimu." },
+              { t: "Masukkan di Perangkat Lain", d: "Buka iLovegym di HP/laptop lain, tempel kode tadi di tab Akun, lalu klik 'Hubungkan'!" },
+            ],
+            ctaText: "Buka Tab Akun Cloud →",
+            action: () => {
+              show("profil");
+              showProfilePane("account", true);
+            },
+          },
+          {
+            id: "pr",
+            icon: "🏆",
+            label: "Catat Beban & Rekor PR",
+            title: "Cara mencatat beban (kg) & mencetak Rekor Pribadi",
+            steps: [
+              { t: "Klik Tanggal di Jadwal", d: "Buka menu Aktivitas → Jadwal lalu ketuk tanggal latihanmu." },
+              { t: "Tambah Gerakan & Isi Kg", d: "Pilih gerakan (misal Squat), lalu isi angka beban di kotak 'kg' sebelahnya." },
+              { t: "Lihat Rekor di Progres", d: "Simpan! Beban terberatmu otomatis muncul di halaman Progres → Rekor Pribadi." },
+            ],
+            ctaText: "Buka Kalender Jadwal →",
+            action: () => {
+              show("jadwal");
+            },
+          },
+        ];
+
+        // Kamus Visual Singkat
+        const VISUAL_ITEMS = [
+          {
+            id: "beranda",
+            icon: "⌂",
+            name: "Beranda",
+            loc: "Menu Utama Kiri",
+            summary: "Pusat kendali harianmu setiap kali membuka website.",
+            points: [
+              ["🎯", "Kartu Fokus Hari Ini", "Menampilkan menu latihanmu hari ini + kutipan penyemangat."],
+              ["✓", "Lingkaran Centang Besar", "Tekan saat selesai latihan untuk efek konfeti & tambah streak."],
+              ["📊", "4 Statistik Inti", "Streak latihan, sesi bulan ini, total sesi setahun, & berat terakhir."],
+            ],
+            tourKey: "beranda",
+          },
+          {
+            id: "jadwal",
+            icon: "📅",
+            name: "Jadwal Setahun",
+            loc: "Menu Aktivitas → Jadwal",
+            summary: "Kalender interaktif 12 bulan untuk mencatat detail latihan per tanggal.",
+            points: [
+              ["🗓️", "Klik Tanggal Mana Saja", "Ubah fokus hari itu, tulis catatan badan, atau tandai Istirahat."],
+              ["🏋️", "Catat Gerakan & Kg", "Masukkan daftar gerakan beserta beban (kg) untuk rekor PR."],
+              ["✨", "Pesan Sebulan", "Isi kutipan motivasi otomatis ke seluruh tanggal bulan ini."],
+            ],
+            tourKey: "jadwal",
+          },
+          {
+            id: "rutin",
+            icon: "🏋️",
+            name: "Rutinitas & Alarm",
+            loc: "Menu Aktivitas → Rutinitas",
+            summary: "Atur sekali, jadwal setahun penuh terisi otomatis.",
+            points: [
+              ["🔄", "Pola Senin–Minggu", "Tentukan fokus tiap hari (ketik 'Istirahat' untuk hari libur)."],
+              ["⏰", "Pengingat Latihan", "Notifikasi browser, unduh kalender HP (.ics), & Google Calendar."],
+              ["🏷️", "Chip Gerakan & Fokus", "Simpan daftar gerakan favorit agar tinggal sekali ketuk."],
+            ],
+            tourKey: "rutin",
+          },
+          {
+            id: "musik_beli",
+            icon: "🎵",
+            name: "Playlist & Wishlist",
+            loc: "Menu Aktivitas → Playlist / Mau Dibeli",
+            summary: "Hiburan musik saat angkat beban & catatan tabungan alat gym.",
+            points: [
+              ["▶️", "Putar Instan", "Buka lagu di YouTube atau Spotify tab baru tanpa unduh."],
+              ["🛒", "Wishlist Mau Dibeli", "Catat incaran whey/sepatu + otomatis hitung total anggaran."],
+            ],
+            tourKey: "musik",
+          },
+          {
+            id: "progres_galeri",
+            icon: "📈",
+            name: "Progres & Kenangan",
+            loc: "Menu Progres & Kenangan",
+            summary: "Lihat hasil keringatmu lewat level, grafik, rekor PR, dan foto.",
+            points: [
+              ["👑", "Level & Lencana", "Naik 1 level otomatis setiap menyelesaikan 5 sesi latihan."],
+              ["🏆", "Rekor Pribadi & Berat", "Rekor angkatan terberat (kg) dan grafik garis berat badan."],
+              ["📸", "Galeri Foto", "Simpan foto Before-After (Progres) & momen gym (Kenangan)."],
+            ],
+            tourKey: "progres",
+          },
+          {
+            id: "profil_chat",
+            icon: "💬",
+            name: "Profil, Teman & Chat 🔥",
+            loc: "Menu Profil & Tombol Kanan Layar",
+            summary: "Terhubung dengan teman latihan, sinkron cloud, dan jaga Streak Api harian.",
+            points: [
+              ["🔢", "Pop-up 4 Angka Profil", "Klik Sesi/Pengikut/Mengikuti/Streak di profil untuk rincian instan."],
+              ["☁️", "Kode Rahasia Cloud", "Sinkron data HP & laptop di tab Akun tanpa daftar email."],
+              ["🔥", "Side Chat & Streak WIB", "Saling kirim 1 pesan/foto tiap hari WIB bersama teman mutual follow!"],
+            ],
+            tourKey: "profil",
+          },
+        ];
+
+        function getSeenPages() {
+          try {
+            return JSON.parse(localStorage.getItem(SEEN_PAGES_KEY) || "{}");
+          } catch (e) {
+            return {};
+          }
+        }
+        function markPageSeen(p) {
+          try {
+            const m = getSeenPages();
+            m[p] = 1;
+            localStorage.setItem(SEEN_PAGES_KEY, JSON.stringify(m));
+          } catch (e) {}
+          const dot = document.querySelector("#guideHeaderBtn .gp-dot");
+          if (dot) dot.style.display = "none";
+        }
+
+        // Render Tab 2: Recipes
+        let activeRecipe = RECIPES[0].id;
+        function renderRecipes() {
+          const pills = $("gmRecipePills");
+          const stage = $("gmRecipeStage");
+          if (!pills || !stage) return;
+          pills.innerHTML = RECIPES.map(
+            (r) =>
+              `<button type="button" class="gm-recipe-pill ${r.id === activeRecipe ? "active" : ""}" data-rcp="${r.id}"><span>${r.icon}</span><span>${esc(r.label)}</span></button>`,
+          ).join("");
+          const cur = RECIPES.find((r) => r.id === activeRecipe) || RECIPES[0];
+          stage.innerHTML = `
+            <div class="gm-recipe-head">
+              <h4>${cur.icon} ${esc(cur.title)}</h4>
+            </div>
+            <div class="gm-recipe-flow">
+              ${cur.steps
+                .map(
+                  (s, i) => `
+                <div class="gm-rf-step">
+                  <span class="gm-rf-num">${i + 1}</span>
+                  <b>${esc(s.t)}</b>
+                  <span>${esc(s.d)}</span>
+                </div>`,
+                )
+                .join("")}
+            </div>
+            <button type="button" class="btn" id="gmRecipeGo">${esc(cur.ctaText)}</button>
+          `;
+          pills.querySelectorAll("[data-rcp]").forEach((b) => {
+            b.onclick = () => {
+              activeRecipe = b.dataset.rcp;
+              renderRecipes();
+            };
+          });
+          $("gmRecipeGo").onclick = () => {
+            dlg.close();
+            cur.action();
+          };
+        }
+
+        // Render Tab 3: Kamus Visual
+        let activeVe = VISUAL_ITEMS[0].id;
+        function renderVisual() {
+          const nav = $("gmVeNav");
+          const detail = $("gmVeDetail");
+          if (!nav || !detail) return;
+          nav.innerHTML = VISUAL_ITEMS.map(
+            (v) =>
+              `<button type="button" class="gm-ve-btn ${v.id === activeVe ? "active" : ""}" data-ve="${v.id}"><span>${v.icon}</span><span>${esc(v.name)}</span></button>`,
+          ).join("");
+          const cur = VISUAL_ITEMS.find((v) => v.id === activeVe) || VISUAL_ITEMS[0];
+          detail.innerHTML = `
+            <div class="gm-ve-top">
+              <div class="gm-ve-ico">${cur.icon}</div>
+              <div>
+                <span class="gm-kicker">${esc(cur.loc)}</span>
+                <h4>${esc(cur.name)}</h4>
+              </div>
+            </div>
+            <p style="margin:0;color:var(--mute);font-size:13px">${esc(cur.summary)}</p>
+            <div class="gm-ve-chips">
+              ${cur.points
+                .map(
+                  (pt) => `
+                <div class="gm-ve-chip">
+                  <i>${pt[0]}</i>
+                  <div><b>${esc(pt[1])}</b> — ${esc(pt[2])}</div>
+                </div>`,
+                )
+                .join("")}
+            </div>
+            <div class="row">
+              <button type="button" class="btn" id="gmVeTourBtn">✨ Tunjukkan Langsung di Halaman</button>
+            </div>
+          `;
+          nav.querySelectorAll("[data-ve]").forEach((b) => {
+            b.onclick = () => {
+              activeVe = b.dataset.ve;
+              renderVisual();
+            };
+          });
+          $("gmVeTourBtn").onclick = () => {
+            dlg.close();
+            startTour(cur.tourKey);
+          };
+        }
+
+        function setGuideTab(name) {
+          dlg.querySelectorAll("[data-guide-tab]").forEach((btn) => {
+            btn.setAttribute("aria-selected", String(btn.dataset.guideTab === name));
+          });
+          dlg.querySelectorAll("[data-guide-pane]").forEach((pane) => {
+            pane.hidden = pane.dataset.guidePane !== name;
+          });
+        }
+
+        function updateCurrentPageBanner() {
+          const curPage = PAGE_TOURS[tab] ? tab : "beranda";
+          const label = PAGE_LABELS[curPage] || "⌂ Beranda";
+          $("gmCurrentTitle").textContent = `📍 Kamu sedang di halaman ${label}`;
+          $("gmTourCurrentBtn").onclick = () => {
+            dlg.close();
+            startTour(curPage);
+          };
+        }
+
+        function openGuide(defaultTab = "pages") {
+          stopTour();
+          updateCurrentPageBanner();
+          renderRecipes();
+          renderVisual();
+          setGuideTab(defaultTab);
+          setActivityMenu(false);
+          if (!dlg.open) dlg.showModal();
+        }
+
+        // Spotlight Tour Engine
+        let tourSteps = [];
+        let tourIdx = 0;
+        let activeTourPage = "";
+
+        function positionSpotlight() {
+          if (layer.hidden || !tourSteps[tourIdx]) return;
+          const step = tourSteps[tourIdx];
+          const el = document.querySelector(step.sel);
+          if (!el) return;
+          const r = el.getBoundingClientRect();
+          const pad = 8;
+          const top = Math.max(8, r.top - pad);
+          const left = Math.max(8, r.left - pad);
+          const width = Math.min(window.innerWidth - 16, r.width + pad * 2);
+          const height = Math.min(window.innerHeight - 16, r.height + pad * 2);
+
+          ring.style.top = top + "px";
+          ring.style.left = left + "px";
+          ring.style.width = width + "px";
+          ring.style.height = height + "px";
+
+          // Position tooltip card below or above target
+          const cardW = Math.min(350, window.innerWidth - 24);
+          const cardH = card.offsetHeight || 195;
+          let cLeft = left + width / 2 - cardW / 2;
+          cLeft = Math.max(12, Math.min(window.innerWidth - cardW - 12, cLeft));
+
+          let cTop = top + height + 14;
+          if (cTop + cardH > window.innerHeight - 16) {
+            cTop = Math.max(14, top - cardH - 14);
+          }
+          card.style.left = cLeft + "px";
+          card.style.top = cTop + "px";
+        }
+
+        function renderTourStep() {
+          const step = tourSteps[tourIdx];
+          if (!step) {
+            stopTour(true);
+            return;
+          }
+          if (step.page && tab !== step.page) {
+            show(step.page);
+          }
+          const el = document.querySelector(step.sel);
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+          const pageLabel = PAGE_LABELS[step.page] || "Tur Fitur";
+          $("tourBadge").textContent = `${pageLabel.toUpperCase()} · ${tourIdx + 1}/${tourSteps.length}`;
+          $("tourTitle").textContent = step.title;
+          $("tourDesc").textContent = step.desc;
+          $("tourDots").innerHTML = tourSteps
+            .map((_, i) => `<i class="${i <= tourIdx ? "on" : ""}"></i>`)
+            .join("");
+          $("tourPrev").hidden = tourIdx === 0;
+          $("tourNext").textContent =
+            tourIdx === tourSteps.length - 1 ? "Selesai ✓" : "Lanjut →";
+
+          setTimeout(positionSpotlight, 120);
+          setTimeout(positionSpotlight, 360);
+        }
+
+        function startTour(keyName) {
+          if (dlg.open) dlg.close();
+          setChatDrawer(false);
+          if (keyName === "all") {
+            tourSteps = [
+              PAGE_TOURS.beranda[0],
+              PAGE_TOURS.beranda[1],
+              PAGE_TOURS.jadwal[1],
+              PAGE_TOURS.rutin[0],
+              PAGE_TOURS.musik[0],
+              PAGE_TOURS.beli[0],
+              PAGE_TOURS.progres[0],
+              PAGE_TOURS.galeri[0],
+              PAGE_TOURS.profil[0],
+              PAGE_TOURS.chat[0],
+            ];
+            activeTourPage = "beranda";
+          } else {
+            tourSteps = PAGE_TOURS[keyName] || PAGE_TOURS.beranda;
+            activeTourPage = keyName;
+          }
+          tourIdx = 0;
+          layer.hidden = false;
+          markPageSeen(activeTourPage);
+          renderTourStep();
+        }
+
+        function stopTour(completed = false) {
+          if (activeTourPage) markPageSeen(activeTourPage);
+          layer.hidden = true;
+          tourSteps = [];
+          if (completed) {
+            toast("Tur selesai! Klik 📖 Panduan di atas kapan saja jika butuh bantuan.");
+          }
+        }
+
+        $("tourPrev").onclick = () => {
+          if (tourIdx > 0) {
+            tourIdx--;
+            renderTourStep();
+          }
+        };
+        $("tourNext").onclick = () => {
+          if (tourIdx < tourSteps.length - 1) {
+            tourIdx++;
+            renderTourStep();
+          } else {
+            stopTour(true);
+          }
+        };
+        $("tourSkip").onclick = () => stopTour(false);
+        window.addEventListener("resize", positionSpotlight, { passive: true });
+        window.addEventListener("scroll", positionSpotlight, { passive: true });
+
+        // Trigger buttons
+        $("guideHeaderBtn")?.addEventListener("click", () => openGuide("pages"));
+        document.querySelectorAll("[data-open-guide]").forEach((btn) => {
+          btn.addEventListener("click", () => openGuide("pages"));
+        });
+        $("guideModalClose")?.addEventListener("click", () => dlg.close());
+        $("guideModalDone")?.addEventListener("click", () => dlg.close());
+        dlg.addEventListener("click", (ev) => {
+          if (ev.target === dlg) dlg.close();
+        });
+        dlg.querySelectorAll("[data-guide-tab]").forEach((btn) => {
+          btn.addEventListener("click", () => setGuideTab(btn.dataset.guideTab));
+        });
+        dlg.querySelectorAll("[data-start-tour]").forEach((btn) => {
+          btn.addEventListener("click", () => startTour(btn.dataset.startTour));
+        });
+
+        // Auto-onboarding kontekstual per halaman untuk user baru (via localStorage)
+        function maybeOfferPageTour(pageName) {
+          if (incomingProfile || !PAGE_TOURS[pageName]) return;
+          const seen = getSeenPages();
+          if (seen[pageName]) return;
+          setTimeout(() => {
+            if (!dlg.open && !$("dlg")?.open && !$("profileStatDialog")?.open && layer.hidden) {
+              startTour(pageName);
+            }
+          }, 520);
+        }
+
+        // Hook ke navigasi show() agar saat user baru pertama kali masuk ke halaman tertentu, tur halaman itu otomatis menyapa
+        const origShow = show;
+        show = function (t) {
+          origShow(t);
+          maybeOfferPageTour(tab);
+        };
+
+        // Cek saat pertama kali buka website
+        const initialSeen = getSeenPages();
+        if (Object.keys(initialSeen).length > 0) {
+          const dot = document.querySelector("#guideHeaderBtn .gp-dot");
+          if (dot) dot.style.display = "none";
+        }
+        maybeOfferPageTour(tab);
+      })();
     </script>
   </body>
 </html>

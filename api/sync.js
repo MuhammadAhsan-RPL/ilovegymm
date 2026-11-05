@@ -353,7 +353,7 @@ return 'OK'`,
       const followerSet = new Set((followers || []).filter(okPublicId));
       const mutual = (following || [])
         .filter((id) => okPublicId(id) && followerSet.has(id))
-        .slice(0, 200);
+        .slice(0, 50);
       if (!mutual.length) return res.json({ id: ownId, chats: [] });
 
       const today = wibToday();
@@ -364,29 +364,26 @@ return 'OK'`,
           ["ZREVRANGE", chatMessagesKey(thread), 0, 0],
           ["HGETALL", chatStreakKey(thread)],
           ["SMEMBERS", chatDayKey(thread, today)],
-          ["ZREVRANGE", "chat:thread:" + thread, 0, 0],
-          ["HGETALL", "chat:streak:" + thread],
         ];
       });
       const values = await redis(commands);
       const chats = mutual.map((id, index) => {
-        const base = index * 6;
+        const base = index * 4;
         const rawProfile = values[base];
-        const rawLatestNew = values[base + 1];
-        const streakNew = values[base + 2] || {};
+        const rawLatest = values[base + 1];
+        const streak = values[base + 2] || {};
         const dayMembers = Array.isArray(values[base + 3]) ? values[base + 3] : [];
-        const rawLatestOld = values[base + 4];
-        const streakOld = values[base + 5] || {};
-        const rawLatest =
-          Array.isArray(rawLatestNew) && rawLatestNew.length
-            ? rawLatestNew
-            : rawLatestOld;
-        const streak =
-          streakNew && Object.keys(streakNew).length ? streakNew : streakOld;
         let latest = null;
         if (Array.isArray(rawLatest) && rawLatest.length) {
           try {
-            latest = JSON.parse(rawLatest[0]);
+            const parsed = JSON.parse(rawLatest[0]);
+            latest = {
+              id: parsed.id,
+              from: parsed.from,
+              text: parsed.text || "",
+              photo: parsed.photo || (parsed.src ? "inline" : ""),
+              at: parsed.at,
+            };
           } catch (e) {
             latest = null;
           }
@@ -417,16 +414,11 @@ return 'OK'`,
           error: "Chat hanya tersedia untuk akun yang saling mengikuti.",
         });
       const today = wibToday();
-      const [entriesNew, streakNew, dayMembers, entriesOld, streakOld] =
-        await redis([
-          ["ZRANGE", chatMessagesKey(partner.thread), -100, -1],
-          ["HGETALL", chatStreakKey(partner.thread)],
-          ["SMEMBERS", chatDayKey(partner.thread, today)],
-          ["ZRANGE", "chat:thread:" + partner.thread, -100, -1],
-          ["HGETALL", "chat:streak:" + partner.thread],
-        ]);
-      const entries =
-        Array.isArray(entriesNew) && entriesNew.length ? entriesNew : entriesOld;
+      const [entries, streak, dayMembers] = await redis([
+        ["ZRANGE", chatMessagesKey(partner.thread), -50, -1],
+        ["HGETALL", chatStreakKey(partner.thread)],
+        ["SMEMBERS", chatDayKey(partner.thread, today)],
+      ]);
       const messages = (entries || []).flatMap((entry) => {
         try {
           return [JSON.parse(entry)];
@@ -434,8 +426,7 @@ return 'OK'`,
           return [];
         }
       });
-      const state =
-        streakNew && Object.keys(streakNew).length ? streakNew : streakOld || {};
+      const state = streak || {};
       const sentSet = new Set(Array.isArray(dayMembers) ? dayMembers : []);
       return res.json({
         messages,
@@ -456,22 +447,22 @@ return 'OK'`,
           error: "Chat hanya tersedia untuk akun yang saling mengikuti.",
         });
       const text =
-        typeof b.text === "string" ? b.text.trim().slice(0, 1000) : "";
+        typeof b.text === "string" ? b.text.trim().slice(0, 400) : "";
       const hasPhoto = typeof b.src === "string" && b.src.length > 0;
       if (!text && !hasPhoto)
         return res.status(400).json({ error: "Tulis pesan atau pilih foto." });
       let bytes = null;
       if (hasPhoto) {
         if (
-          b.src.length > 320_000 ||
+          b.src.length > 68_000 ||
           !/^data:image\/jpeg;base64,[A-Za-z0-9+/]+={0,2}$/.test(b.src)
         )
           return res.status(400).json({
-            error: "Foto harus berupa JPEG dan berukuran maksimal sekitar 230 KB.",
+            error: "Ukuran foto terlalu besar (maks ~48 KB setelah kompresi).",
           });
         bytes = Buffer.from(b.src.slice(b.src.indexOf(",") + 1), "base64");
         if (
-          bytes.length > 235_000 ||
+          bytes.length > 50_000 ||
           bytes[0] !== 0xff ||
           bytes[1] !== 0xd8 ||
           bytes[bytes.length - 2] !== 0xff ||
@@ -485,39 +476,32 @@ return 'OK'`,
       const now = Date.now();
       const today = wibToday(now);
       const rateKey = "chat:rate:" + partner.ownId + ":" + Math.floor(now / 60000);
-      const [rate] = await redis([["INCR", rateKey]]);
-      if (Number(rate) === 1) await redis([["EXPIRE", rateKey, 120]]);
-      if (Number(rate) > 40)
-        return res.status(429).json({
-          error: "Terlalu banyak pesan. Coba lagi sebentar.",
-        });
+      const photoRateKey = "chat:photo-rate:" + partner.ownId + ":" + today;
+      const rateCmds = [
+        ["INCR", rateKey],
+        ["EXPIRE", rateKey, 90],
+      ];
       if (bytes) {
-        const photoRateKey =
-          "chat:photo-rate:" + partner.ownId + ":" + today;
-        const [photoRate] = await redis([["INCR", photoRateKey]]);
-        if (Number(photoRate) === 1)
-          await redis([["EXPIRE", photoRateKey, 172800]]);
-        if (Number(photoRate) > 20)
-          return res.status(429).json({
-            error: "Batas foto harian tercapai. Coba lagi besok.",
-          });
+        rateCmds.push(["INCR", photoRateKey], ["EXPIRE", photoRateKey, 90000]);
       }
+      const rateRes = await redis(rateCmds);
+      if (Number(rateRes[0]) > 20)
+        return res.status(429).json({
+          error: "Terlalu cepat mengirim pesan. Tunggu sebentar ya.",
+        });
+      if (bytes && Number(rateRes[2]) > 6)
+        return res.status(429).json({
+          error: "Batas kirim foto chat (6 foto/hari) tercapai agar kuota tetap hemat. Lanjut besok ya!",
+        });
 
-      const pathname = bytes
-        ? `chat/${partner.thread}/${randomUUID()}.jpg`
-        : "";
-      /* Opsi A: Foto disimpan langsung sebagai Base64 di Upstash Redis
-         tanpa Vercel Blob atau database tambahan. */
-      const imgKey = "chat:img:" + pathname;
-      if (bytes)
-        await redis([["SET", imgKey, b.src, "EX", 60 * 60 * 24 * 30]]);
-      const inlineSrc = bytes && b.src.length <= 120_000 ? b.src : "";
+      /* Opsi A Hemat Kuota: Foto Base64 (~15-35 KB) disimpan langsung di dalam
+         item pesan (maks 50 pesan per room + TTL 30 hari) tanpa duplikasi key. */
       const message = {
         id: randomUUID(),
         from: partner.ownId,
         text,
-        photo: bytes ? pathname : "",
-        ...(inlineSrc ? { src: inlineSrc } : {}),
+        photo: bytes ? "inline" : "",
+        ...(bytes ? { src: b.src } : {}),
         at: now,
       };
       const script = `local message = ARGV[1]
@@ -525,26 +509,11 @@ local sender = ARGV[2]
 local other = ARGV[3]
 local today = ARGV[4]
 local now = tonumber(ARGV[5])
-local evicted = {}
-local currentCount = redis.call('ZCARD', KEYS[1])
-if currentCount >= 200 then
-  local oldMessages = redis.call('ZRANGE', KEYS[1], 0, currentCount - 200)
-  for _, raw in ipairs(oldMessages) do
-    local ok, oldMessage = pcall(cjson.decode, raw)
-    if ok and type(oldMessage) == 'table' and type(oldMessage.photo) == 'string' and oldMessage.photo ~= '' then
-      redis.call('SREM', KEYS[4], oldMessage.photo)
-      table.insert(evicted, oldMessage.photo)
-    end
-  end
-end
 redis.call('ZADD', KEYS[1], now, message)
-redis.call('ZREMRANGEBYRANK', KEYS[1], 0, -201)
-local ok, currentMessage = pcall(cjson.decode, message)
-if ok and type(currentMessage) == 'table' and type(currentMessage.photo) == 'string' and currentMessage.photo ~= '' then
-  redis.call('SADD', KEYS[4], currentMessage.photo)
-end
+redis.call('ZREMRANGEBYRANK', KEYS[1], 0, -51)
+redis.call('EXPIRE', KEYS[1], 2592000)
 redis.call('SADD', KEYS[2], sender)
-redis.call('EXPIRE', KEYS[2], 345600)
+redis.call('EXPIRE', KEYS[2], 259200)
 if redis.call('SISMEMBER', KEYS[2], other) == 1 then
   local lastDay = redis.call('HGET', KEYS[3], 'day')
   if lastDay ~= today then
@@ -554,38 +523,23 @@ if redis.call('SISMEMBER', KEYS[2], other) == 1 then
     redis.call('HSET', KEYS[3], 'count', count + 1, 'day', today, 'lastAt', now)
   end
 end
-return cjson.encode(evicted)`;
-      try {
-        const commands = [
-          [
-            "EVAL",
-            script,
-            4,
-            chatMessagesKey(partner.thread),
-            chatDayKey(partner.thread, today),
-            chatStreakKey(partner.thread),
-            chatMediaKey(partner.thread),
-            JSON.stringify(message),
-            partner.ownId,
-            b.to,
-            today,
-            now,
-          ],
-        ];
-        const [result] = await redis(commands);
-        const evictedPhotos =
-          typeof result === "string" ? JSON.parse(result) : [];
-        if (Array.isArray(evictedPhotos) && evictedPhotos.length) {
-          try {
-            await redis(evictedPhotos.map((name) => ["DEL", "chat:img:" + name]));
-          } catch (error) {
-            console.error("Gagal membersihkan foto chat lama:", error);
-          }
-        }
-      } catch (e) {
-        if (bytes) await redis([["DEL", imgKey]]);
-        throw e;
-      }
+redis.call('EXPIRE', KEYS[3], 5184000)
+return 1`;
+      await redis([
+        [
+          "EVAL",
+          script,
+          3,
+          chatMessagesKey(partner.thread),
+          chatDayKey(partner.thread, today),
+          chatStreakKey(partner.thread),
+          JSON.stringify(message),
+          partner.ownId,
+          b.to,
+          today,
+          now,
+        ],
+      ]);
       return res.json({ message });
     }
 
@@ -604,16 +558,21 @@ return cjson.encode(evicted)`;
     }
     if (b.op === "put") {
       const s = JSON.stringify(b.rec || {});
-      if (s.length > 900000)
-        return res.status(413).json({ error: "Data terlalu besar" });
+      if (s.length > 450000)
+        return res.status(413).json({ error: "Data terlalu besar (maks 450 KB)" });
       await redis([["SET", D, s]]);
       return res.json({ ok: true });
     }
     if (b.op === "photo_put") {
-      if (!okId(b.id) || typeof b.src !== "string" || b.src.length > 700000)
+      if (!okId(b.id) || typeof b.src !== "string" || b.src.length > 150000)
         return res
           .status(400)
-          .json({ error: "Foto tidak valid atau terlalu besar" });
+          .json({ error: "Foto terlalu besar (maks ~110 KB setelah kompresi)" });
+      const [photoCount] = await redis([["SCARD", P]]);
+      if (Number(photoCount) >= 26)
+        return res
+          .status(400)
+          .json({ error: "Batas galeri cloud maksimal 25 foto agar kuota tetap hemat." });
       await redis([
         ["SET", "i:" + uid + ":" + b.id, b.src],
         ["SADD", P, b.id],
@@ -635,6 +594,13 @@ return cjson.encode(evicted)`;
     }
     return res.status(400).json({ error: "Perintah tidak dikenal" });
   } catch (e) {
-    return res.status(500).json({ error: String(e.message || e) });
+    const msg = String(e.message || e);
+    if (/request limit|max daily|max monthly|OOM|maxmemory/i.test(msg)) {
+      return res.status(503).json({
+        error:
+          "Kuota database gratis sedang mencapai batas. Data latihanmu tetap aman tersimpan di perangkat ini.",
+      });
+    }
+    return res.status(500).json({ error: msg });
   }
 };
