@@ -1690,10 +1690,9 @@
       }
       .music-item {
         display: grid !important;
-        grid-template-columns: 32px minmax(130px, 1fr) minmax(
-            90px,
-            0.7fr
-          ) auto auto auto;
+        grid-template-columns:
+          32px minmax(130px, 1fr) minmax(90px, 0.7fr)
+          auto auto auto;
         gap: 10px;
       }
       .music-item .music-icon {
@@ -2010,69 +2009,39 @@
 
       /* ===== Footer baru & poles semua halaman ===== */
       .site-footer {
-        margin-top: 56px;
-        padding: 30px clamp(18px, 4vw, 38px) 22px;
-        border-radius: 32px;
+        margin-top: 32px;
+        padding: 18px 24px 14px;
+        border-radius: 22px;
       }
       .site-footer::before {
         content: "";
         position: absolute;
         inset: 0 0 auto;
-        height: 3px;
-        background: linear-gradient(90deg, var(--forest), var(--sun), #a078ff);
+        height: 2px;
+        background: linear-gradient(90deg, var(--sun), #a078ff);
       }
       .ft-pulse {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 54px;
-        width: 100%;
-        height: 46px;
-        opacity: 0.55;
-        pointer-events: none;
-        z-index: -1;
-      }
-      .ft-pulse path {
-        fill: none;
-        stroke: var(--sun);
-        stroke-width: 2;
-        vector-effect: non-scaling-stroke;
-        stroke-dasharray: 900;
-        stroke-dashoffset: 900;
-        animation: ecg 5s linear infinite;
-      }
-      @keyframes ecg {
-        60%,
-        100% {
-          stroke-dashoffset: 0;
-        }
+        display: none;
       }
       .ft-hero {
         display: flex;
-        align-items: flex-end;
+        align-items: center;
         justify-content: space-between;
-        gap: 16px;
-        padding-bottom: 18px;
+        gap: 12px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--line);
       }
       .ft-title {
-        margin: 8px 0 0;
-        font:
-          400 clamp(28px, 5vw, 46px)/1.05 "DM Serif Display",
-          Georgia,
-          serif;
-        max-width: 16ch;
+        display: none;
       }
-      .ft-title em {
-        background: linear-gradient(90deg, #ff7aa2, #ffb199);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
+      .ft-top {
+        min-height: 0;
+        padding: 7px 12px;
+        font-size: 12px;
+        line-height: 1.2;
       }
       .ft-stats {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 10px;
-        padding: 6px 0 22px;
+        display: none;
       }
       .ft-stat {
         display: flex;
@@ -2104,25 +2073,55 @@
         font-size: 12px;
       }
       .site-footer .footer-content {
-        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr) minmax(
-            0,
-            0.9fr
-          );
-        align-items: start;
-        border-top: 1px solid var(--line);
+        grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+        align-items: center;
+        gap: 24px;
+        padding: 14px 0;
+        border-top: 0;
       }
-      .ft-one {
-        grid-template-columns: minmax(0, 1fr);
+      .site-footer .footer-brand strong {
+        font-size: 28px;
+      }
+      .site-footer .footer-brand p {
+        max-width: 42ch;
+        margin: 7px 0 0;
+        font-size: 12px;
+      }
+      .site-footer .footer-motto {
+        margin-top: 6px;
+        font-size: 13px;
+      }
+      .site-footer .footer-label {
+        margin: 0 0 7px 2px;
+        font-size: 9px;
+      }
+      .site-footer .footer-nav {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .site-footer .footer-nav button,
+      .site-footer .footer-actions button {
+        padding: 8px 9px;
+        border-radius: 12px;
+        font-size: 11px;
+        white-space: nowrap;
+      }
+      .footer-actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+        margin-top: 6px;
       }
       .footer-bottomline {
         flex-wrap: wrap;
-        padding-top: 16px;
+        gap: 8px 16px;
+        padding-top: 10px;
         border-top: 1px solid var(--line);
         color: var(--mute);
-        font-size: 12px;
+        font-size: 10px;
       }
       .ft-sync {
-        padding: 4px 12px;
+        padding: 3px 9px;
         border: 1px solid var(--line);
         border-radius: 99px;
       }
@@ -2207,15 +2206,63 @@
         outline-offset: 3px;
       }
       @media (max-width: 720px) {
-        .ft-hero {
-          flex-direction: column;
-          align-items: flex-start;
+        .site-footer {
+          margin-top: 24px;
+          padding: 14px 18px 11px;
+          border-radius: 18px;
         }
-        .ft-stats {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
+        .site-footer .ft-hero {
+          padding-bottom: 8px;
+        }
+        .site-footer .ft-top {
+          padding: 6px 10px;
+          font-size: 11px;
         }
         .site-footer .footer-content {
           grid-template-columns: minmax(0, 1fr);
+          gap: 9px;
+          padding: 10px 0;
+        }
+        .site-footer .footer-brand p {
+          max-width: 42ch;
+          margin-top: 4px;
+          font-size: 10px;
+          white-space: nowrap;
+        }
+        .site-footer .footer-brand strong {
+          font-size: 24px;
+        }
+        .site-footer .footer-motto {
+          display: none;
+        }
+        .site-footer .footer-nav {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 2px 6px;
+        }
+        .site-footer .footer-nav button,
+        .site-footer .footer-actions button {
+          padding: 4px 2px;
+          border-color: transparent;
+          background: transparent;
+          font-size: 10px;
+          line-height: 1.25;
+        }
+        .site-footer .footer-actions button {
+          padding: 6px 9px;
+          border-color: var(--line);
+        }
+        .site-footer .footer-actions {
+          margin-top: 5px;
+        }
+        .site-footer .footer-bottomline {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 4px;
+          padding-top: 8px;
+          font-size: 9px;
+        }
+        .site-footer .ft-sync {
+          padding: 2px 7px;
         }
       }
       @media (prefers-reduced-motion: reduce) {
@@ -2811,18 +2858,14 @@
         <div class="ft-hero">
           <div>
             <span class="footer-kicker">iLOVEGYM · YOUR TRAINING JOURNAL</span>
-            <p class="ft-title">Konsistensi <em>terlihat bagus</em> untukmu.</p>
           </div>
           <button class="btn ft-top" id="ftTop" type="button">↑ Ke atas</button>
         </div>
-        <div class="ft-stats" id="ftStats"></div>
+        <div class="ft-stats" id="ftStats" hidden></div>
         <div class="footer-content">
           <div class="footer-brand">
             <strong>i<span>♥</span>gym</strong>
-            <p>
-              Gerak kecil, perubahan besar. Ruang personal untuk menjaga ritme
-              dan merayakan setiap progresmu.
-            </p>
+            <p>Tempat rapi untuk mencatat progres latihanmu.</p>
             <div class="footer-motto" id="ftToday">Hari ini</div>
           </div>
           <div class="footer-links">
@@ -2841,37 +2884,19 @@
               <button type="button" data-footer-view="progres">
                 📈&nbsp; Progres
               </button>
-              <button type="button" data-footer-view="galeri">
-                📸&nbsp; Kenangan
-              </button>
-              <button type="button" data-footer-view="musik">
-                🎵&nbsp; Playlist
-              </button>
-              <button type="button" data-footer-view="beli">
-                🛒&nbsp; Mau dibeli
+              <button type="button" data-footer-view="profil">
+                ♡&nbsp; Profil
               </button>
             </div>
-          </div>
-          <div class="footer-links">
-            <p class="footer-label">Aksi cepat</p>
-            <div class="footer-nav ft-one" role="group" aria-label="Aksi cepat">
+            <div class="footer-actions" role="group" aria-label="Aksi cepat">
               <button type="button" id="ftTimer">
                 ⏱&nbsp; Timer istirahat
-              </button>
-              <button type="button" id="ftBackup">
-                💾&nbsp; Unduh cadangan
-              </button>
-              <button type="button" data-footer-view="profil">
-                ♡&nbsp; Profil &amp; teman
               </button>
             </div>
           </div>
         </div>
         <div class="footer-bottomline">
-          <span
-            >© <span id="ftYear"></span> iLovegym · Dibuat untuk hari-hari yang
-            lebih kuat.</span
-          >
+          <span>© <span id="ftYear"></span> iLovegym</span>
           <span class="ft-sync" id="ftSync"></span>
         </div>
       </footer>
@@ -5316,7 +5341,6 @@
         $("tp").hidden = false;
         $("tb").focus();
       };
-      $("ftBackup").onclick = () => $("exp").click();
       const spBar = document.createElement("div");
       spBar.id = "sp";
       document.body.appendChild(spBar);
